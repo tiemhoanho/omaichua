@@ -546,7 +546,7 @@
               </button>
             </div>
 
-            <!-- Nút chuyển ảnh Trước / Sau của cùng 1 bó hoa -->
+            <!-- Nút chuyển ảnh Trước / Sau của cùng 1 bó hoa (chỉ hiện trên desktop, mobile vuốt ngang hoặc chạm thumbnail) -->
             <button
               id="modal-prev-btn"
               type="button"
@@ -1415,7 +1415,6 @@
 
       let html = pageItems.map(item => {
         const coverImg = item.images && item.images.length > 0 ? item.images[0] : "";
-        const imgCount = item.images ? item.images.length : 0;
 
         let statusBadgeClass = "bg-[#EEF3EF] text-[#5D7A63]";
         if (item.status.toLowerCase().includes("đặt")) statusBadgeClass = "bg-[#FEF3C7] text-[#92400E]";
@@ -1427,7 +1426,7 @@
             class="group cursor-pointer bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-[#EFE5DF] card-shadow card-shadow-hover transition-all duration-300 flex flex-col justify-between"
           >
             <div>
-              <div class="relative aspect-[4/3] bg-[#F5EFEA] overflow-hidden">
+              <div class="relative aspect-[3/4] sm:aspect-[4/3] bg-[#F5EFEA] overflow-hidden">
                 ${
                   coverImg
                     ? `<img
@@ -1445,7 +1444,7 @@
                 }
 
                 <div class="absolute top-1.5 sm:top-2.5 left-1.5 sm:left-2.5 right-1.5 sm:right-2.5 flex items-center justify-between gap-1 pointer-events-none">
-                  <span class="px-2 sm:px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-sm text-[10px] sm:text-[11px] font-bold text-[#54433B] shadow-sm truncate max-w-[62%]">
+                  <span class="px-2 sm:px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-sm text-[10px] sm:text-[11px] font-bold text-[#54433B] shadow-sm truncate max-w-[64%]">
                     ${item.category}
                   </span>
                   ${
@@ -1457,36 +1456,29 @@
                   }
                 </div>
 
-                <div class="absolute bottom-1.5 sm:bottom-2.5 left-1.5 sm:left-2.5 right-1.5 sm:right-2.5 flex items-center justify-between gap-1 pointer-events-none">
-                  <span class="px-2 sm:px-2.5 py-0.5 rounded-full ${statusBadgeClass} text-[10px] sm:text-[11px] font-bold shadow-sm truncate">
+                <div class="absolute bottom-1.5 sm:bottom-2.5 left-1.5 sm:left-2.5 pointer-events-none">
+                  <span class="px-2 sm:px-2.5 py-0.5 rounded-full ${statusBadgeClass} text-[10px] sm:text-[11px] font-bold shadow-sm">
                     ${item.status}
                   </span>
-                  ${
-                    imgCount > 1
-                      ? `<span class="inline-flex items-center gap-0.5 sm:gap-1 px-2 sm:px-2.5 py-0.5 rounded-full bg-black/60 text-white text-[10px] sm:text-[11px] font-bold backdrop-blur-sm shrink-0">
-                          <i data-lucide="images" class="w-2.5 h-2.5 sm:w-3 sm:h-3"></i> ${imgCount} ảnh
-                        </span>`
-                      : ""
-                  }
                 </div>
               </div>
 
-              <div class="p-2.5 sm:p-3.5 pb-1 sm:pb-1.5">
-                <h3 class="text-xs sm:text-base font-bold text-[#54433B] line-clamp-1 group-hover:text-[#9E5A63] transition-colors">
+              <div class="px-2.5 sm:px-4 pt-2.5 sm:pt-3.5 pb-1.5 sm:pb-2.5">
+                <h3 class="text-xs sm:text-lg font-bold text-[#54433B] line-clamp-2 sm:line-clamp-1 group-hover:text-[#9E5A63] transition-colors leading-snug">
                   ${item.name}
                 </h3>
-                <p class="text-[11px] sm:text-sm text-[#7E6B62] line-clamp-2 mt-1 leading-snug">
+                <p class="hidden sm:line-clamp-2 text-sm text-[#7E6B62] mt-1 leading-relaxed">
                   ${item.description}
                 </p>
               </div>
             </div>
 
-            <div class="px-2.5 sm:px-3.5 pb-2.5 sm:pb-3.5 pt-1.5 sm:pt-2 mt-1 border-t border-[#F6EFEA] flex items-end justify-between gap-1">
+            <div class="px-2.5 sm:px-4 pb-2.5 sm:pb-4 pt-1.5 sm:pt-2 border-t border-[#F6EFEA] flex items-center justify-between gap-1">
               <div class="min-w-0">
-                <span class="block text-[9px] sm:text-[10px] text-[#9A867D] leading-none">Giá mẫu hoa</span>
-                <span class="text-xs sm:text-base font-bold text-[#9E5A63] leading-tight block mt-0.5 truncate">${formatVND(item.price)}</span>
+                <span class="hidden sm:block text-[11px] text-[#9A867D]">Giá mẫu hoa</span>
+                <span class="text-xs sm:text-base font-bold text-[#9E5A63] truncate block">${formatVND(item.price)}</span>
               </div>
-              <span class="text-[10px] sm:text-xs font-bold text-[#54433B] underline underline-offset-2 sm:underline-offset-4 group-hover:text-[#9E5A63] shrink-0">
+              <span class="text-[10px] sm:text-sm font-bold text-[#54433B] underline underline-offset-2 sm:underline-offset-4 group-hover:text-[#9E5A63] shrink-0">
                 Xem chi tiết
               </span>
             </div>
@@ -1498,7 +1490,7 @@
       const emptySlots = Math.max(0, ITEMS_PER_PAGE - pageItems.length);
       for (let i = 0; i < emptySlots; i++) {
         html += `
-          <div class="rounded-xl sm:rounded-2xl border-2 border-dashed border-[#E5D8D0] bg-[#FAF6F2]/65 min-h-[195px] sm:min-h-[268px] flex flex-col items-center justify-center p-3 sm:p-5 text-center text-[#B9A79E] select-none">
+          <div class="rounded-xl sm:rounded-2xl border-2 border-dashed border-[#E5D8D0] bg-[#FAF6F2]/65 min-h-[250px] sm:min-h-[340px] flex flex-col items-center justify-center p-3 sm:p-5 text-center text-[#B9A79E] select-none">
             <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/85 border border-[#EAE0D9] flex items-center justify-center mb-1.5 sm:mb-2">
               <i data-lucide="flower-2" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D1BFB6]"></i>
             </div>
@@ -1814,10 +1806,10 @@
       const thumbContainer = document.getElementById("modal-thumbnails");
 
       if (images.length > 1) {
-        prevBtn.classList.remove("hidden");
-        prevBtn.classList.add("flex");
-        nextBtn.classList.remove("hidden");
-        nextBtn.classList.add("flex");
+        prevBtn.classList.remove("hidden", "flex");
+        prevBtn.classList.add("hidden", "sm:flex");
+        nextBtn.classList.remove("hidden", "flex");
+        nextBtn.classList.add("hidden", "sm:flex");
         counter.classList.remove("hidden");
         counter.textContent = `${currentModalImageIndex + 1} / ${images.length}`;
 
