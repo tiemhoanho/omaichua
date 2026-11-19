@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mai &amp; More — Hoa Lụa Nghệ Thuật Lưu Giữ Kỷ Niệm</title>
+  <title>Mai &amp; More — More than flowers</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
@@ -22,6 +22,20 @@
     }
     .card-shadow-hover:hover {
       box-shadow: 0 18px 36px -12px rgba(84, 67, 59, 0.16);
+    }
+    @keyframes hotPulse {
+      0%, 100% {
+        box-shadow: 0 4px 12px rgba(225, 29, 72, 0.42);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 6px 18px rgba(225, 29, 72, 0.65);
+        transform: scale(1.04);
+      }
+    }
+    .hot-badge {
+      background: linear-gradient(135deg, #F43F5E 0%, #E11D48 55%, #BE123C 100%);
+      animation: hotPulse 2.4s infinite ease-in-out;
     }
     /* Accordion: trên mobile chỉ đóng/mở bằng class .active khi chạm; trên desktop hỗ trợ cả hover chuột */
     .accordion-content {
@@ -71,7 +85,7 @@
   <script>
     const DEFAULT_CONFIG = {
       shopName: "Mai & More",
-      slogan: "GỬI TRỌN KÝ ỨC • GIỮ MÃI SẮC HƯƠNG",
+      slogan: "More than flowers",
       heroImage: "https://drive.google.com/file/d/1Q9mgXjc6Il3M4K4LGkf_tANMzJ5JrTH_/view?usp=sharing",
       sheetUrl: "https://docs.google.com/spreadsheets/d/1Uo8EA-Eu0b_VylJ-cpxVt4gF1GQqD5MON6DFRq5AcJc/edit?usp=sharing",
       zaloUrl: "https://zalo.me/0981011115",
@@ -92,7 +106,7 @@
         </div>
         <div class="min-w-0">
           <span id="header-shop-name" class="block text-lg sm:text-2xl font-bold tracking-tight text-[#54433B] leading-none truncate">Mai &amp; More</span>
-          <span id="header-slogan" class="block text-[9px] sm:text-[11px] tracking-[0.08em] sm:tracking-[0.14em] uppercase text-[#8E7970] mt-1 leading-tight line-clamp-2 sm:line-clamp-1">GỬI TRỌN KÝ ỨC • GIỮ MÃI SẮC HƯƠNG</span>
+          <span id="header-slogan" class="block text-[11px] sm:text-xs tracking-[0.12em] sm:tracking-[0.16em] italic text-[#8E7970] mt-1 leading-tight truncate">More than flowers</span>
         </div>
       </a>
 
@@ -138,18 +152,26 @@
           </div>
         </div>
 
-        <!-- Nút liên hệ nhanh Zalo, Facebook, Instagram hiển thị rõ trên điện thoại -->
+        <!-- Nút liên hệ nhanh Zalo, Facebook, Instagram hiển thị bằng SVG trực tiếp -->
         <div class="flex flex-wrap items-center gap-2 pt-1">
-          <a id="hero-zalo" href="https://zalo.me/0981011115" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/90 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-xs sm:text-sm font-bold text-[#54433B] shadow-sm transition-colors">
-            <svg class="w-4 h-4 text-[#0068FF] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.76 1.38 5.23 3.55 6.88-.18 1.25-.72 2.66-1.42 3.57-.22.29-.02.71.34.67 1.76-.2 3.74-.82 5.04-1.58.8.19 1.63.3 2.49.3 5.52 0 10-4.03 10-9S17.52 2 12 2zm-3.2 12.1H5.6c-.33 0-.6-.27-.6-.6 0-.14.05-.28.14-.39l2.74-3.41H5.6c-.33 0-.6-.27-.6-.6s.27-.6.6-.6h3.4c.33 0 .6.27.6.6 0 .14-.05.28-.14.39l-2.74 3.41h2.08c.33 0 .6.27.6.6s-.27.6-.6.6zm3.8 0c-.33 0-.6-.27-.6-.6v-.35c-.38.32-.87.51-1.41.51-1.22 0-2.2-.99-2.2-2.2s.98-2.2 2.2-2.2c.54 0 1.03.19 1.41.51v-.35c0-.33.27-.6.6-.6s.6.27.6.6v4.08c0 .33-.27.6-.6.6zm2.4 0c-.33 0-.6-.27-.6-.6V8.1c0-.33.27-.6.6-.6s.6.27.6.6v5.4c0 .33-.27.6-.6.6zm3.2.16c-1.25 0-2.26-1.01-2.26-2.26s1.01-2.26 2.26-2.26 2.26 1.01 2.26 2.26-1.01 2.26-2.26 2.26z"/></svg>
+          <a id="hero-zalo" href="https://zalo.me/0981011115" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/95 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-xs sm:text-sm font-bold text-[#54433B] shadow-sm transition-colors">
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 48 48" fill="none">
+              <rect width="48" height="48" rx="12" fill="#0068FF"/>
+              <path d="M13.5 16.5H22.2L13.5 27.5H22.5M25.5 21.5V27.5M25.5 17.5V18.2M31 20.5C28.8 20.5 27 22.1 27 24C27 25.9 28.8 27.5 31 27.5C33.2 27.5 35 25.9 35 24C35 22.1 33.2 20.5 31 20.5Z" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11 33.5L15.5 31.8C18.1 33.1 21 33.8 24 33.8C33.4 33.8 41 27.8 41 20.4" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
             <span>Zalo</span>
           </a>
-          <a id="hero-fb" href="https://www.facebook.com/mai.maiquynhhhh" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/90 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-xs sm:text-sm font-bold text-[#54433B] shadow-sm transition-colors">
-            <svg class="w-4 h-4 text-[#1877F2] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+          <a id="hero-fb" href="https://www.facebook.com/mai.maiquynhhhh" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/95 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-xs sm:text-sm font-bold text-[#54433B] shadow-sm transition-colors">
+            <svg class="w-4 h-4 text-[#1877F2] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+            </svg>
             <span>Facebook</span>
           </a>
-          <a id="hero-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/90 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-xs sm:text-sm font-bold text-[#54433B] shadow-sm transition-colors">
-            <svg class="w-4 h-4 text-[#E4405F] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+          <a id="hero-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/95 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-xs sm:text-sm font-bold text-[#54433B] shadow-sm transition-colors">
+            <svg class="w-4 h-4 text-[#E4405F] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+            </svg>
             <span>Instagram</span>
           </a>
         </div>
@@ -252,7 +274,7 @@
     </div>
   </section>
 
-  <!-- ==================== BỘ SƯU TẬP MẪU HOA (LƯỚI 6 Ô GỌN ĐẸP + PHÂN TRANG) ==================== -->
+  <!-- ==================== BỘ SƯU TẬP MẪU HOA ==================== -->
   <main id="bo-suu-tap" class="py-10 sm:py-12 md:py-16">
     <div class="max-w-5xl mx-auto px-3 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
@@ -264,27 +286,31 @@
       <div class="bg-white p-3 sm:p-4 rounded-2xl border border-[#EFE5DF] card-shadow mb-5 sm:mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 sm:gap-4">
         <div id="category-filters" class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0"></div>
 
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
-          <div class="relative">
-            <i data-lucide="search" class="w-4 h-4 text-[#9A867D] absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+        <!-- Thanh tìm kiếm & sắp xếp: xếp 2 ô 1 hàng trên mobile, mũi tên căn giữa chuẩn -->
+        <div class="grid grid-cols-2 sm:flex sm:flex-row items-center gap-2 sm:gap-2.5">
+          <div class="relative min-w-0">
+            <i data-lucide="search" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#9A867D] absolute left-3 sm:left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
             <input
               id="search-input"
               type="text"
-              placeholder="Tìm tên mẫu hoa..."
+              placeholder="Tìm mẫu hoa..."
               oninput="onFilterChanged()"
-              class="w-full sm:w-52 pl-9 pr-4 py-2 rounded-full bg-[#FDFBF7] border border-[#E5D8D0] text-sm text-[#54433B] placeholder-[#A49188] focus:outline-none focus:border-[#9E5A63]"
+              class="w-full sm:w-52 pl-8 sm:pl-9 pr-3 sm:pr-4 py-2 rounded-full bg-[#FDFBF7] border border-[#E5D8D0] text-xs sm:text-sm text-[#54433B] placeholder-[#A49188] focus:outline-none focus:border-[#9E5A63]"
             />
           </div>
 
-          <select
-            id="sort-select"
-            onchange="onFilterChanged()"
-            class="px-4 py-2 rounded-full bg-[#FDFBF7] border border-[#E5D8D0] text-sm text-[#54433B] focus:outline-none focus:border-[#9E5A63]"
-          >
-            <option value="default">Sắp xếp: Mặc định</option>
-            <option value="price-asc">Giá: Thấp đến Cao</option>
-            <option value="price-desc">Giá: Cao đến Thấp</option>
-          </select>
+          <div class="relative min-w-0">
+            <select
+              id="sort-select"
+              onchange="onFilterChanged()"
+              class="w-full appearance-none pl-3.5 sm:pl-4 pr-8 sm:pr-9 py-2 rounded-full bg-[#FDFBF7] border border-[#E5D8D0] text-xs sm:text-sm text-[#54433B] focus:outline-none focus:border-[#9E5A63] truncate"
+            >
+              <option value="default">Sắp xếp: Mặc định</option>
+              <option value="price-asc">Giá: Thấp đến Cao</option>
+              <option value="price-desc">Giá: Cao đến Thấp</option>
+            </select>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7E6B62] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+          </div>
         </div>
       </div>
 
@@ -296,10 +322,10 @@
         </div>
       </div>
 
-      <!-- Khung lưới 6 ô (trên mobile khung ảnh cao dài tôn dáng hoa, trên desktop giữ nguyên bố cục đầy đủ) -->
+      <!-- Khung lưới 6 ô -->
       <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5"></div>
 
-      <!-- Thanh điều hướng sang trang luôn gọn đẹp trên màn hình -->
+      <!-- Thanh điều hướng sang trang -->
       <div id="pagination-bar" class="mt-7 pt-5 border-t border-[#EFE5DF] flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-2">
           <button
@@ -370,15 +396,22 @@
           <h3 class="text-lg font-bold text-[#54433B] mb-3">Đặt Hoa Trực Tiếp Qua</h3>
           <div class="flex flex-wrap gap-2.5">
             <a id="footer-zalo" href="https://zalo.me/0981011115" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-sm font-bold text-[#54433B] transition-colors">
-              <svg class="w-4 h-4 text-[#0068FF] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.76 1.38 5.23 3.55 6.88-.18 1.25-.72 2.66-1.42 3.57-.22.29-.02.71.34.67 1.76-.2 3.74-.82 5.04-1.58.8.19 1.63.3 2.49.3 5.52 0 10-4.03 10-9S17.52 2 12 2z"/></svg>
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 48 48" fill="none">
+                <rect width="48" height="48" rx="12" fill="#0068FF"/>
+                <path d="M13.5 16.5H22.2L13.5 27.5H22.5M25.5 21.5V27.5M25.5 17.5V18.2M31 20.5C28.8 20.5 27 22.1 27 24C27 25.9 28.8 27.5 31 27.5C33.2 27.5 35 25.9 35 24C35 22.1 33.2 20.5 31 20.5Z" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
               <span>Zalo Tiệm Hoa</span>
             </a>
             <a id="footer-fb" href="https://www.facebook.com/mai.maiquynhhhh" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-sm font-bold text-[#54433B] transition-colors">
-              <svg class="w-4 h-4 text-[#1877F2] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+              <svg class="w-4 h-4 text-[#1877F2] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+              </svg>
               <span>Facebook</span>
             </a>
             <a id="footer-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-sm font-bold text-[#54433B] transition-colors">
-              <svg class="w-4 h-4 text-[#E4405F] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+              <svg class="w-4 h-4 text-[#E4405F] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+              </svg>
               <span>Instagram</span>
             </a>
           </div>
@@ -386,7 +419,7 @@
       </div>
 
       <div class="pt-6 flex items-center justify-between text-sm text-[#8E7970]">
-        <p>© 2026 <span id="copyright-shop-name">Mai &amp; More</span>. Gói trọn yêu thương trong từng cánh hoa.</p>
+        <p>© 2026 <span id="copyright-shop-name">Mai &amp; More</span> — More than flowers.</p>
         <button
           onclick="openAdminAccess()"
           title="Khu vực dành riêng cho chủ tiệm"
@@ -425,11 +458,15 @@
     </button>
 
     <div class="bg-[#FDFBF7] rounded-2xl sm:rounded-3xl max-w-4xl w-[95%] sm:w-full mx-auto overflow-hidden border border-[#E8DCD4] shadow-2xl flex flex-col max-h-[92vh]" onclick="event.stopPropagation()">
-      <!-- Thanh điều hướng cố định phía trên modal (gọn trên mobile, không che ảnh) -->
+      <!-- Thanh điều hướng cố định phía trên modal -->
       <div class="flex items-center justify-between gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-white/95 border-b border-[#EFE5DF] shrink-0">
         <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
           <span id="modal-category" class="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#F7E7E9] text-[#9E5A63] text-[11px] sm:text-xs font-bold truncate">Hoa lụa</span>
           <span id="modal-status" class="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#EEF3EF] text-[#5D7A63] text-[11px] sm:text-xs font-bold shrink-0">Còn hàng</span>
+          <span id="modal-hot-badge" class="hidden hot-badge items-center gap-1 px-2.5 py-0.5 rounded-full text-white text-[10px] sm:text-xs font-bold tracking-wider uppercase border border-white/70 shrink-0">
+            <i data-lucide="flame" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FDE047] fill-[#FDE047] shrink-0"></i>
+            <span>HOT</span>
+          </span>
         </div>
 
         <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
@@ -442,7 +479,7 @@
 
       <!-- Nội dung cuộn mượt trên mobile, chia 2 cột trên màn hình lớn -->
       <div class="overflow-y-auto flex-1 grid grid-cols-1 lg:grid-cols-12">
-        <!-- Khu vực trình chiếu ảnh gọn thoáng, trên điện thoại cao và rộng tối đa -->
+        <!-- Khu vực trình chiếu ảnh -->
         <div class="lg:col-span-7 bg-[#F5EFEA] relative flex flex-col justify-between p-1.5 sm:p-4 select-none">
           <div
             id="gallery-viewport"
@@ -455,7 +492,7 @@
             ontouchstart="handleGalleryTouchStart(event)"
             ontouchmove="handleGalleryTouchMove(event)"
             ontouchend="handleGalleryTouchEnd(event)"
-            class="relative w-full h-[52vh] min-h-[330px] sm:h-[410px] lg:h-[460px] flex items-center justify-center rounded-xl sm:rounded-2xl overflow-hidden bg-white/95 border border-[#EAE0D9]"
+            class="relative w-full h-[58vh] min-h-[380px] sm:h-[410px] lg:h-[460px] flex items-center justify-center rounded-xl sm:rounded-2xl overflow-hidden bg-white/95 border border-[#EAE0D9]"
           >
             <img
               id="modal-main-img"
@@ -485,7 +522,6 @@
               <i data-lucide="chevron-right" class="w-5 h-5"></i>
             </button>
 
-            <!-- Bộ đếm góc ảnh (ẩn trên điện thoại) -->
             <div id="modal-img-counter" class="hidden absolute bottom-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-black/55 text-white text-[11px] font-bold pointer-events-none">
               1 / 1
             </div>
@@ -537,15 +573,22 @@
 
             <div class="grid grid-cols-3 gap-2">
               <a id="modal-zalo" href="https://zalo.me/0981011115" target="_blank" rel="noopener" class="py-2 px-2.5 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-center text-xs sm:text-sm font-bold text-[#54433B] transition-colors flex items-center justify-center gap-1.5">
-                <svg class="w-4 h-4 text-[#0068FF] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.76 1.38 5.23 3.55 6.88-.18 1.25-.72 2.66-1.42 3.57-.22.29-.02.71.34.67 1.76-.2 3.74-.82 5.04-1.58.8.19 1.63.3 2.49.3 5.52 0 10-4.03 10-9S17.52 2 12 2z"/></svg>
+                <svg class="w-4 h-4 shrink-0" viewBox="0 0 48 48" fill="none">
+                  <rect width="48" height="48" rx="12" fill="#0068FF"/>
+                  <path d="M13.5 16.5H22.2L13.5 27.5H22.5M25.5 21.5V27.5M25.5 17.5V18.2M31 20.5C28.8 20.5 27 22.1 27 24C27 25.9 28.8 27.5 31 27.5C33.2 27.5 35 25.9 35 24C35 22.1 33.2 20.5 31 20.5Z" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
                 <span>Zalo</span>
               </a>
               <a id="modal-fb" href="https://www.facebook.com/mai.maiquynhhhh" target="_blank" rel="noopener" class="py-2 px-2.5 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-center text-xs sm:text-sm font-bold text-[#54433B] transition-colors flex items-center justify-center gap-1.5">
-                <svg class="w-4 h-4 text-[#1877F2] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+                <svg class="w-4 h-4 text-[#1877F2] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+                </svg>
                 <span>Facebook</span>
               </a>
               <a id="modal-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="py-2 px-2.5 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-center text-xs sm:text-sm font-bold text-[#54433B] transition-colors flex items-center justify-center gap-1.5">
-                <svg class="w-4 h-4 text-[#E4405F] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+                <svg class="w-4 h-4 text-[#E4405F] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+                </svg>
                 <span>Instagram</span>
               </a>
             </div>
@@ -846,12 +889,13 @@
 
     function loadSavedConfig() {
       try {
-        const saved = localStorage.getItem("mai_and_more_config_v3");
+        const saved = localStorage.getItem("mai_and_more_config_v4");
         if (saved) {
           const parsed = JSON.parse(saved);
           appConfig = {
             ...DEFAULT_CONFIG,
             ...parsed,
+            slogan: DEFAULT_CONFIG.slogan,
             heroImage: DEFAULT_CONFIG.heroImage || parsed.heroImage || "",
             sheetUrl: DEFAULT_CONFIG.sheetUrl || parsed.sheetUrl || "",
             zaloUrl: DEFAULT_CONFIG.zaloUrl || parsed.zaloUrl || "https://zalo.me",
@@ -881,6 +925,9 @@
       setTxt("hero-order-hours", appConfig.orderHours);
       setTxt("footer-shop-name", appConfig.shopName);
       setTxt("copyright-shop-name", appConfig.shopName);
+      setTxt("footer-order-hours", appConfig.orderHours);
+      setTxt("footer-phone", appConfig.phone);
+
       setHref("hero-zalo", appConfig.zaloUrl);
       setHref("hero-fb", appConfig.facebookUrl);
       setHref("hero-ig", appConfig.instagramUrl);
@@ -1183,7 +1230,7 @@
       allProducts = products;
       isUsingSheetData = true;
       appConfig.sheetUrl = url;
-      localStorage.setItem("mai_and_more_config_v3", JSON.stringify(appConfig));
+      localStorage.setItem("mai_and_more_config_v4", JSON.stringify(appConfig));
 
       selectedCategory = "Tất cả";
       currentPage = 1;
@@ -1310,10 +1357,13 @@
         if (item.status.toLowerCase().includes("đặt")) statusBadgeClass = "bg-[#FEF3C7] text-[#92400E]";
         if (item.status.toLowerCase().includes("hết")) statusBadgeClass = "bg-[#FEE2E2] text-[#991B1B]";
 
+        // Viền mặc định cho tất cả thẻ sản phẩm (không làm viền đỏ)
+        const cardBorderClass = "border-[#EFE5DF]";
+
         return `
           <article
             onclick="openProductModal(${item.id})"
-            class="group cursor-pointer bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-[#EFE5DF] card-shadow card-shadow-hover transition-all duration-300 flex flex-col justify-between"
+            class="group cursor-pointer bg-white rounded-xl sm:rounded-2xl overflow-hidden border ${cardBorderClass} card-shadow card-shadow-hover transition-all duration-300 flex flex-col justify-between"
           >
             <div>
               <div class="relative aspect-[3/4] sm:aspect-[4/3] bg-[#F5EFEA] overflow-hidden">
@@ -1334,13 +1384,14 @@
                 }
 
                 <div class="absolute top-1.5 sm:top-2.5 left-1.5 sm:left-2.5 right-1.5 sm:right-2.5 flex items-center justify-between gap-1 pointer-events-none">
-                  <span class="px-2 sm:px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-sm text-[10px] sm:text-[11px] font-bold text-[#54433B] shadow-sm truncate max-w-[65%]">
+                  <span class="px-2 sm:px-2.5 py-0.5 rounded-full bg-white/95 backdrop-blur-sm text-[10px] sm:text-[11px] font-bold text-[#54433B] shadow-sm truncate max-w-[60%]">
                     ${item.category}
                   </span>
                   ${
                     item.featured
-                      ? `<span class="inline-flex items-center gap-0.5 sm:gap-1 px-2 sm:px-2.5 py-0.5 rounded-full bg-[#9E5A63] text-white text-[10px] sm:text-[11px] font-bold shadow-sm shrink-0">
-                          <i data-lucide="star" class="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-white"></i> Hot
+                      ? `<span class="inline-flex items-center gap-1 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-gradient-to-r from-[#D92D4B] to-[#F05252] text-white text-[10px] sm:text-xs font-extrabold uppercase tracking-wider shadow-md ring-2 ring-white/95 shrink-0">
+                          <i data-lucide="flame" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FDE047] fill-[#FDE047] shrink-0"></i>
+                          <span>HOT</span>
                         </span>`
                       : ""
                   }
@@ -1357,13 +1408,13 @@
                 <h3 class="text-xs sm:text-base font-bold text-[#54433B] line-clamp-2 sm:line-clamp-1 group-hover:text-[#9E5A63] transition-colors leading-snug">
                   ${item.name}
                 </h3>
-                <p class="hidden sm:line-clamp-2 text-sm text-[#7E6B62] mt-1 leading-snug">
+                <p class="hidden sm:block text-sm text-[#7E6B62] line-clamp-2 mt-1 leading-snug">
                   ${item.description}
                 </p>
               </div>
             </div>
 
-            <div class="px-2.5 sm:px-3.5 pb-2.5 sm:pb-3.5 pt-1.5 sm:pt-2 mt-1 border-t border-[#F6EFEA] flex items-end justify-between gap-1">
+            <div class="px-2.5 sm:px-3.5 pb-2.5 sm:pb-3.5 pt-1 sm:pt-2 mt-0.5 sm:mt-1 sm:border-t sm:border-[#F6EFEA] flex items-end justify-between gap-1">
               <div class="min-w-0">
                 <span class="hidden sm:block text-[10px] text-[#9A867D] leading-none">Giá mẫu hoa</span>
                 <span class="text-xs sm:text-base font-bold text-[#9E5A63] leading-tight block sm:mt-0.5 truncate">${formatVND(item.price)}</span>
@@ -1379,7 +1430,7 @@
       const emptySlots = Math.max(0, ITEMS_PER_PAGE - pageItems.length);
       for (let i = 0; i < emptySlots; i++) {
         html += `
-          <div class="rounded-xl sm:rounded-2xl border-2 border-dashed border-[#E5D8D0] bg-[#FAF6F2]/65 min-h-[250px] sm:min-h-[268px] flex flex-col items-center justify-center p-3 sm:p-5 text-center text-[#B9A79E] select-none">
+          <div class="rounded-xl sm:rounded-2xl border-2 border-dashed border-[#E5D8D0] bg-[#FAF6F2]/65 min-h-[210px] sm:min-h-[270px] flex flex-col items-center justify-center p-3 sm:p-5 text-center text-[#B9A79E] select-none">
             <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/85 border border-[#EAE0D9] flex items-center justify-center mb-1.5 sm:mb-2">
               <i data-lucide="flower-2" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D1BFB6]"></i>
             </div>
@@ -1468,7 +1519,6 @@
       const nextIdx = (idx + step + list.length) % list.length;
       const nextProd = list[nextIdx];
 
-      // Đồng bộ trang lưới nền nếu bó tiếp theo nằm ở trang khác
       const targetPage = Math.floor(nextIdx / ITEMS_PER_PAGE) + 1;
       if (targetPage !== currentPage && filteredProducts.length > 0) {
         currentPage = targetPage;
@@ -1478,7 +1528,7 @@
       openProductModal(nextProd.id);
     }
 
-    /* ==================== PHÓNG TO / KÉO ẢNH CHI TIẾT (CHẠM ĐÚP / CHỤM NGÓN TAY) ==================== */
+    /* ==================== PHÓNG TO / KÉO ẢNH CHI TIẾT ==================== */
     function updateImageTransform() {
       const img = document.getElementById("modal-main-img");
       if (!img) return;
@@ -1615,6 +1665,17 @@
       document.getElementById("modal-price").textContent = formatVND(product.price);
       document.getElementById("modal-desc").textContent = product.description;
 
+      const hotBadge = document.getElementById("modal-hot-badge");
+      if (hotBadge) {
+        if (product.featured) {
+          hotBadge.classList.remove("hidden");
+          hotBadge.classList.add("inline-flex");
+        } else {
+          hotBadge.classList.add("hidden");
+          hotBadge.classList.remove("inline-flex");
+        }
+      }
+
       const prevProdBtn = document.getElementById("modal-prev-product-btn");
       const nextProdBtn = document.getElementById("modal-next-product-btn");
       if (prevProdBtn && nextProdBtn) {
@@ -1656,7 +1717,6 @@
       const thumbContainer = document.getElementById("modal-thumbnails");
 
       if (images.length > 1) {
-        // Trên điện thoại ẩn nút chuyển ảnh trong khung hình (khách vuốt ngang hoặc chạm thumbnail); chỉ hiện trên máy tính
         prevBtn.classList.add("hidden", "sm:flex");
         prevBtn.classList.remove("flex");
         nextBtn.classList.add("hidden", "sm:flex");
@@ -1855,7 +1915,7 @@
     function updateConfigPreview() {
       const draft = getDraftConfig();
       appConfig = { ...draft };
-      localStorage.setItem("mai_and_more_config_v3", JSON.stringify(appConfig));
+      localStorage.setItem("mai_and_more_config_v4", JSON.stringify(appConfig));
       applyConfigToUI();
       document.getElementById("config-preview-box").textContent = buildConfigCode(draft, true);
     }
