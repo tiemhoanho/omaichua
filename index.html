@@ -69,6 +69,35 @@
       background: #D7C4BC;
       border-radius: 9999px;
     }
+    .reviews-track {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .reviews-track::-webkit-scrollbar {
+      display: none;
+    }
+    @media (min-width: 640px) {
+      .reviews-track {
+        scrollbar-width: thin;
+        scrollbar-color: #D7C4BC #F3EAE5;
+        -ms-overflow-style: auto;
+      }
+      .reviews-track::-webkit-scrollbar {
+        display: block;
+        height: 7px;
+      }
+      .reviews-track::-webkit-scrollbar-track {
+        background: #F3EAE5;
+        border-radius: 9999px;
+      }
+      .reviews-track::-webkit-scrollbar-thumb {
+        background: #D7C4BC;
+        border-radius: 9999px;
+      }
+      .reviews-track::-webkit-scrollbar-thumb:hover {
+        background: #C2A99E;
+      }
+    }
     .zoom-stage {
       touch-action: none;
       user-select: none;
@@ -401,36 +430,36 @@
   <!-- ==================== HÌNH ẢNH KHÁCH ĐÁNH GIÁ ==================== -->
   <section id="danh-gia" class="py-12 md:py-16 border-t border-[#EFE5DF] bg-[#FAF5F1]/70">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7">
-        <div>
-          <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#9E5A63]">Phản hồi chân thật</span>
-          <h2 class="text-2xl sm:text-4xl font-bold text-[#54433B] mt-1">Đánh Giá Của Khách Hàng</h2>
-          <p class="text-sm sm:text-base text-[#7E6B62] mt-1.5">Chạm vào từng ảnh để phóng to xem rõ phản hồi từ khách thương của tiệm</p>
-        </div>
-
-        <div class="flex items-center gap-2 self-start sm:self-auto">
-          <button
-            id="review-prev-btn"
-            type="button"
-            onclick="scrollReviewsTrack(-1)"
-            class="w-9 h-9 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] flex items-center justify-center shadow-sm transition-colors"
-            aria-label="Xem đánh giá trước"
-          >
-            <i data-lucide="chevron-left" class="w-4 h-4"></i>
-          </button>
-          <button
-            id="review-next-btn"
-            type="button"
-            onclick="scrollReviewsTrack(1)"
-            class="w-9 h-9 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] flex items-center justify-center shadow-sm transition-colors"
-            aria-label="Xem đánh giá tiếp theo"
-          >
-            <i data-lucide="chevron-right" class="w-4 h-4"></i>
-          </button>
-        </div>
+      <div class="text-center max-w-2xl mx-auto mb-7 sm:mb-9">
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#9E5A63]">Phản hồi chân thật</span>
+        <h2 class="text-2xl sm:text-4xl font-bold text-[#54433B] mt-1">Đánh Giá Của Khách Hàng</h2>
+        <p class="text-sm sm:text-base text-[#7E6B62] mt-1.5">Chạm vào từng ảnh để phóng to xem rõ phản hồi từ khách thương của tiệm</p>
       </div>
 
-      <div id="reviews-track" class="flex gap-3 sm:gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth"></div>
+      <div class="relative">
+        <button
+          id="review-prev-btn"
+          type="button"
+          onclick="scrollReviewsTrack(-1)"
+          class="flex absolute left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#F7E7E9]/95 sm:bg-white/95 hover:bg-[#F0D6DA] sm:hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] items-center justify-center shadow-md transition-all active:scale-95"
+          aria-label="Xem đánh giá trước"
+        >
+          <i data-lucide="chevron-left" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+        </button>
+
+        <div id="reviews-track" class="reviews-track w-full flex gap-3 sm:gap-4 overflow-x-auto pb-2 sm:pb-3 snap-x snap-mandatory scroll-smooth cursor-grab active:cursor-grabbing select-none"></div>
+
+        <button
+          id="review-next-btn"
+          type="button"
+          onclick="scrollReviewsTrack(1)"
+          class="flex absolute right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/95 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] items-center justify-center shadow-md transition-all active:scale-95"
+          aria-label="Xem đánh giá tiếp theo"
+        >
+          <i data-lucide="chevron-right" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+        </button>
+      </div>
+
       <p id="reviews-empty-note" class="hidden text-center text-sm text-[#8E7970] py-6">
         Hiện chưa có ảnh đánh giá nào được bật hiển thị.
       </p>
@@ -1215,10 +1244,60 @@
 
     window.addEventListener("hashchange", checkAdminHashTrigger);
 
+    // Kéo chuột để vuốt ngang danh sách ảnh đánh giá trên máy tính
+    function setupReviewsMouseDragScroll() {
+      const track = document.getElementById("reviews-track");
+      if (!track) return;
+
+      let isMouseDown = false;
+      let hasDragged = false;
+      let startX = 0;
+      let startScrollLeft = 0;
+
+      track.addEventListener("mousedown", (e) => {
+        if (e.button !== 0) return;
+        isMouseDown = true;
+        hasDragged = false;
+        startX = e.pageX - track.offsetLeft;
+        startScrollLeft = track.scrollLeft;
+        track.style.scrollBehavior = "auto";
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!isMouseDown) return;
+        const x = e.pageX - track.offsetLeft;
+        const walk = (x - startX) * 1.35;
+        if (Math.abs(x - startX) > 5) {
+          hasDragged = true;
+        }
+        track.scrollLeft = startScrollLeft - walk;
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!isMouseDown) return;
+        isMouseDown = false;
+        track.style.scrollBehavior = "smooth";
+        if (hasDragged) {
+          setTimeout(() => {
+            hasDragged = false;
+          }, 60);
+        }
+      });
+
+      track.addEventListener("dragstart", (e) => e.preventDefault());
+      track.addEventListener("click", (e) => {
+        if (hasDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       loadSavedConfig();
       applyConfigToUI();
       setupGridSwipe();
+      setupReviewsMouseDragScroll();
 
       initZoomController("product", "modal-img-stage", "modal-main-img", "product-zoom-badge", (dir) => {
         if (currentModalProduct && currentModalProduct.images && currentModalProduct.images.length > 1) {
@@ -2395,7 +2474,7 @@
         <button
           type="button"
           onclick="openReviewLightbox(${idx})"
-          class="group shrink-0 snap-start w-44 sm:w-56 aspect-[3/4] rounded-2xl overflow-hidden bg-white border border-[#EFE5DF] card-shadow card-shadow-hover transition-all duration-300 relative focus:outline-none"
+          class="group shrink-0 snap-start w-[calc(50%-0.375rem)] sm:w-56 aspect-[3/4] rounded-2xl overflow-hidden bg-white border border-[#EFE5DF] card-shadow card-shadow-hover transition-all duration-300 relative focus:outline-none"
           aria-label="Phóng to ảnh đánh giá ${idx + 1}"
         >
           <img
@@ -2418,7 +2497,7 @@
     function scrollReviewsTrack(direction) {
       const track = document.getElementById("reviews-track");
       if (!track) return;
-      const step = Math.max(200, Math.round(track.clientWidth * 0.75));
+      const step = Math.max(180, Math.round(track.clientWidth * 0.65));
       track.scrollBy({ left: direction * step, behavior: "smooth" });
     }
 
