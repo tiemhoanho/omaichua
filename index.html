@@ -7,41 +7,54 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
+    /* Áp dụng phông chữ Times New Roman toàn trang theo nhận diện của tiệm */
     * {
       font-family: 'Times New Roman', Times, serif !important;
     }
+
     body {
       background-color: #FDFBF7;
       color: #54433B;
     }
+
+    /* Bảng màu pastel dịu nhẹ, ấm áp đặc trưng của Mai & More */
     .pastel-gradient {
       background: linear-gradient(135deg, #FDFBF7 0%, #F7E7E9 55%, #F2EAE4 100%);
     }
+
     .card-shadow {
       box-shadow: 0 10px 30px -10px rgba(84, 67, 59, 0.08);
     }
+
     .card-shadow-hover:hover {
       box-shadow: 0 18px 36px -12px rgba(84, 67, 59, 0.16);
     }
+
+    /* Hiệu ứng thu gọn / mở rộng mượt mà cho các thẻ Tâm Huyết Của Tiệm */
     .accordion-content {
       display: grid;
       grid-template-rows: 0fr;
       transition: grid-template-rows 0.32s ease, opacity 0.32s ease;
       opacity: 0;
     }
+
     .accordion-card.active .accordion-content {
       grid-template-rows: 1fr;
       opacity: 1;
     }
+
     .accordion-inner {
       overflow: hidden;
     }
+
     .accordion-chevron {
       transition: transform 0.3s ease;
     }
+
     .accordion-card.active .accordion-chevron {
       transform: rotate(180deg);
     }
+
     @media (hover: hover) and (pointer: fine) {
       .accordion-card:hover .accordion-content {
         grid-template-rows: 1fr;
@@ -51,6 +64,8 @@
         transform: rotate(180deg);
       }
     }
+
+    /* Ẩn thanh cuộn nhưng vẫn cho phép cuộn ngang mượt */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -58,6 +73,8 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+
+    /* Thanh cuộn tinh tế */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -69,40 +86,14 @@
       background: #D7C4BC;
       border-radius: 9999px;
     }
-    .reviews-track {
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    .reviews-track::-webkit-scrollbar {
-      display: none;
-    }
-    @media (min-width: 640px) {
-      .reviews-track {
-        scrollbar-width: thin;
-        scrollbar-color: #D7C4BC #F3EAE5;
-        -ms-overflow-style: auto;
-      }
-      .reviews-track::-webkit-scrollbar {
-        display: block;
-        height: 7px;
-      }
-      .reviews-track::-webkit-scrollbar-track {
-        background: #F3EAE5;
-        border-radius: 9999px;
-      }
-      .reviews-track::-webkit-scrollbar-thumb {
-        background: #D7C4BC;
-        border-radius: 9999px;
-      }
-      .reviews-track::-webkit-scrollbar-thumb:hover {
-        background: #C2A99E;
-      }
-    }
+
+    /* Khu vực tương tác phóng to / thu nhỏ / kéo thả ảnh */
     .zoom-stage {
       touch-action: none;
       user-select: none;
       -webkit-user-select: none;
     }
+
     .zoom-target {
       will-change: transform;
       transform-origin: center center;
@@ -113,13 +104,10 @@
 
   <!-- ==================== CẤU HÌNH MẶC ĐỊNH CỦA TIỆM ==================== -->
   <script>
-    const _0xVault = {
-      s: "A2BeCHV0HHVHBVNvZkxdeh9WQUhmQQVXdAR2YUFxBH19ewd0dmdABXNWe1M=",
-      p: "f1RYcV5RfF8=",
-      k: "MaiAndMore#2026!"
-    };
+    // Mã hóa XOR + Base64 để không lộ đường dẫn bảng tính trực tiếp dưới dạng chuỗi thuần túy
+    const _0x5a2e = ["f3A2F1g7a2V6d0x3P1Z+I3B2f2U2V352KXV1R250IXM=", "25100510"];
 
-    function _0xDecode(enc, key) {
+    function _0xDecodeVault(enc, key) {
       try {
         const raw = atob(enc);
         let out = "";
@@ -132,7 +120,7 @@
       }
     }
 
-    function _0xEncode(plain, key) {
+    function _0xEncodeVault(plain, key) {
       let out = "";
       for (let i = 0; i < plain.length; i++) {
         out += String.fromCharCode(plain.charCodeAt(i) ^ key.charCodeAt(i % key.length));
@@ -140,21 +128,50 @@
       return btoa(out);
     }
 
-    function _0xGetMasterPin() {
-      return _0xDecode(_0xVault.p, _0xVault.k);
+    function handleImageError(imgEl) {
+      if (!imgEl) return;
+      const originalSrc = imgEl.getAttribute("data-orig-src") || imgEl.src;
+      const retryStage = parseInt(imgEl.getAttribute("data-retry") || "0", 10);
+
+      if (retryStage === 0 && originalSrc.includes("lh3.googleusercontent.com/d/")) {
+        const idMatch = originalSrc.match(/\/d\/([a-zA-Z0-9_-]+)/);
+        if (idMatch) {
+          imgEl.setAttribute("data-retry", "1");
+          imgEl.src = `https://drive.google.com/thumbnail?id=${idMatch[1]}&sz=w1600`;
+          return;
+        }
+      }
+
+      if (retryStage <= 1 && originalSrc.startsWith("http")) {
+        imgEl.setAttribute("data-retry", "2");
+        imgEl.src = `https://wsrv.nl/?url=${encodeURIComponent(originalSrc)}&w=1400&output=webp`;
+        return;
+      }
+
+      imgEl.onerror = null;
+      imgEl.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+          <rect width="600" height="600" fill="#F7E7E9"/>
+          <circle cx="300" cy="260" r="70" fill="#FDFBF7" opacity="0.85"/>
+          <text x="300" y="270" font-family="Times New Roman, serif" font-size="42" fill="#9E5A63" text-anchor="middle">❀</text>
+          <text x="300" y="370" font-family="Times New Roman, serif" font-size="22" fill="#54433B" text-anchor="middle">Mai &amp; More</text>
+          <text x="300" y="402" font-family="Times New Roman, serif" font-size="15" fill="#8E7970" text-anchor="middle">Ảnh mẫu hoa đang được cập nhật</text>
+        </svg>
+      `);
     }
 
     const DEFAULT_CONFIG = {
       shopName: "Mai & More",
       slogan: "More than flowers",
       heroImage: "https://drive.google.com/file/d/1Q9mgXjc6Il3M4K4LGkf_tANMzJ5JrTH_/view?usp=sharing",
-      vaultToken: _0xVault.s,
-      pinToken: _0xVault.p,
+      vaultToken: _0x5a2e[0],
       zaloUrl: "https://zalo.me/0981011115",
       facebookUrl: "https://www.facebook.com/mai.maiquynhhhh",
       instagramUrl: "https://www.instagram.com/oomaichua/",
+      threadsUrl: "https://www.threads.com/@oomaichua?xmt=AQG0b0kRQtz-ABtPI9ZNva0KgucH6k_RdDUMj5vTGJXE-no",
       phone: "0981011115",
-      orderHours: "Nhận đơn online cả ngày"
+      orderHours: "Nhận đơn online cả ngày",
+      adminPin: "25100510"
     };
   </script>
 
@@ -171,6 +188,7 @@
         </div>
       </a>
 
+      <!-- Thanh điều hướng trên màn hình máy tính -->
       <nav class="hidden md:flex items-center gap-6 lg:gap-7 text-base text-[#6E5B52]">
         <a href="#tam-huyet" class="hover:text-[#9E5A63] transition-colors whitespace-nowrap">Tâm huyết của tiệm</a>
         <a href="#bo-suu-tap" class="hover:text-[#9E5A63] transition-colors whitespace-nowrap">Bộ sưu tập</a>
@@ -184,6 +202,7 @@
       </a>
     </div>
 
+    <!-- Dải điều hướng nhanh gọn gàng trên điện thoại -->
     <nav aria-label="Điều hướng nhanh trên điện thoại" class="md:hidden border-t border-[#F3EAE5] bg-[#FDFBF7]/90">
       <div class="max-w-5xl mx-auto px-3 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar text-xs font-bold text-[#6E5B52]">
         <a href="#tam-huyet" class="px-3 py-1 rounded-full bg-white border border-[#EAE0D9] hover:border-[#DFC6C9] hover:text-[#9E5A63] whitespace-nowrap shrink-0 transition-colors">
@@ -245,6 +264,10 @@
           <a id="hero-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-white border border-[#E2D3CA] text-xs font-bold text-[#54433B] shadow-sm transition-all">
             <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="igGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FD5949"/><stop offset="50%" stop-color="#D6249F"/><stop offset="100%" stop-color="#285AEB"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGrad)"/><circle cx="12" cy="12" r="4.5" stroke="#FFFFFF" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="#FFFFFF"/></svg>
             <span>Instagram</span>
+          </a>
+          <a id="hero-threads" href="https://www.threads.com/@oomaichua?xmt=AQG0b0kRQtz-ABtPI9ZNva0KgucH6k_RdDUMj5vTGJXE-no" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-white border border-[#E2D3CA] text-xs font-bold text-[#54433B] shadow-sm transition-all">
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#101010"/><path d="M15.85 11.45c-.15-.08-.31-.15-.47-.22-.25-2.18-1.46-3.44-3.56-3.46-1.42-.01-2.61.6-3.27 1.68l1.25.86c.48-.72 1.24-1.05 2.01-1.04 1.24.01 1.94.64 2.13 1.78-.65-.12-1.36-.16-2.12-.11-2.14.13-3.51 1.29-3.42 2.91.05.91.52 1.72 1.32 2.24.67.44 1.54.66 2.44.61 1.19-.07 2.13-.52 2.78-1.34.49-.62.8-1.41.94-2.41.56.34.98.78 1.21 1.31.38.89.41 2.34-.78 3.53-1.05 1.05-2.31 1.5-4.21 1.52-2.11-.02-3.71-.69-4.75-2.01-.98-1.24-1.49-3.03-1.51-5.32.02-2.29.53-4.08 1.51-5.32 1.04-1.32 2.64-1.99 4.75-2.01 2.13.02 3.76.7 4.83 2.02.53.65.93 1.46 1.19 2.41l1.46-.39c-.32-1.16-.82-2.16-1.49-2.98C16.71 4.1 14.69 3.22 12.11 3.2h-.02c-2.57.02-4.57.9-5.94 2.63-1.22 1.54-1.85 3.66-1.87 6.3v.02c.02 2.64.65 4.76 1.87 6.3 1.37 1.73 3.37 2.61 5.94 2.63h.02c2.3-.02 3.94-.63 5.28-1.97 1.73-1.73 1.68-3.89 1.11-5.21-.41-.95-1.18-1.73-2.65-2.45zm-3.53 3.75c-.99.06-2.03-.39-2.08-1.29-.04-.67.47-1.41 1.99-1.5.22-.01.43-.02.64-.02.56 0 1.09.05 1.57.16-.18 1.98-1.12 2.59-2.12 2.65z" fill="#FFFFFF"/></svg>
+            <span>Threads</span>
           </a>
         </div>
       </div>
@@ -346,7 +369,7 @@
     </div>
   </section>
 
-  <!-- ==================== BỘ SƯU TẬP MẪU HOA ==================== -->
+  <!-- ==================== BỘ SƯU TẬP MẪU HOA (LƯỚI 6 Ô GỌN ĐẸP + PHÂN TRANG) ==================== -->
   <main id="bo-suu-tap" class="py-12 md:py-16">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-8">
@@ -393,8 +416,10 @@
         </div>
       </div>
 
+      <!-- Khung lưới 6 ô -->
       <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5"></div>
 
+      <!-- Thanh điều hướng sang trang -->
       <div id="pagination-bar" class="mt-7 pt-5 border-t border-[#EFE5DF] flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-2">
           <button
@@ -430,33 +455,54 @@
   <!-- ==================== HÌNH ẢNH KHÁCH ĐÁNH GIÁ ==================== -->
   <section id="danh-gia" class="py-12 md:py-16 border-t border-[#EFE5DF] bg-[#FAF5F1]/70">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-7 sm:mb-9">
+      <div class="text-center max-w-2xl mx-auto mb-6 sm:mb-7 relative">
         <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#9E5A63]">Phản hồi chân thật</span>
         <h2 class="text-2xl sm:text-4xl font-bold text-[#54433B] mt-1">Đánh Giá Của Khách Hàng</h2>
         <p class="text-sm sm:text-base text-[#7E6B62] mt-1.5">Chạm vào từng ảnh để phóng to xem rõ phản hồi từ khách thương của tiệm</p>
+
+        <div class="hidden sm:flex items-center gap-2 mt-4 justify-end">
+          <button
+            id="review-prev-btn"
+            type="button"
+            onclick="scrollReviewsTrack(-1)"
+            class="w-9 h-9 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] flex items-center justify-center shadow-sm transition-colors"
+            aria-label="Xem đánh giá trước"
+          >
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+          </button>
+          <button
+            id="review-next-btn"
+            type="button"
+            onclick="scrollReviewsTrack(1)"
+            class="w-9 h-9 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] flex items-center justify-center shadow-sm transition-colors"
+            aria-label="Xem đánh giá tiếp theo"
+          >
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+        </div>
       </div>
 
       <div class="relative">
         <button
-          id="review-prev-btn"
+          id="review-prev-mobile-btn"
           type="button"
           onclick="scrollReviewsTrack(-1)"
-          class="flex absolute left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#F7E7E9]/95 sm:bg-white/95 hover:bg-[#F0D6DA] sm:hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] items-center justify-center shadow-md transition-all active:scale-95"
+          class="sm:hidden absolute -left-2.5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/95 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] flex items-center justify-center shadow-md active:scale-95 transition-all"
           aria-label="Xem đánh giá trước"
         >
-          <i data-lucide="chevron-left" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+          <i data-lucide="chevron-left" class="w-4 h-4"></i>
         </button>
 
-        <div id="reviews-track" class="reviews-track w-full flex gap-3 sm:gap-4 overflow-x-auto pb-2 sm:pb-3 snap-x snap-mandatory scroll-smooth cursor-grab active:cursor-grabbing select-none"></div>
+        <div id="reviews-track" class="flex gap-3 sm:gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth cursor-grab select-none"></div>
 
         <button
-          id="review-next-btn"
+          id="review-next-mobile-btn"
           type="button"
           onclick="scrollReviewsTrack(1)"
-          class="flex absolute right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/95 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] items-center justify-center shadow-md transition-all active:scale-95"
+          class="sm:hidden absolute -right-2.5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/95 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] flex items-center justify-center shadow-md active:scale-95 transition-all"
           aria-label="Xem đánh giá tiếp theo"
         >
-          <i data-lucide="chevron-right" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+          <i data-lucide="chevron-right" class="w-4 h-4"></i>
         </button>
       </div>
 
@@ -595,6 +641,10 @@
             <a id="footer-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-sm font-bold text-[#54433B] transition-colors">
               <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="igGradFooter" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FD5949"/><stop offset="50%" stop-color="#D6249F"/><stop offset="100%" stop-color="#285AEB"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGradFooter)"/><circle cx="12" cy="12" r="4.5" stroke="#FFFFFF" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="#FFFFFF"/></svg>
               <span>Instagram</span>
+            </a>
+            <a id="footer-threads" href="https://www.threads.com/@oomaichua?xmt=AQG0b0kRQtz-ABtPI9ZNva0KgucH6k_RdDUMj5vTGJXE-no" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-sm font-bold text-[#54433B] transition-colors">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#101010"/><path d="M15.85 11.45c-.15-.08-.31-.15-.47-.22-.25-2.18-1.46-3.44-3.56-3.46-1.42-.01-2.61.6-3.27 1.68l1.25.86c.48-.72 1.24-1.05 2.01-1.04 1.24.01 1.94.64 2.13 1.78-.65-.12-1.36-.16-2.12-.11-2.14.13-3.51 1.29-3.42 2.91.05.91.52 1.72 1.32 2.24.67.44 1.54.66 2.44.61 1.19-.07 2.13-.52 2.78-1.34.49-.62.8-1.41.94-2.41.56.34.98.78 1.21 1.31.38.89.41 2.34-.78 3.53-1.05 1.05-2.31 1.5-4.21 1.52-2.11-.02-3.71-.69-4.75-2.01-.98-1.24-1.49-3.03-1.51-5.32.02-2.29.53-4.08 1.51-5.32 1.04-1.32 2.64-1.99 4.75-2.01 2.13.02 3.76.7 4.83 2.02.53.65.93 1.46 1.19 2.41l1.46-.39c-.32-1.16-.82-2.16-1.49-2.98C16.71 4.1 14.69 3.22 12.11 3.2h-.02c-2.57.02-4.57.9-5.94 2.63-1.22 1.54-1.85 3.66-1.87 6.3v.02c.02 2.64.65 4.76 1.87 6.3 1.37 1.73 3.37 2.61 5.94 2.63h.02c2.3-.02 3.94-.63 5.28-1.97 1.73-1.73 1.68-3.89 1.11-5.21-.41-.95-1.18-1.73-2.65-2.45zm-3.53 3.75c-.99.06-2.03-.39-2.08-1.29-.04-.67.47-1.41 1.99-1.5.22-.01.43-.02.64-.02.56 0 1.09.05 1.57.16-.18 1.98-1.12 2.59-2.12 2.65z" fill="#FFFFFF"/></svg>
+              <span>Threads</span>
             </a>
           </div>
         </div>
@@ -762,7 +812,7 @@
             <span class="truncate">Đặt mẫu này ngay (Sao chép lời nhắn)</span>
           </button>
 
-          <div class="grid grid-cols-3 gap-1.5 sm:gap-2.5">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2">
             <a id="modal-zalo" href="https://zalo.me/0981011115" target="_blank" rel="noopener" class="py-2 sm:py-2.5 px-2 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-[#54433B] transition-colors">
               <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#0068FF"/><text x="12" y="15.5" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="bold" font-size="8.5">Zalo</text></svg>
               <span>Zalo</span>
@@ -774,6 +824,10 @@
             <a id="modal-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="py-2 sm:py-2.5 px-2 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-[#54433B] transition-colors">
               <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="igGradModal" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FD5949"/><stop offset="50%" stop-color="#D6249F"/><stop offset="100%" stop-color="#285AEB"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGradModal)"/><circle cx="12" cy="12" r="4.5" stroke="#FFFFFF" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="#FFFFFF"/></svg>
               <span>Instagram</span>
+            </a>
+            <a id="modal-threads" href="https://www.threads.com/@oomaichua?xmt=AQG0b0kRQtz-ABtPI9ZNva0KgucH6k_RdDUMj5vTGJXE-no" target="_blank" rel="noopener" class="py-2 sm:py-2.5 px-2 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-[#54433B] transition-colors">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#101010"/><path d="M15.85 11.45c-.15-.08-.31-.15-.47-.22-.25-2.18-1.46-3.44-3.56-3.46-1.42-.01-2.61.6-3.27 1.68l1.25.86c.48-.72 1.24-1.05 2.01-1.04 1.24.01 1.94.64 2.13 1.78-.65-.12-1.36-.16-2.12-.11-2.14.13-3.51 1.29-3.42 2.91.05.91.52 1.72 1.32 2.24.67.44 1.54.66 2.44.61 1.19-.07 2.13-.52 2.78-1.34.49-.62.8-1.41.94-2.41.56.34.98.78 1.21 1.31.38.89.41 2.34-.78 3.53-1.05 1.05-2.31 1.5-4.21 1.52-2.11-.02-3.71-.69-4.75-2.01-.98-1.24-1.49-3.03-1.51-5.32.02-2.29.53-4.08 1.51-5.32 1.04-1.32 2.64-1.99 4.75-2.01 2.13.02 3.76.7 4.83 2.02.53.65.93 1.46 1.19 2.41l1.46-.39c-.32-1.16-.82-2.16-1.49-2.98C16.71 4.1 14.69 3.22 12.11 3.2h-.02c-2.57.02-4.57.9-5.94 2.63-1.22 1.54-1.85 3.66-1.87 6.3v.02c.02 2.64.65 4.76 1.87 6.3 1.37 1.73 3.37 2.61 5.94 2.63h.02c2.3-.02 3.94-.63 5.28-1.97 1.73-1.73 1.68-3.89 1.11-5.21-.41-.95-1.18-1.73-2.65-2.45zm-3.53 3.75c-.99.06-2.03-.39-2.08-1.29-.04-.67.47-1.41 1.99-1.5.22-.01.43-.02.64-.02.56 0 1.09.05 1.57.16-.18 1.98-1.12 2.59-2.12 2.65z" fill="#FFFFFF"/></svg>
+              <span>Threads</span>
             </a>
           </div>
         </div>
@@ -864,7 +918,7 @@
       <div class="bg-white p-5 rounded-2xl border border-[#EFE5DF] space-y-3">
         <div class="flex items-center gap-2.5">
           <span class="w-6 h-6 rounded-full bg-[#9E5A63] text-white text-xs font-bold flex items-center justify-center">2</span>
-          <h4 class="text-lg font-bold text-[#54433B]">Cập nhật nguồn dữ liệu kho hoa (Tự động mã hóa ẩn)</h4>
+          <h4 class="text-lg font-bold text-[#54433B]">Cập nhật nguồn dữ liệu kho hoa (Tự động ẩn đường dẫn)</h4>
         </div>
         <p class="text-sm text-[#6E5B52]">
           Nguồn hiện tại đang được bảo vệ ẩn. Nếu muốn đổi sang bảng tính khác, hãy dán đường link chia sẻ mới vào ô dưới rồi bấm đồng bộ:
@@ -905,6 +959,10 @@
             <input id="admin-ig" type="text" oninput="updateConfigPreview()" class="w-full px-3.5 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
           </div>
           <div>
+            <label class="block text-xs font-bold text-[#7E6B62] mb-1">Link Threads</label>
+            <input id="admin-threads" type="text" oninput="updateConfigPreview()" class="w-full px-3.5 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
+          </div>
+          <div>
             <label class="block text-xs font-bold text-[#7E6B62] mb-1">Số điện thoại hiển thị</label>
             <input id="admin-phone" type="text" oninput="updateConfigPreview()" class="w-full px-3.5 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
           </div>
@@ -912,10 +970,10 @@
             <label class="block text-xs font-bold text-[#7E6B62] mb-1">Trạng thái nhận đơn</label>
             <input id="admin-hours" type="text" oninput="updateConfigPreview()" class="w-full px-3.5 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
           </div>
-          <div>
-            <label class="block text-xs font-bold text-[#7E6B62] mb-1">Đổi mã PIN mới (tự ẩn khi xuất)</label>
+          <div class="sm:col-span-3">
+            <label class="block text-xs font-bold text-[#7E6B62] mb-1">Đổi mã PIN Cổng Chủ Tiệm</label>
             <div class="relative">
-              <input id="admin-pin" type="password" placeholder="Nhập PIN mới nếu muốn đổi..." oninput="updateConfigPreview()" class="w-full pl-3.5 pr-9 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
+              <input id="admin-pin" type="password" oninput="updateConfigPreview()" class="w-full pl-3.5 pr-9 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
               <button type="button" onclick="togglePinVisibility('admin-pin', this)" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#8E7970]">
                 <i data-lucide="eye" class="w-4 h-4"></i>
               </button>
@@ -1235,69 +1293,11 @@
       if (zoomControllers[key]) zoomControllers[key].reset();
     }
 
-    // Chỉ mở Cổng Chủ Tiệm khi truy cập đúng hash #quynhmai
-    function checkAdminHashTrigger() {
-      if (window.location.hash.toLowerCase() === "#quynhmai") {
-        openAdminAccess();
-      }
-    }
-
-    window.addEventListener("hashchange", checkAdminHashTrigger);
-
-    // Kéo chuột để vuốt ngang danh sách ảnh đánh giá trên máy tính
-    function setupReviewsMouseDragScroll() {
-      const track = document.getElementById("reviews-track");
-      if (!track) return;
-
-      let isMouseDown = false;
-      let hasDragged = false;
-      let startX = 0;
-      let startScrollLeft = 0;
-
-      track.addEventListener("mousedown", (e) => {
-        if (e.button !== 0) return;
-        isMouseDown = true;
-        hasDragged = false;
-        startX = e.pageX - track.offsetLeft;
-        startScrollLeft = track.scrollLeft;
-        track.style.scrollBehavior = "auto";
-      });
-
-      window.addEventListener("mousemove", (e) => {
-        if (!isMouseDown) return;
-        const x = e.pageX - track.offsetLeft;
-        const walk = (x - startX) * 1.35;
-        if (Math.abs(x - startX) > 5) {
-          hasDragged = true;
-        }
-        track.scrollLeft = startScrollLeft - walk;
-      });
-
-      window.addEventListener("mouseup", () => {
-        if (!isMouseDown) return;
-        isMouseDown = false;
-        track.style.scrollBehavior = "smooth";
-        if (hasDragged) {
-          setTimeout(() => {
-            hasDragged = false;
-          }, 60);
-        }
-      });
-
-      track.addEventListener("dragstart", (e) => e.preventDefault());
-      track.addEventListener("click", (e) => {
-        if (hasDragged) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      }, true);
-    }
-
     document.addEventListener("DOMContentLoaded", () => {
       loadSavedConfig();
       applyConfigToUI();
       setupGridSwipe();
-      setupReviewsMouseDragScroll();
+      setupReviewsDragScroll();
 
       initZoomController("product", "modal-img-stage", "modal-main-img", "product-zoom-badge", (dir) => {
         if (currentModalProduct && currentModalProduct.images && currentModalProduct.images.length > 1) {
@@ -1311,7 +1311,9 @@
         }
       });
 
-      checkAdminHashTrigger();
+      if (window.location.hash === "#quanly") {
+        openAdminAccess();
+      }
 
       const activeSource = resolveActiveSheetUrl();
       if (activeSource) {
@@ -1328,21 +1330,18 @@
     });
 
     function resolveActiveSheetUrl() {
-      const decodedId = _0xDecode(appConfig.vaultToken || _0xVault.s, _0xGetMasterPin());
+      const customOverride = appConfig.customSheetUrl ? String(appConfig.customSheetUrl).trim() : "";
+      if (customOverride) return customOverride;
+      const decodedId = _0xDecodeVault(appConfig.vaultToken || _0x5a2e[0], _0x5a2e[1]);
       if (decodedId && decodedId.length > 15) {
         return `https://docs.google.com/spreadsheets/d/${decodedId}/edit`;
       }
       return "";
     }
 
-    function getActiveAdminPin() {
-      const decodedPin = _0xDecode(appConfig.pinToken || _0xVault.p, _0xVault.k);
-      return decodedPin || _0xGetMasterPin();
-    }
-
     function loadSavedConfig() {
       try {
-        const saved = localStorage.getItem("mai_and_more_config_v5");
+        const saved = localStorage.getItem("mai_and_more_config_v4");
         if (saved) {
           const parsed = JSON.parse(saved);
           appConfig = {
@@ -1350,12 +1349,13 @@
             ...parsed,
             heroImage: DEFAULT_CONFIG.heroImage || parsed.heroImage || "",
             vaultToken: parsed.vaultToken || DEFAULT_CONFIG.vaultToken,
-            pinToken: parsed.pinToken || DEFAULT_CONFIG.pinToken,
             slogan: DEFAULT_CONFIG.slogan,
             zaloUrl: parsed.zaloUrl || DEFAULT_CONFIG.zaloUrl,
             facebookUrl: parsed.facebookUrl || DEFAULT_CONFIG.facebookUrl,
             instagramUrl: parsed.instagramUrl || DEFAULT_CONFIG.instagramUrl,
-            phone: parsed.phone || DEFAULT_CONFIG.phone
+            threadsUrl: parsed.threadsUrl || DEFAULT_CONFIG.threadsUrl,
+            phone: parsed.phone || DEFAULT_CONFIG.phone,
+            adminPin: parsed.adminPin || DEFAULT_CONFIG.adminPin
           };
         }
       } catch (e) {
@@ -1375,12 +1375,15 @@
       if (document.getElementById("hero-zalo")) document.getElementById("hero-zalo").href = appConfig.zaloUrl;
       if (document.getElementById("hero-fb")) document.getElementById("hero-fb").href = appConfig.facebookUrl;
       if (document.getElementById("hero-ig")) document.getElementById("hero-ig").href = appConfig.instagramUrl;
+      if (document.getElementById("hero-threads")) document.getElementById("hero-threads").href = appConfig.threadsUrl;
       document.getElementById("footer-zalo").href = appConfig.zaloUrl;
       document.getElementById("footer-fb").href = appConfig.facebookUrl;
       document.getElementById("footer-ig").href = appConfig.instagramUrl;
+      if (document.getElementById("footer-threads")) document.getElementById("footer-threads").href = appConfig.threadsUrl;
       document.getElementById("modal-zalo").href = appConfig.zaloUrl;
       document.getElementById("modal-fb").href = appConfig.facebookUrl;
       document.getElementById("modal-ig").href = appConfig.instagramUrl;
+      if (document.getElementById("modal-threads")) document.getElementById("modal-threads").href = appConfig.threadsUrl;
 
       const heroImg = document.getElementById("hero-img");
       if (heroImg && appConfig.heroImage) {
@@ -1421,37 +1424,6 @@
         .split(/[\n,;]+/)
         .map(item => normalizeSingleImageUrl(item))
         .filter(Boolean);
-    }
-
-    function handleImageError(imgEl) {
-      const originalSrc = imgEl.getAttribute("data-orig-src") || imgEl.src;
-      const retryStage = parseInt(imgEl.getAttribute("data-retry") || "0", 10);
-
-      if (retryStage === 0 && originalSrc.includes("lh3.googleusercontent.com/d/")) {
-        const idMatch = originalSrc.match(/\/d\/([a-zA-Z0-9_-]+)/);
-        if (idMatch) {
-          imgEl.setAttribute("data-retry", "1");
-          imgEl.src = `https://drive.google.com/thumbnail?id=${idMatch[1]}&sz=w1600`;
-          return;
-        }
-      }
-
-      if (retryStage <= 1 && originalSrc.startsWith("http")) {
-        imgEl.setAttribute("data-retry", "2");
-        imgEl.src = `https://wsrv.nl/?url=${encodeURIComponent(originalSrc)}&w=1400&output=webp`;
-        return;
-      }
-
-      imgEl.onerror = null;
-      imgEl.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
-        <svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
-          <rect width="600" height="600" fill="#F7E7E9"/>
-          <circle cx="300" cy="260" r="70" fill="#FDFBF7" opacity="0.85"/>
-          <text x="300" y="270" font-family="Times New Roman, serif" font-size="42" fill="#9E5A63" text-anchor="middle">❀</text>
-          <text x="300" y="370" font-family="Times New Roman, serif" font-size="22" fill="#54433B" text-anchor="middle">Mai &amp; More</text>
-          <text x="300" y="402" font-family="Times New Roman, serif" font-size="15" fill="#8E7970" text-anchor="middle">Ảnh mẫu hoa đang được cập nhật</text>
-        </svg>
-      `);
     }
 
     function extractSheetInfo(url) {
@@ -1650,7 +1622,7 @@
         finish(null);
       };
 
-      s.src = `https://docs.google.com/spreadsheets/d/${info.sheetId}/gviz/tq?sheet=${encodeURIComponent(sheetName)}&tqx=out:json;responseHandler:${cbName}`;
+      s.src = `https://docs.google.com/spreadsheets/d/${info.sheetId}/gviz/tq?sheet=${encodeURIComponent(sheetName)}&tqx=json;responseHandler:${cbName}`;
       document.body.appendChild(s);
     }
 
@@ -1809,9 +1781,9 @@
       allProducts = products;
       isUsingSheetData = true;
       if (sheetId) {
-        appConfig.vaultToken = _0xEncode(sheetId, _0xGetMasterPin());
+        appConfig.vaultToken = _0xEncodeVault(sheetId, _0x5a2e[1]);
       }
-      localStorage.setItem("mai_and_more_config_v5", JSON.stringify(appConfig));
+      localStorage.setItem("mai_and_more_config_v4", JSON.stringify(appConfig));
 
       selectedCategory = "Tất cả";
       currentPage = 1;
@@ -2288,8 +2260,8 @@
 
     function verifyAdminPin() {
       const entered = document.getElementById("pin-input").value.trim();
-      const validPin = getActiveAdminPin();
-      if (entered && entered === validPin) {
+      const validPin = String(appConfig.adminPin || DEFAULT_CONFIG.adminPin);
+      if (entered === validPin) {
         closePinModal();
         openAdminDashboard();
       } else {
@@ -2302,9 +2274,10 @@
       document.getElementById("admin-zalo").value = appConfig.zaloUrl || "";
       document.getElementById("admin-fb").value = appConfig.facebookUrl || "";
       document.getElementById("admin-ig").value = appConfig.instagramUrl || "";
+      if (document.getElementById("admin-threads")) document.getElementById("admin-threads").value = appConfig.threadsUrl || "";
       document.getElementById("admin-phone").value = appConfig.phone || "";
       document.getElementById("admin-hours").value = appConfig.orderHours || "";
-      document.getElementById("admin-pin").value = "";
+      document.getElementById("admin-pin").value = appConfig.adminPin || "25100510";
 
       updateConfigPreview();
       const adminModal = document.getElementById("admin-modal");
@@ -2344,61 +2317,56 @@
 
     function getDraftConfig() {
       const rawUrlInput = document.getElementById("admin-sheet-url").value.trim();
-      const newPinInput = document.getElementById("admin-pin").value.trim();
-
       let token = appConfig.vaultToken || DEFAULT_CONFIG.vaultToken;
       if (rawUrlInput) {
         const info = extractSheetInfo(rawUrlInput);
         if (info && info.sheetId) {
-          token = _0xEncode(info.sheetId, _0xGetMasterPin());
+          token = _0xEncodeVault(info.sheetId, _0x5a2e[1]);
         }
       }
-
-      let pinToken = appConfig.pinToken || DEFAULT_CONFIG.pinToken;
-      if (newPinInput) {
-        pinToken = _0xEncode(newPinInput, _0xVault.k);
-      }
-
       return {
         shopName: appConfig.shopName,
         slogan: appConfig.slogan,
         heroImage: appConfig.heroImage,
         vaultToken: token,
-        pinToken: pinToken,
         zaloUrl: document.getElementById("admin-zalo").value.trim() || "https://zalo.me",
         facebookUrl: document.getElementById("admin-fb").value.trim() || "https://facebook.com",
         instagramUrl: document.getElementById("admin-ig").value.trim() || "https://instagram.com",
+        threadsUrl: (document.getElementById("admin-threads") ? document.getElementById("admin-threads").value.trim() : "") || DEFAULT_CONFIG.threadsUrl,
         phone: document.getElementById("admin-phone").value.trim() || "0981011115",
-        orderHours: document.getElementById("admin-hours").value.trim() || "Nhận đơn online cả ngày"
+        orderHours: document.getElementById("admin-hours").value.trim() || "Nhận đơn online cả ngày",
+        adminPin: document.getElementById("admin-pin").value.trim() || "25100510"
       };
     }
 
-    function buildConfigCode(cfg) {
+    function buildConfigCode(cfg, maskPin = false) {
+      const displayPin = maskPin ? "••••••••" : cfg.adminPin;
       return `const DEFAULT_CONFIG = {
   shopName: ${JSON.stringify(cfg.shopName)},
   slogan: ${JSON.stringify(cfg.slogan)},
   heroImage: ${JSON.stringify(cfg.heroImage)},
   vaultToken: ${JSON.stringify(cfg.vaultToken)},
-  pinToken: ${JSON.stringify(cfg.pinToken)},
   zaloUrl: ${JSON.stringify(cfg.zaloUrl)},
   facebookUrl: ${JSON.stringify(cfg.facebookUrl)},
   instagramUrl: ${JSON.stringify(cfg.instagramUrl)},
+  threadsUrl: ${JSON.stringify(cfg.threadsUrl)},
   phone: ${JSON.stringify(cfg.phone)},
-  orderHours: ${JSON.stringify(cfg.orderHours)}
+  orderHours: ${JSON.stringify(cfg.orderHours)},
+  adminPin: ${JSON.stringify(displayPin)}
 };`;
     }
 
     function updateConfigPreview() {
       const draft = getDraftConfig();
       appConfig = { ...draft };
-      localStorage.setItem("mai_and_more_config_v5", JSON.stringify(appConfig));
+      localStorage.setItem("mai_and_more_config_v4", JSON.stringify(appConfig));
       applyConfigToUI();
-      document.getElementById("config-preview-box").textContent = buildConfigCode(draft);
+      document.getElementById("config-preview-box").textContent = buildConfigCode(draft, true);
     }
 
     function copyGeneratedConfig() {
       const draft = getDraftConfig();
-      const code = buildConfigCode(draft);
+      const code = buildConfigCode(draft, false);
       fallbackCopyText(code, "Đã sao chép mã cấu hình bảo mật!");
     }
 
@@ -2458,6 +2426,53 @@
       }
     });
 
+    let reviewClickSuppressed = false;
+
+    function setupReviewsDragScroll() {
+      const track = document.getElementById("reviews-track");
+      if (!track) return;
+
+      let isMouseDown = false;
+      let startX = 0;
+      let scrollLeftStart = 0;
+      let hasMoved = false;
+
+      track.addEventListener("mousedown", (e) => {
+        if (e.button !== 0) return;
+        isMouseDown = true;
+        hasMoved = false;
+        reviewClickSuppressed = false;
+        startX = e.pageX - track.offsetLeft;
+        scrollLeftStart = track.scrollLeft;
+        track.classList.remove("snap-x", "scroll-smooth");
+        track.style.cursor = "grabbing";
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!isMouseDown) return;
+        const x = e.pageX - track.offsetLeft;
+        const walk = (x - startX) * 1.3;
+        if (Math.abs(x - startX) > 6) {
+          hasMoved = true;
+          reviewClickSuppressed = true;
+        }
+        if (hasMoved) {
+          e.preventDefault();
+          track.scrollLeft = scrollLeftStart - walk;
+        }
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!isMouseDown) return;
+        isMouseDown = false;
+        track.style.cursor = "grab";
+        track.classList.add("snap-x", "scroll-smooth");
+        setTimeout(() => {
+          reviewClickSuppressed = false;
+        }, 60);
+      });
+    }
+
     function renderCustomerReviews() {
       const track = document.getElementById("reviews-track");
       const emptyNote = document.getElementById("reviews-empty-note");
@@ -2473,8 +2488,9 @@
       track.innerHTML = customerReviews.map((rev, idx) => `
         <button
           type="button"
-          onclick="openReviewLightbox(${idx})"
-          class="group shrink-0 snap-start w-[calc(50%-0.375rem)] sm:w-56 aspect-[3/4] rounded-2xl overflow-hidden bg-white border border-[#EFE5DF] card-shadow card-shadow-hover transition-all duration-300 relative focus:outline-none"
+          onclick="if(!reviewClickSuppressed) openReviewLightbox(${idx})"
+          draggable="false"
+          class="group shrink-0 snap-start w-[calc(50%-6px)] sm:w-56 aspect-[3/4] rounded-2xl overflow-hidden bg-white border border-[#EFE5DF] card-shadow card-shadow-hover transition-all duration-300 relative focus:outline-none"
           aria-label="Phóng to ảnh đánh giá ${idx + 1}"
         >
           <img
@@ -2482,8 +2498,9 @@
             data-orig-src="${rev.image}"
             alt="Ảnh khách đánh giá ${idx + 1}"
             referrerpolicy="no-referrer"
+            draggable="false"
             onerror="handleImageError(this)"
-            class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+            class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 pointer-events-none"
           />
           <span class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-white/90 text-[#54433B] shadow-sm flex items-center justify-center opacity-90 group-hover:scale-105 transition-transform">
             <i data-lucide="zoom-in" class="w-4 h-4"></i>
@@ -2497,7 +2514,7 @@
     function scrollReviewsTrack(direction) {
       const track = document.getElementById("reviews-track");
       if (!track) return;
-      const step = Math.max(180, Math.round(track.clientWidth * 0.65));
+      const step = Math.max(200, Math.round(track.clientWidth * 0.75));
       track.scrollBy({ left: direction * step, behavior: "smooth" });
     }
 
