@@ -51,6 +51,13 @@
         transform: rotate(180deg);
       }
     }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -62,29 +69,68 @@
       background: #D7C4BC;
       border-radius: 9999px;
     }
+    .zoom-stage {
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .zoom-target {
+      will-change: transform;
+      transform-origin: center center;
+    }
   </style>
 </head>
 <body class="antialiased selection:bg-[#F7E7E9] selection:text-[#54433B]">
 
   <!-- ==================== CẤU HÌNH MẶC ĐỊNH CỦA TIỆM ==================== -->
   <script>
+    const _0xVault = {
+      s: "A2BeCHV0HHVHBVNvZkxdeh9WQUhmQQVXdAR2YUFxBH19ewd0dmdABXNWe1M=",
+      p: "f1RYcV5RfF8=",
+      k: "MaiAndMore#2026!"
+    };
+
+    function _0xDecode(enc, key) {
+      try {
+        const raw = atob(enc);
+        let out = "";
+        for (let i = 0; i < raw.length; i++) {
+          out += String.fromCharCode(raw.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+        }
+        return out;
+      } catch (e) {
+        return "";
+      }
+    }
+
+    function _0xEncode(plain, key) {
+      let out = "";
+      for (let i = 0; i < plain.length; i++) {
+        out += String.fromCharCode(plain.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+      }
+      return btoa(out);
+    }
+
+    function _0xGetMasterPin() {
+      return _0xDecode(_0xVault.p, _0xVault.k);
+    }
+
     const DEFAULT_CONFIG = {
       shopName: "Mai & More",
       slogan: "More than flowers",
       heroImage: "https://drive.google.com/file/d/1Q9mgXjc6Il3M4K4LGkf_tANMzJ5JrTH_/view?usp=sharing",
-      sheetUrl: "https://docs.google.com/spreadsheets/d/1Uo8EA-Eu0b_VylJ-cpxVt4gF1GQqD5MON6DFRq5AcJc/edit?usp=sharing",
+      vaultToken: _0xVault.s,
+      pinToken: _0xVault.p,
       zaloUrl: "https://zalo.me/0981011115",
       facebookUrl: "https://www.facebook.com/mai.maiquynhhhh",
       instagramUrl: "https://www.instagram.com/oomaichua/",
       phone: "0981011115",
-      orderHours: "Nhận đơn online cả ngày",
-      // Mã băm SHA-256 của mã PIN mặc định (không lưu pass thô trong mã nguồn)
-      adminPinHash: "91616c17d45f1215499a145594c0219c6b4b386787424a782071333d9d450205"
+      orderHours: "Nhận đơn online cả ngày"
     };
   </script>
 
   <!-- ==================== HEADER ==================== -->
-  <header class="sticky top-0 z-40 bg-[#FDFBF7]/90 backdrop-blur-md border-b border-[#EFE5DF]">
+  <header class="sticky top-0 z-40 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-[#EFE5DF]">
     <div class="max-w-5xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
       <a href="#" class="flex items-center gap-2 sm:gap-3 group min-w-0">
         <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#F7E7E9] border border-[#E8CFD3] flex items-center justify-center text-[#9E5A63] shrink-0 transition-transform duration-300 group-hover:scale-105">
@@ -96,10 +142,11 @@
         </div>
       </a>
 
-      <nav class="hidden md:flex items-center gap-7 text-base text-[#6E5B52]">
-        <a href="#tam-huyet" class="hover:text-[#9E5A63] transition-colors">Tâm huyết của tiệm</a>
-        <a href="#bo-suu-tap" class="hover:text-[#9E5A63] transition-colors">Bộ sưu tập</a>
-        <a href="#lien-he" class="hover:text-[#9E5A63] transition-colors">Liên hệ đặt hoa</a>
+      <nav class="hidden md:flex items-center gap-6 lg:gap-7 text-base text-[#6E5B52]">
+        <a href="#tam-huyet" class="hover:text-[#9E5A63] transition-colors whitespace-nowrap">Tâm huyết của tiệm</a>
+        <a href="#bo-suu-tap" class="hover:text-[#9E5A63] transition-colors whitespace-nowrap">Bộ sưu tập</a>
+        <a href="#danh-gia" class="hover:text-[#9E5A63] transition-colors whitespace-nowrap">Đánh giá của khách hàng</a>
+        <a href="#lien-he" class="hover:text-[#9E5A63] transition-colors whitespace-nowrap">Liên hệ đặt hoa</a>
       </nav>
 
       <a href="#bo-suu-tap" class="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-full bg-[#F7E7E9] hover:bg-[#F0D6DA] text-[#54433B] text-xs sm:text-sm font-bold border border-[#E6CDD1] shrink-0 transition-all">
@@ -107,6 +154,24 @@
         <span>Chọn mẫu hoa</span>
       </a>
     </div>
+
+    <nav aria-label="Điều hướng nhanh trên điện thoại" class="md:hidden border-t border-[#F3EAE5] bg-[#FDFBF7]/90">
+      <div class="max-w-5xl mx-auto px-3 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar text-xs font-bold text-[#6E5B52]">
+        <a href="#tam-huyet" class="px-3 py-1 rounded-full bg-white border border-[#EAE0D9] hover:border-[#DFC6C9] hover:text-[#9E5A63] whitespace-nowrap shrink-0 transition-colors">
+          Tâm huyết của tiệm
+        </a>
+        <a href="#bo-suu-tap" class="px-3 py-1 rounded-full bg-white border border-[#EAE0D9] hover:border-[#DFC6C9] hover:text-[#9E5A63] whitespace-nowrap shrink-0 transition-colors">
+          Bộ sưu tập
+        </a>
+        <a href="#danh-gia" class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#F7E7E9]/70 border border-[#E8CFD3] text-[#9E5A63] whitespace-nowrap shrink-0 transition-colors">
+          <i data-lucide="star" class="w-3 h-3 fill-[#9E5A63]"></i>
+          <span>Đánh giá của khách hàng</span>
+        </a>
+        <a href="#lien-he" class="px-3 py-1 rounded-full bg-white border border-[#EAE0D9] hover:border-[#DFC6C9] hover:text-[#9E5A63] whitespace-nowrap shrink-0 transition-colors">
+          Liên hệ đặt hoa
+        </a>
+      </div>
+    </nav>
   </header>
 
   <!-- ==================== HERO BANNER ==================== -->
@@ -149,7 +214,7 @@
             <span>Facebook</span>
           </a>
           <a id="hero-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-white border border-[#E2D3CA] text-xs font-bold text-[#54433B] shadow-sm transition-all">
-            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="igGradHero" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FD5949"/><stop offset="50%" stop-color="#D6249F"/><stop offset="100%" stop-color="#285AEB"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGradHero)"/><circle cx="12" cy="12" r="4.5" stroke="#FFFFFF" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="#FFFFFF"/></svg>
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="igGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FD5949"/><stop offset="50%" stop-color="#D6249F"/><stop offset="100%" stop-color="#285AEB"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGrad)"/><circle cx="12" cy="12" r="4.5" stroke="#FFFFFF" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="#FFFFFF"/></svg>
             <span>Instagram</span>
           </a>
         </div>
@@ -252,7 +317,7 @@
     </div>
   </section>
 
-  <!-- ==================== BỘ SƯU TẬP MẪU HOA (LƯỚI 6 Ô GỌN ĐẸP + PHÂN TRANG) ==================== -->
+  <!-- ==================== BỘ SƯU TẬP MẪU HOA ==================== -->
   <main id="bo-suu-tap" class="py-12 md:py-16">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-8">
@@ -299,10 +364,8 @@
         </div>
       </div>
 
-      <!-- Khung lưới 6 ô (2 cột trên mobile kiểu sàn TMĐT, 3 cột x 2 hàng trên màn hình lớn) -->
       <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5"></div>
 
-      <!-- Thanh điều hướng sang trang luôn gọn đẹp trên màn hình -->
       <div id="pagination-bar" class="mt-7 pt-5 border-t border-[#EFE5DF] flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-2">
           <button
@@ -334,6 +397,126 @@
       </div>
     </div>
   </main>
+
+  <!-- ==================== HÌNH ẢNH KHÁCH ĐÁNH GIÁ ==================== -->
+  <section id="danh-gia" class="py-12 md:py-16 border-t border-[#EFE5DF] bg-[#FAF5F1]/70">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7">
+        <div>
+          <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#9E5A63]">Phản hồi chân thật</span>
+          <h2 class="text-2xl sm:text-4xl font-bold text-[#54433B] mt-1">Đánh Giá Của Khách Hàng</h2>
+          <p class="text-sm sm:text-base text-[#7E6B62] mt-1.5">Chạm vào từng ảnh để phóng to xem rõ phản hồi từ khách thương của tiệm</p>
+        </div>
+
+        <div class="flex items-center gap-2 self-start sm:self-auto">
+          <button
+            id="review-prev-btn"
+            type="button"
+            onclick="scrollReviewsTrack(-1)"
+            class="w-9 h-9 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] flex items-center justify-center shadow-sm transition-colors"
+            aria-label="Xem đánh giá trước"
+          >
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+          </button>
+          <button
+            id="review-next-btn"
+            type="button"
+            onclick="scrollReviewsTrack(1)"
+            class="w-9 h-9 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] flex items-center justify-center shadow-sm transition-colors"
+            aria-label="Xem đánh giá tiếp theo"
+          >
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="reviews-track" class="flex gap-3 sm:gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth"></div>
+      <p id="reviews-empty-note" class="hidden text-center text-sm text-[#8E7970] py-6">
+        Hiện chưa có ảnh đánh giá nào được bật hiển thị.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== LIGHTBOX PHÓNG TO ẢNH ĐÁNH GIÁ ==================== -->
+  <div id="review-lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-2 sm:p-4" onclick="closeReviewLightbox(event)">
+    <div class="relative w-full md:w-[92vw] lg:w-[88vw] max-w-6xl bg-[#FDFBF7] rounded-2xl sm:rounded-3xl p-2.5 sm:p-4 border border-[#E8DCD4] shadow-2xl flex flex-col max-h-[94vh]" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between gap-2 px-1 sm:px-2 pb-2 border-b border-[#EFE5DF] shrink-0">
+        <div class="flex items-center gap-2 min-w-0">
+          <span id="review-lightbox-counter" class="text-xs sm:text-sm font-bold text-[#54433B] whitespace-nowrap">Đánh giá 1 / 1</span>
+          <span class="hidden md:inline text-xs text-[#8E7970]">• Lăn chuột hoặc chụm 2 ngón để phóng to/thu nhỏ, kéo để xem chi tiết</span>
+        </div>
+
+        <div class="flex items-center gap-1.5 shrink-0">
+          <button
+            type="button"
+            onclick="adjustZoom('review', -0.4)"
+            class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#F5EFEA] hover:bg-[#EFE5DF] text-[#54433B] flex items-center justify-center transition-colors"
+            title="Thu nhỏ"
+            aria-label="Thu nhỏ ảnh"
+          >
+            <i data-lucide="zoom-out" class="w-4 h-4"></i>
+          </button>
+          <span id="review-zoom-badge" class="px-2 py-0.5 rounded-full bg-[#F7E7E9] text-[#9E5A63] text-xs font-bold min-w-[46px] text-center">100%</span>
+          <button
+            type="button"
+            onclick="adjustZoom('review', 0.4)"
+            class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#F5EFEA] hover:bg-[#EFE5DF] text-[#54433B] flex items-center justify-center transition-colors"
+            title="Phóng to"
+            aria-label="Phóng to ảnh"
+          >
+            <i data-lucide="zoom-in" class="w-4 h-4"></i>
+          </button>
+          <button
+            type="button"
+            onclick="resetZoom('review')"
+            class="px-2.5 h-7 sm:h-8 rounded-full bg-[#F5EFEA] hover:bg-[#EFE5DF] text-[#54433B] text-xs font-bold transition-colors"
+            title="Đặt lại kích thước gốc"
+          >
+            Gốc
+          </button>
+          <button
+            type="button"
+            onclick="hideReviewLightbox()"
+            class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#54433B] hover:bg-[#3F312B] text-white flex items-center justify-center transition-colors ml-1"
+            aria-label="Đóng ảnh đánh giá"
+          >
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="review-zoom-stage" class="zoom-stage relative mt-2.5 bg-[#F5EFEA] rounded-xl sm:rounded-2xl overflow-hidden flex items-center justify-center w-full h-[76vh] md:h-[82vh] cursor-grab">
+        <img
+          id="review-lightbox-img"
+          src=""
+          alt="Ảnh khách đánh giá Mai & More"
+          referrerpolicy="no-referrer"
+          draggable="false"
+          class="zoom-target max-w-full max-h-full w-auto h-auto object-contain select-none"
+        />
+
+        <button
+          id="review-lb-prev"
+          type="button"
+          onclick="navigateReviewLightbox(-1)"
+          class="hidden absolute left-2.5 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/90 hover:bg-white text-[#54433B] shadow-md items-center justify-center transition-transform active:scale-95"
+          aria-label="Ảnh đánh giá trước"
+        >
+          <i data-lucide="chevron-left" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+        </button>
+
+        <button
+          id="review-lb-next"
+          type="button"
+          onclick="navigateReviewLightbox(1)"
+          class="hidden absolute right-2.5 sm:right-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/90 hover:bg-white text-[#54433B] shadow-md items-center justify-center transition-transform active:scale-95"
+          aria-label="Ảnh đánh giá tiếp theo"
+        >
+          <i data-lucide="chevron-right" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- ==================== FOOTER & LIÊN HỆ ==================== -->
   <footer id="lien-he" class="bg-[#F6EFEA] border-t border-[#E8DCD4] pt-12 pb-8">
@@ -390,46 +573,46 @@
 
       <div class="pt-6 flex items-center justify-between text-sm text-[#8E7970]">
         <p>© 2026 <span id="copyright-shop-name">Mai &amp; More</span>. Gói trọn yêu thương trong từng cánh hoa.</p>
-        <span class="text-xs text-[#A49188]">Hoa lụa nghệ thuật lưu giữ kỷ niệm</span>
+        <button
+          onclick="openAdminAccess()"
+          title="Khu vực dành riêng cho chủ tiệm"
+          class="p-2 rounded-full text-[#B8A69E] hover:text-[#54433B] hover:bg-white/60 transition-colors"
+          aria-label="Cổng chủ tiệm"
+        >
+          <i data-lucide="lock" class="w-4 h-4"></i>
+        </button>
       </div>
     </div>
   </footer>
 
   <!-- ==================== MODAL CHI TIẾT MẪU HOA ==================== -->
-  <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm px-9 sm:px-14 py-3 sm:py-5" onclick="closeProductModal(event)">
-    <!-- Mũi tên mờ bên trái để quay về bó trước -->
+  <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/65 backdrop-blur-sm px-9 sm:px-14 md:px-16 py-2.5 sm:py-4" onclick="closeProductModal(event)">
     <button
       id="modal-prev-product-btn"
       type="button"
       onclick="event.stopPropagation(); navigateModalProduct(-1)"
-      class="fixed left-1.5 sm:left-5 top-1/2 -translate-y-1/2 z-30 w-8 h-12 sm:w-11 sm:h-14 rounded-full bg-white/30 hover:bg-white/65 active:bg-white/80 text-white hover:text-[#54433B] backdrop-blur-md border border-white/35 flex items-center justify-center shadow-lg transition-all disabled:opacity-15 disabled:pointer-events-none"
+      class="fixed left-1.5 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-8 h-12 sm:w-11 sm:h-14 rounded-full bg-white/30 hover:bg-white/75 active:bg-white/90 text-white hover:text-[#54433B] backdrop-blur-md border border-white/35 flex items-center justify-center shadow-lg transition-all disabled:opacity-15 disabled:pointer-events-none"
       aria-label="Bó hoa trước"
       title="Bó hoa trước"
     >
       <i data-lucide="chevron-left" class="w-5 h-5 sm:w-6 sm:h-6"></i>
     </button>
 
-    <!-- Mũi tên mờ bên phải để chuyển sang bó tiếp theo -->
     <button
       id="modal-next-product-btn"
       type="button"
       onclick="event.stopPropagation(); navigateModalProduct(1)"
-      class="fixed right-1.5 sm:right-5 top-1/2 -translate-y-1/2 z-30 w-8 h-12 sm:w-11 sm:h-14 rounded-full bg-white/30 hover:bg-white/65 active:bg-white/80 text-white hover:text-[#54433B] backdrop-blur-md border border-white/35 flex items-center justify-center shadow-lg transition-all disabled:opacity-15 disabled:pointer-events-none"
+      class="fixed right-1.5 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-8 h-12 sm:w-11 sm:h-14 rounded-full bg-white/30 hover:bg-white/75 active:bg-white/90 text-white hover:text-[#54433B] backdrop-blur-md border border-white/35 flex items-center justify-center shadow-lg transition-all disabled:opacity-15 disabled:pointer-events-none"
       aria-label="Bó hoa tiếp theo"
       title="Bó hoa tiếp theo"
     >
       <i data-lucide="chevron-right" class="w-5 h-5 sm:w-6 sm:h-6"></i>
     </button>
 
-    <div class="bg-[#FDFBF7] rounded-2xl sm:rounded-3xl max-w-4xl w-full overflow-y-auto md:overflow-hidden border border-[#E8DCD4] shadow-2xl grid grid-cols-1 md:grid-cols-12 max-h-[88vh]" onclick="event.stopPropagation()">
-      <!-- Thanh tiêu đề cố định trên mobile -->
+    <div class="bg-[#FDFBF7] rounded-2xl sm:rounded-3xl w-full md:w-[92vw] lg:w-[88vw] max-w-6xl overflow-y-auto md:overflow-hidden border border-[#E8DCD4] shadow-2xl grid grid-cols-1 md:grid-cols-12 max-h-[92vh]" onclick="event.stopPropagation()">
       <div class="md:hidden sticky top-0 z-20 flex items-center justify-between px-3 py-2 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-[#EFE5DF]">
         <div class="flex items-center gap-1.5 min-w-0">
           <span id="modal-mobile-pos" class="px-2 py-0.5 rounded-full bg-[#F7E7E9] text-[#9E5A63] text-[11px] font-bold shrink-0">1/1</span>
-          <span id="modal-mobile-hot" class="hidden items-center gap-0.5 px-2 py-0.5 rounded-full bg-gradient-to-r from-[#D92D4B] to-[#F05252] text-white text-[10px] font-extrabold uppercase tracking-wider shrink-0">
-            <svg class="w-2.5 h-2.5 fill-[#FDE047] shrink-0" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
-            <span>HOT</span>
-          </span>
           <span id="modal-mobile-title-bar" class="text-xs font-bold text-[#54433B] truncate">Chi tiết mẫu hoa</span>
         </div>
         <button onclick="hideProductModal()" class="w-7 h-7 rounded-full bg-[#F5EFEA] hover:bg-[#EFE5DF] text-[#54433B] flex items-center justify-center shrink-0" aria-label="Đóng">
@@ -438,19 +621,50 @@
       </div>
 
       <div class="md:col-span-7 bg-[#F5EFEA] relative flex flex-col justify-between p-2 sm:p-4 select-none">
-        <div id="modal-img-stage" class="relative w-full h-[52vh] min-h-[330px] sm:h-80 md:h-[400px] flex items-center justify-center rounded-xl sm:rounded-2xl overflow-hidden bg-white/80 border border-[#EAE0D9] touch-pan-y">
+        <div id="modal-img-stage" class="zoom-stage relative w-full h-[50vh] min-h-[320px] sm:h-[54vh] md:h-[70vh] flex items-center justify-center rounded-xl sm:rounded-2xl overflow-hidden bg-white/85 border border-[#EAE0D9] cursor-grab">
           <img
             id="modal-main-img"
             src=""
             alt="Ảnh chi tiết mẫu hoa"
             referrerpolicy="no-referrer"
-            class="max-w-full max-h-full w-auto h-auto object-contain transition-transform duration-200"
+            draggable="false"
+            class="zoom-target max-w-full max-h-full w-auto h-auto object-contain select-none"
           />
+
+          <div class="absolute top-2.5 right-2.5 z-10 flex items-center gap-1 bg-white/90 backdrop-blur-md px-2 py-1 rounded-full border border-[#E5D8D0] shadow-sm">
+            <button
+              type="button"
+              onclick="event.stopPropagation(); adjustZoom('product', -0.4)"
+              class="w-6 h-6 rounded-full hover:bg-[#F7E7E9] text-[#54433B] flex items-center justify-center transition-colors"
+              title="Thu nhỏ"
+              aria-label="Thu nhỏ ảnh"
+            >
+              <i data-lucide="zoom-out" class="w-3.5 h-3.5"></i>
+            </button>
+            <span id="product-zoom-badge" class="text-[11px] font-bold text-[#9E5A63] min-w-[38px] text-center">100%</span>
+            <button
+              type="button"
+              onclick="event.stopPropagation(); adjustZoom('product', 0.4)"
+              class="w-6 h-6 rounded-full hover:bg-[#F7E7E9] text-[#54433B] flex items-center justify-center transition-colors"
+              title="Phóng to"
+              aria-label="Phóng to ảnh"
+            >
+              <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i>
+            </button>
+            <button
+              type="button"
+              onclick="event.stopPropagation(); resetZoom('product')"
+              class="px-1.5 py-0.5 rounded-full hover:bg-[#F7E7E9] text-[10px] font-bold text-[#54433B] transition-colors"
+              title="Về kích thước gốc"
+            >
+              Gốc
+            </button>
+          </div>
 
           <button
             id="modal-prev-btn"
             onclick="changeModalImage(-1)"
-            class="hidden absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#54433B] shadow-md items-center justify-center transition-transform active:scale-95"
+            class="hidden absolute left-2.5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-white text-[#54433B] shadow-md items-center justify-center transition-transform active:scale-95"
             aria-label="Ảnh trước"
           >
             <i data-lucide="chevron-left" class="w-5 h-5"></i>
@@ -458,73 +672,77 @@
           <button
             id="modal-next-btn"
             onclick="changeModalImage(1)"
-            class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#54433B] shadow-md items-center justify-center transition-transform active:scale-95"
+            class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-white text-[#54433B] shadow-md items-center justify-center transition-transform active:scale-95"
             aria-label="Ảnh tiếp theo"
           >
             <i data-lucide="chevron-right" class="w-5 h-5"></i>
           </button>
 
-          <div id="modal-img-counter" class="hidden absolute bottom-2 right-2 px-2 py-0.5 rounded-full bg-black/60 text-white text-[10px] sm:text-xs font-bold">
+          <div id="modal-img-counter" class="hidden absolute bottom-2 right-2 z-10 px-2.5 py-0.5 rounded-full bg-black/60 text-white text-[10px] sm:text-xs font-bold">
             1 / 1
+          </div>
+
+          <div class="hidden md:block absolute bottom-2 left-2.5 z-10 px-2.5 py-0.5 rounded-full bg-white/85 text-[11px] text-[#7E6B62] pointer-events-none">
+            Lăn chuột để phóng to • Kéo để soi chi tiết
           </div>
         </div>
 
         <div id="modal-thumbnails" class="hidden items-center gap-1.5 sm:gap-2 mt-2 sm:mt-3 overflow-x-auto pb-0.5 justify-center"></div>
       </div>
 
-      <div class="md:col-span-5 p-3.5 sm:p-6 flex flex-col justify-between md:overflow-y-auto">
+      <div class="md:col-span-5 p-3.5 sm:p-6 md:p-7 flex flex-col justify-between md:overflow-y-auto md:max-h-[88vh]">
         <div>
           <div class="flex items-start justify-between gap-2">
             <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
               <span id="modal-category" class="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#F7E7E9] text-[#9E5A63] text-[11px] sm:text-xs font-bold">Hoa lụa</span>
               <span id="modal-status" class="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#EEF3EF] text-[#5D7A63] text-[11px] sm:text-xs font-bold">Còn hàng</span>
-              <span id="modal-desktop-hot" class="hidden items-center gap-1 px-2.5 py-0.5 sm:py-1 rounded-full bg-gradient-to-r from-[#D92D4B] to-[#F05252] text-white text-[11px] sm:text-xs font-extrabold uppercase tracking-wider">
-                <svg class="w-3 h-3 fill-[#FDE047] shrink-0" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
+              <span id="modal-hot" class="hidden items-center gap-1 px-2.5 sm:px-3 py-0.5 rounded-full bg-gradient-to-r from-[#D92D4B] to-[#F05252] text-white text-[11px] sm:text-xs font-bold shadow-sm">
+                <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-[#FDE047] shrink-0" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
                 <span>HOT</span>
               </span>
             </div>
-            <button onclick="hideProductModal()" class="hidden md:flex p-1.5 rounded-full hover:bg-[#EFE5DF] text-[#7E6B62]" aria-label="Đóng">
+            <button onclick="hideProductModal()" class="hidden md:flex p-2 rounded-full bg-[#F5EFEA] hover:bg-[#EFE5DF] text-[#54433B]" aria-label="Đóng">
               <i data-lucide="x" class="w-5 h-5"></i>
             </button>
           </div>
 
-          <div class="mt-2 sm:mt-3 flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1 md:block">
+          <div class="mt-2 sm:mt-4 flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1 md:block">
             <h3 id="modal-title" class="text-base sm:text-2xl md:text-3xl font-bold text-[#54433B] leading-snug">Tên mẫu hoa</h3>
-            <p id="modal-price" class="text-base sm:text-2xl font-bold text-[#9E5A63] md:mt-1.5 shrink-0">380.000đ</p>
+            <p id="modal-price" class="text-base sm:text-2xl md:text-3xl font-bold text-[#9E5A63] md:mt-2 shrink-0">380.000đ</p>
           </div>
 
-          <div class="mt-2.5 sm:mt-4 pt-2.5 sm:pt-4 border-t border-[#EFE5DF] space-y-2.5 sm:space-y-3">
+          <div class="mt-2.5 sm:mt-5 pt-2.5 sm:pt-4 border-t border-[#EFE5DF] space-y-2.5 sm:space-y-4">
             <div>
-              <p class="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#8E7970] mb-1">Mô tả thiết kế</p>
+              <p class="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#8E7970] mb-1.5">Mô tả thiết kế</p>
               <p id="modal-desc" class="text-xs sm:text-base text-[#6E5B52] leading-relaxed whitespace-pre-line">Mô tả chi tiết bó hoa</p>
             </div>
 
-            <div class="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#FAF4F0] border border-[#EFE3DA] text-xs sm:text-sm text-[#6E5B52] space-y-1">
+            <div class="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#FAF4F0] border border-[#EFE3DA] text-xs sm:text-sm text-[#6E5B52] space-y-1.5">
               <p><strong class="text-[#54433B]">Quà đi kèm:</strong> Tặng thiệp viết tay &amp; túi đựng xinh xắn</p>
               <p><strong class="text-[#54433B]">Ưu đãi số lượng:</strong> Mua số lượng lớn (&gt;3 bó) để nhận giá ưu đãi</p>
             </div>
           </div>
         </div>
 
-        <div class="mt-3.5 sm:mt-5 pt-3 sm:pt-4 border-t border-[#EFE5DF] space-y-2">
+        <div class="mt-3.5 sm:mt-6 pt-3 sm:pt-4 border-t border-[#EFE5DF] space-y-2.5">
           <button
             onclick="copyOrderMessage()"
-            class="w-full py-2.5 sm:py-3 px-3 rounded-full bg-[#54433B] hover:bg-[#3E302A] text-white font-bold text-xs sm:text-base flex items-center justify-center gap-1.5 sm:gap-2 transition-colors shadow-sm"
+            class="w-full py-2.5 sm:py-3.5 px-3 rounded-full bg-[#54433B] hover:bg-[#3E302A] text-white font-bold text-xs sm:text-base flex items-center justify-center gap-1.5 sm:gap-2 transition-colors shadow-sm"
           >
             <i data-lucide="copy" class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0"></i>
             <span class="truncate">Đặt mẫu này ngay (Sao chép lời nhắn)</span>
           </button>
 
-          <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
-            <a id="modal-zalo" href="https://zalo.me/0981011115" target="_blank" rel="noopener" class="py-1.5 sm:py-2 px-2 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-[#54433B] transition-colors">
+          <div class="grid grid-cols-3 gap-1.5 sm:gap-2.5">
+            <a id="modal-zalo" href="https://zalo.me/0981011115" target="_blank" rel="noopener" class="py-2 sm:py-2.5 px-2 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-[#54433B] transition-colors">
               <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#0068FF"/><text x="12" y="15.5" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="bold" font-size="8.5">Zalo</text></svg>
               <span>Zalo</span>
             </a>
-            <a id="modal-fb" href="https://www.facebook.com/mai.maiquynhhhh" target="_blank" rel="noopener" class="py-1.5 sm:py-2 px-2 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-[#54433B] transition-colors">
+            <a id="modal-fb" href="https://www.facebook.com/mai.maiquynhhhh" target="_blank" rel="noopener" class="py-2 sm:py-2.5 px-2 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-[#54433B] transition-colors">
               <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
               <span>Facebook</span>
             </a>
-            <a id="modal-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="py-1.5 sm:py-2 px-2 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-[#54433B] transition-colors">
+            <a id="modal-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="py-2 sm:py-2.5 px-2 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-[#54433B] transition-colors">
               <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="igGradModal" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FD5949"/><stop offset="50%" stop-color="#D6249F"/><stop offset="100%" stop-color="#285AEB"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGradModal)"/><circle cx="12" cy="12" r="4.5" stroke="#FFFFFF" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="#FFFFFF"/></svg>
               <span>Instagram</span>
             </a>
@@ -549,7 +767,7 @@
         </button>
       </div>
 
-      <p class="text-sm text-[#6E5B52] mb-4">Vui lòng nhập mã PIN quản trị để mở bảng thiết lập kho hoa Google Sheets.</p>
+      <p class="text-sm text-[#6E5B52] mb-4">Vui lòng nhập mã PIN quản trị để mở bảng thiết lập kho hoa.</p>
 
       <div class="relative mb-3">
         <input
@@ -584,7 +802,7 @@
       <div class="flex items-center justify-between pb-4 border-b border-[#EFE5DF]">
         <div>
           <span class="text-xs font-bold uppercase tracking-widest text-[#9E5A63]">Dành riêng cho chủ tiệm</span>
-          <h3 class="text-2xl font-bold text-[#54433B]">Quản Lý Kho Hoa &amp; Kết Nối Google Sheets</h3>
+          <h3 class="text-2xl font-bold text-[#54433B]">Quản Lý Kho Hoa &amp; Đồng Bộ Dữ Liệu</h3>
         </div>
         <button onclick="closeAdminModal()" class="p-2 rounded-full hover:bg-[#EFE5DF] text-[#7E6B62]">
           <i data-lucide="x" class="w-5 h-5"></i>
@@ -594,17 +812,18 @@
       <div class="bg-white p-5 rounded-2xl border border-[#EFE5DF] space-y-3">
         <div class="flex items-center gap-2.5">
           <span class="w-6 h-6 rounded-full bg-[#9E5A63] text-white text-xs font-bold flex items-center justify-center">1</span>
-          <h4 class="text-lg font-bold text-[#54433B]">Tạo bảng tính Google Sheets với 7 cột chuẩn</h4>
+          <h4 class="text-lg font-bold text-[#54433B]">Cấu trúc bảng dữ liệu 7 cột chuẩn</h4>
         </div>
         <p class="text-sm text-[#6E5B52] leading-relaxed">
-          Mở <strong>sheets.new</strong> và nhập đúng 7 tiêu đề cột ở dòng 1:
+          Dòng 1 dùng đúng 7 tiêu đề:
           <code class="bg-[#F7E7E9] px-1.5 py-0.5 rounded text-xs font-bold">Ten_Mau, Gia, Danh_Muc, Hinh_Anh, Mo_Ta, Trang_Thai, Noi_Bat</code>.
-          Mỗi bó hoa có thể dán <strong>nhiều link ảnh Google Drive</strong> vào ô <code class="bg-[#F5EFEA] px-1 rounded text-xs">Hinh_Anh</code>, ngăn cách nhau bằng dấu phẩy <code class="bg-[#F5EFEA] px-1 rounded text-xs">,</code>.
+          Mỗi bó hoa có thể dán <strong>nhiều link ảnh</strong> vào ô <code class="bg-[#F5EFEA] px-1 rounded text-xs">Hinh_Anh</code>, ngăn cách nhau bằng dấu phẩy <code class="bg-[#F5EFEA] px-1 rounded text-xs">,</code>.
+          Tab <code class="bg-[#F7E7E9] px-1.5 py-0.5 rounded text-xs font-bold">Danh_Gia</code> dùng 2 cột <code class="bg-[#F5EFEA] px-1 rounded text-xs">Hinh_Anh</code> và <code class="bg-[#F5EFEA] px-1 rounded text-xs">Hien_Thi</code> (nhập <code class="bg-[#F5EFEA] px-1 rounded text-xs">Có</code> để hiển thị ảnh khách đánh giá).
         </p>
         <div class="flex flex-wrap gap-2.5 pt-1">
           <button onclick="downloadSampleCsv()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#5D7A63] hover:bg-[#4C6651] text-white text-sm font-bold transition-colors">
             <i data-lucide="download" class="w-4 h-4"></i>
-            <span>Tải file mẫu Google Sheets (.csv)</span>
+            <span>Tải file mẫu dữ liệu (.csv)</span>
           </button>
           <button onclick="copySheetHeaders()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#FDFBF7] hover:bg-[#F7E7E9] border border-[#DFD1C8] text-sm font-bold text-[#54433B] transition-colors">
             <i data-lucide="copy" class="w-4 h-4"></i>
@@ -616,22 +835,22 @@
       <div class="bg-white p-5 rounded-2xl border border-[#EFE5DF] space-y-3">
         <div class="flex items-center gap-2.5">
           <span class="w-6 h-6 rounded-full bg-[#9E5A63] text-white text-xs font-bold flex items-center justify-center">2</span>
-          <h4 class="text-lg font-bold text-[#54433B]">Bật quyền xem công khai &amp; Kiểm tra tải dữ liệu</h4>
+          <h4 class="text-lg font-bold text-[#54433B]">Cập nhật nguồn dữ liệu kho hoa (Tự động mã hóa ẩn)</h4>
         </div>
         <p class="text-sm text-[#6E5B52]">
-          Trong Google Sheets, bấm <strong>Chia sẻ (Share)</strong> → chọn <strong>Bất kỳ ai có đường liên kết (Anyone with the link)</strong> với quyền <strong>Người xem (Viewer)</strong> → dán link vào ô dưới:
+          Nguồn hiện tại đang được bảo vệ ẩn. Nếu muốn đổi sang bảng tính khác, hãy dán đường link chia sẻ mới vào ô dưới rồi bấm đồng bộ:
         </p>
         <div class="flex flex-col sm:flex-row gap-2.5">
           <input
             id="admin-sheet-url"
-            type="text"
-            placeholder="https://docs.google.com/spreadsheets/d/..."
+            type="password"
+            placeholder="Dán link bảng tính mới để cập nhật..."
             oninput="updateConfigPreview()"
             class="flex-1 px-4 py-2.5 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm text-[#54433B] focus:outline-none focus:border-[#9E5A63]"
           />
           <button onclick="testAndSyncSheet()" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#54433B] hover:bg-[#3F312B] text-white text-sm font-bold shrink-0 transition-colors">
             <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-            <span>Kiểm tra &amp; Tải dữ liệu ngay</span>
+            <span>Kiểm tra &amp; Đồng bộ ngay</span>
           </button>
         </div>
         <div id="admin-sync-status" class="hidden p-3 rounded-xl text-sm"></div>
@@ -640,7 +859,7 @@
       <div class="bg-white p-5 rounded-2xl border border-[#EFE5DF] space-y-4">
         <div class="flex items-center gap-2.5">
           <span class="w-6 h-6 rounded-full bg-[#9E5A63] text-white text-xs font-bold flex items-center justify-center">3</span>
-          <h4 class="text-lg font-bold text-[#54433B]">Cập nhật thông tin tiệm &amp; Xuất mã cố định</h4>
+          <h4 class="text-lg font-bold text-[#54433B]">Cập nhật thông tin tiệm &amp; Xuất mã bảo mật</h4>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -665,9 +884,9 @@
             <input id="admin-hours" type="text" oninput="updateConfigPreview()" class="w-full px-3.5 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-[#7E6B62] mb-1">Đổi mã PIN mới (để trống nếu giữ nguyên)</label>
+            <label class="block text-xs font-bold text-[#7E6B62] mb-1">Đổi mã PIN mới (tự ẩn khi xuất)</label>
             <div class="relative">
-              <input id="admin-pin" type="password" placeholder="Nhập PIN mới..." oninput="updateConfigPreview()" class="w-full pl-3.5 pr-9 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
+              <input id="admin-pin" type="password" placeholder="Nhập PIN mới nếu muốn đổi..." oninput="updateConfigPreview()" class="w-full pl-3.5 pr-9 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
               <button type="button" onclick="togglePinVisibility('admin-pin', this)" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#8E7970]">
                 <i data-lucide="eye" class="w-4 h-4"></i>
               </button>
@@ -782,75 +1001,287 @@
     let appConfig = { ...DEFAULT_CONFIG };
     let allProducts = [];
     let filteredProducts = [];
+    let customerReviews = [];
+    let currentReviewLightboxIdx = 0;
     let isUsingSheetData = false;
     let selectedCategory = "Tất cả";
     let currentPage = 1;
     let currentModalProduct = null;
     let currentModalImageIndex = 0;
 
-    // Mã băm SHA-256 của đường dẫn bí mật "#quynhmai" (không lưu chữ thô trong mã nguồn)
-    const ADMIN_ROUTE_HASH = "30e24455d176e1f277c3e4582e7e7a5680f9b4d0f00e6014d9f55b708b8d47b4";
+    // ==================== HỆ THỐNG PHÓNG TO / THU NHỎ & DI CHUYỂN ẢNH ĐA THIẾT BỊ ====================
+    const zoomControllers = {};
 
-    async function checkSecretRoute() {
-      const currentHash = window.location.hash.replace(/^#/, "").trim().toLowerCase();
-      if (!currentHash) return;
-      const hashBuffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("mai_route_" + currentHash));
-      const hex = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
-      if (hex === ADMIN_ROUTE_HASH) {
-        history.replaceState(null, "", window.location.pathname + window.location.search);
+    function initZoomController(key, stageId, imgId, badgeId, onSwipeHorizontal) {
+      const stage = document.getElementById(stageId);
+      const img = document.getElementById(imgId);
+      if (!stage || !img) return;
+
+      const state = {
+        scale: 1,
+        minScale: 1,
+        maxScale: 4.5,
+        tx: 0,
+        ty: 0,
+        isDragging: false,
+        dragStartX: 0,
+        dragStartY: 0,
+        startTx: 0,
+        startTy: 0,
+        pinchStartDist: 0,
+        pinchStartScale: 1,
+        touchSwipeStartX: 0,
+        touchSwipeStartY: 0,
+        lastTapTime: 0
+      };
+
+      function clampTranslation() {
+        if (state.scale <= 1.01) {
+          state.scale = 1;
+          state.tx = 0;
+          state.ty = 0;
+          return;
+        }
+        const rect = stage.getBoundingClientRect();
+        const maxOffsetX = Math.max(0, (rect.width * (state.scale - 1)) / 2 + 40);
+        const maxOffsetY = Math.max(0, (rect.height * (state.scale - 1)) / 2 + 40);
+        state.tx = Math.min(maxOffsetX, Math.max(-maxOffsetX, state.tx));
+        state.ty = Math.min(maxOffsetY, Math.max(-maxOffsetY, state.ty));
+      }
+
+      function applyTransform(animate = false) {
+        clampTranslation();
+        img.style.transition = animate ? "transform 0.22s ease-out" : "none";
+        img.style.transform = `translate3d(${state.tx}px, ${state.ty}px, 0) scale(${state.scale})`;
+        stage.style.cursor = state.scale > 1 ? (state.isDragging ? "grabbing" : "grab") : "zoom-in";
+        const badge = document.getElementById(badgeId);
+        if (badge) {
+          badge.textContent = `${Math.round(state.scale * 100)}%`;
+        }
+      }
+
+      function zoomAt(targetScale, clientX, clientY, animate = false) {
+        const clamped = Math.min(state.maxScale, Math.max(state.minScale, targetScale));
+        if (clamped === 1) {
+          state.scale = 1;
+          state.tx = 0;
+          state.ty = 0;
+          applyTransform(animate);
+          return;
+        }
+
+        const rect = stage.getBoundingClientRect();
+        const cx = clientX !== undefined ? clientX - (rect.left + rect.width / 2) : 0;
+        const cy = clientY !== undefined ? clientY - (rect.top + rect.height / 2) : 0;
+
+        const ratio = clamped / state.scale;
+        state.tx = cx - ratio * (cx - state.tx);
+        state.ty = cy - ratio * (cy - state.ty);
+        state.scale = clamped;
+        applyTransform(animate);
+      }
+
+      stage.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        const factor = e.deltaY < 0 ? 1.18 : 1 / 1.18;
+        zoomAt(state.scale * factor, e.clientX, e.clientY, false);
+      }, { passive: false });
+
+      stage.addEventListener("dblclick", (e) => {
+        if (e.target.closest("button")) return;
+        e.preventDefault();
+        if (state.scale > 1.05) {
+          zoomAt(1, e.clientX, e.clientY, true);
+        } else {
+          zoomAt(2.2, e.clientX, e.clientY, true);
+        }
+      });
+
+      stage.addEventListener("mousedown", (e) => {
+        if (e.button !== 0 || e.target.closest("button") || state.scale <= 1) return;
+        e.preventDefault();
+        state.isDragging = true;
+        state.dragStartX = e.clientX;
+        state.dragStartY = e.clientY;
+        state.startTx = state.tx;
+        state.startTy = state.ty;
+        applyTransform(false);
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!state.isDragging) return;
+        state.tx = state.startTx + (e.clientX - state.dragStartX);
+        state.ty = state.startTy + (e.clientY - state.dragStartY);
+        applyTransform(false);
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!state.isDragging) return;
+        state.isDragging = false;
+        applyTransform(false);
+      });
+
+      function getTouchDistance(touches) {
+        const dx = touches[0].clientX - touches[1].clientX;
+        const dy = touches[0].clientY - touches[1].clientY;
+        return Math.hypot(dx, dy);
+      }
+
+      stage.addEventListener("touchstart", (e) => {
+        if (e.target.closest("button")) return;
+        if (e.touches.length === 2) {
+          state.isDragging = false;
+          state.pinchStartDist = getTouchDistance(e.touches);
+          state.pinchStartScale = state.scale;
+        } else if (e.touches.length === 1) {
+          const now = Date.now();
+          if (now - state.lastTapTime < 280) {
+            const t = e.touches[0];
+            if (state.scale > 1.05) {
+              zoomAt(1, t.clientX, t.clientY, true);
+            } else {
+              zoomAt(2.2, t.clientX, t.clientY, true);
+            }
+            state.lastTapTime = 0;
+            return;
+          }
+          state.lastTapTime = now;
+
+          state.touchSwipeStartX = e.touches[0].clientX;
+          state.touchSwipeStartY = e.touches[0].clientY;
+          if (state.scale > 1) {
+            state.isDragging = true;
+            state.dragStartX = e.touches[0].clientX;
+            state.dragStartY = e.touches[0].clientY;
+            state.startTx = state.tx;
+            state.startTy = state.ty;
+          }
+        }
+      }, { passive: true });
+
+      stage.addEventListener("touchmove", (e) => {
+        if (e.touches.length === 2 && state.pinchStartDist > 0) {
+          e.preventDefault();
+          const newDist = getTouchDistance(e.touches);
+          const centerX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+          const centerY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+          const nextScale = state.pinchStartScale * (newDist / state.pinchStartDist);
+          zoomAt(nextScale, centerX, centerY, false);
+        } else if (e.touches.length === 1 && state.isDragging && state.scale > 1) {
+          e.preventDefault();
+          state.tx = state.startTx + (e.touches[0].clientX - state.dragStartX);
+          state.ty = state.startTy + (e.touches[0].clientY - state.dragStartY);
+          applyTransform(false);
+        }
+      }, { passive: false });
+
+      stage.addEventListener("touchend", (e) => {
+        if (e.touches.length < 2) {
+          state.pinchStartDist = 0;
+        }
+        if (e.touches.length === 0) {
+          if (state.scale <= 1.02 && !state.isDragging && e.changedTouches && e.changedTouches.length > 0) {
+            const dx = e.changedTouches[0].clientX - state.touchSwipeStartX;
+            const dy = e.changedTouches[0].clientY - state.touchSwipeStartY;
+            if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.25 && typeof onSwipeHorizontal === "function") {
+              onSwipeHorizontal(dx < 0 ? 1 : -1);
+            }
+          }
+          state.isDragging = false;
+          applyTransform(false);
+        }
+      }, { passive: true });
+
+      zoomControllers[key] = {
+        adjust: (delta) => zoomAt(state.scale + delta, undefined, undefined, true),
+        reset: () => zoomAt(1, undefined, undefined, true)
+      };
+    }
+
+    function adjustZoom(key, delta) {
+      if (zoomControllers[key]) zoomControllers[key].adjust(delta);
+    }
+
+    function resetZoom(key) {
+      if (zoomControllers[key]) zoomControllers[key].reset();
+    }
+
+    // Chỉ mở Cổng Chủ Tiệm khi truy cập đúng hash #quynhmai
+    function checkAdminHashTrigger() {
+      if (window.location.hash.toLowerCase() === "#quynhmai") {
         openAdminAccess();
       }
     }
+
+    window.addEventListener("hashchange", checkAdminHashTrigger);
 
     document.addEventListener("DOMContentLoaded", () => {
       loadSavedConfig();
       applyConfigToUI();
       setupGridSwipe();
-      setupModalImageSwipe();
 
-      checkSecretRoute();
-      window.addEventListener("hashchange", checkSecretRoute);
+      initZoomController("product", "modal-img-stage", "modal-main-img", "product-zoom-badge", (dir) => {
+        if (currentModalProduct && currentModalProduct.images && currentModalProduct.images.length > 1) {
+          changeModalImage(dir);
+        }
+      });
 
-      if (appConfig.sheetUrl && appConfig.sheetUrl.trim() !== "") {
-        fetchGoogleSheetData(appConfig.sheetUrl, false);
+      initZoomController("review", "review-zoom-stage", "review-lightbox-img", "review-zoom-badge", (dir) => {
+        if (customerReviews && customerReviews.length > 1) {
+          navigateReviewLightbox(dir);
+        }
+      });
+
+      checkAdminHashTrigger();
+
+      const activeSource = resolveActiveSheetUrl();
+      if (activeSource) {
+        fetchGoogleSheetData(activeSource, false);
       } else {
         allProducts = [...SAMPLE_PRODUCTS];
         isUsingSheetData = false;
         renderCategoryButtons();
         onFilterChanged();
+        renderCustomerReviews();
       }
 
       lucide.createIcons();
     });
 
+    function resolveActiveSheetUrl() {
+      const decodedId = _0xDecode(appConfig.vaultToken || _0xVault.s, _0xGetMasterPin());
+      if (decodedId && decodedId.length > 15) {
+        return `https://docs.google.com/spreadsheets/d/${decodedId}/edit`;
+      }
+      return "";
+    }
+
+    function getActiveAdminPin() {
+      const decodedPin = _0xDecode(appConfig.pinToken || _0xVault.p, _0xVault.k);
+      return decodedPin || _0xGetMasterPin();
+    }
+
     function loadSavedConfig() {
       try {
-        const saved = localStorage.getItem("mai_and_more_config_v4");
+        const saved = localStorage.getItem("mai_and_more_config_v5");
         if (saved) {
           const parsed = JSON.parse(saved);
           appConfig = {
             ...DEFAULT_CONFIG,
             ...parsed,
             heroImage: DEFAULT_CONFIG.heroImage || parsed.heroImage || "",
-            sheetUrl: DEFAULT_CONFIG.sheetUrl || parsed.sheetUrl || "",
+            vaultToken: parsed.vaultToken || DEFAULT_CONFIG.vaultToken,
+            pinToken: parsed.pinToken || DEFAULT_CONFIG.pinToken,
             slogan: DEFAULT_CONFIG.slogan,
-            zaloUrl: DEFAULT_CONFIG.zaloUrl || parsed.zaloUrl || "https://zalo.me",
-            facebookUrl: DEFAULT_CONFIG.facebookUrl || parsed.facebookUrl || "https://facebook.com",
-            instagramUrl: DEFAULT_CONFIG.instagramUrl || parsed.instagramUrl || "https://instagram.com",
-            phone: DEFAULT_CONFIG.phone || parsed.phone || "0981011115",
-            adminPinHash: parsed.adminPinHash || DEFAULT_CONFIG.adminPinHash
+            zaloUrl: parsed.zaloUrl || DEFAULT_CONFIG.zaloUrl,
+            facebookUrl: parsed.facebookUrl || DEFAULT_CONFIG.facebookUrl,
+            instagramUrl: parsed.instagramUrl || DEFAULT_CONFIG.instagramUrl,
+            phone: parsed.phone || DEFAULT_CONFIG.phone
           };
         }
       } catch (e) {
-        console.warn("Không đọc được localStorage:", e);
+        console.warn("Không đọc được cấu hình đã lưu:", e);
       }
-    }
-
-    async function hashPinSHA256(pinStr) {
-      const msgBuffer = new TextEncoder().encode("mai_and_more_salt_" + String(pinStr).trim());
-      const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
     }
 
     function applyConfigToUI() {
@@ -900,7 +1331,7 @@
       else if (lh3Match) driveId = lh3Match[1];
 
       if (driveId) {
-        return `https://lh3.googleusercontent.com/d/${driveId}=w1200`;
+        return `https://lh3.googleusercontent.com/d/${driveId}=w1600`;
       }
       return url;
     }
@@ -921,14 +1352,14 @@
         const idMatch = originalSrc.match(/\/d\/([a-zA-Z0-9_-]+)/);
         if (idMatch) {
           imgEl.setAttribute("data-retry", "1");
-          imgEl.src = `https://drive.google.com/thumbnail?id=${idMatch[1]}&sz=w1200`;
+          imgEl.src = `https://drive.google.com/thumbnail?id=${idMatch[1]}&sz=w1600`;
           return;
         }
       }
 
       if (retryStage <= 1 && originalSrc.startsWith("http")) {
         imgEl.setAttribute("data-retry", "2");
-        imgEl.src = `https://wsrv.nl/?url=${encodeURIComponent(originalSrc)}&w=1000&output=webp`;
+        imgEl.src = `https://wsrv.nl/?url=${encodeURIComponent(originalSrc)}&w=1400&output=webp`;
         return;
       }
 
@@ -958,13 +1389,13 @@
       const info = extractSheetInfo(url);
       if (!info) {
         if (isManualTest) {
-          showAdminSyncStatus(false, "Đường link Google Sheets chưa hợp lệ. Hãy sao chép link từ nút Chia sẻ của bảng tính.");
+          showAdminSyncStatus(false, "Đường link bảng tính chưa hợp lệ. Hãy sao chép link từ nút Chia sẻ.");
         }
         return;
       }
 
       if (isManualTest) {
-        showAdminSyncStatus(null, "Đang kết nối tới Google Sheets...");
+        showAdminSyncStatus(null, "Đang kết nối tới kho dữ liệu...");
       }
 
       const callbackName = "gvizCallback_" + Date.now() + "_" + Math.floor(Math.random() * 1000);
@@ -994,7 +1425,9 @@
             throw new Error("Bảng tính chưa bật quyền chia sẻ công khai.");
           }
           const products = parseGvizTable(response.table);
-          applyLoadedProducts(products, url, isManualTest);
+          fetchCustomerReviewsTab(info, () => {
+            applyLoadedProducts(products, info.sheetId, isManualTest);
+          });
         } catch (err) {
           fallbackCsvFetch(info, url, isManualTest);
         }
@@ -1012,6 +1445,136 @@
       document.body.appendChild(script);
     }
 
+    function parseReviewsFromGvizTable(table) {
+      const cols = (table.cols || []).map(c => normalizeHeaderKey(c.label || c.id));
+      const rows = table.rows || [];
+      let startRow = 0;
+      const hasHeader = cols.some(c => ["hinhanh", "hienthi", "anh", "linkanh", "image", "img"].includes(c));
+      let headers = cols;
+
+      if (!hasHeader && rows.length > 0 && rows[0].c) {
+        headers = rows[0].c.map(cell => normalizeHeaderKey(cell ? (cell.v || cell.f || "") : ""));
+        startRow = 1;
+      }
+
+      const reviews = [];
+      for (let i = startRow; i < rows.length; i++) {
+        const cells = rows[i].c || [];
+        const obj = {};
+        headers.forEach((h, idx) => {
+          if (!h) return;
+          const cell = cells[idx];
+          obj[h] = cell ? (cell.v !== null && cell.v !== undefined ? String(cell.v) : (cell.f || "")) : "";
+        });
+        const imgUrl = normalizeSingleImageUrl(obj.hinhanh || obj.anh || obj.linkanh || obj.image || obj.img || "");
+        const showVal = normalizeHeaderKey(obj.hienthi || obj.hien || obj.show || obj.trangthai || "co");
+        const isShown = ["co", "yes", "true", "1", "x", "hienthi", "active"].includes(showVal);
+        if (imgUrl && isShown) {
+          reviews.push({ id: reviews.length + 1, image: imgUrl });
+        }
+      }
+      return reviews;
+    }
+
+    function parseReviewsFromCsvText(csvText) {
+      const rows = [];
+      let current = "";
+      let row = [];
+      let inQuotes = false;
+
+      for (let i = 0; i < csvText.length; i++) {
+        const char = csvText[i];
+        const nextChar = csvText[i + 1];
+        if (char === '"') {
+          if (inQuotes && nextChar === '"') {
+            current += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === "," && !inQuotes) {
+          row.push(current);
+          current = "";
+        } else if ((char === "\n" || (char === "\r" && nextChar === "\n")) && !inQuotes) {
+          if (char === "\r") i++;
+          row.push(current);
+          rows.push(row);
+          row = [];
+          current = "";
+        } else {
+          current += char;
+        }
+      }
+      if (current !== "" || row.length > 0) {
+        row.push(current);
+        rows.push(row);
+      }
+
+      if (rows.length < 2) return [];
+      const headers = rows[0].map(h => normalizeHeaderKey(h));
+      const reviews = [];
+      for (let i = 1; i < rows.length; i++) {
+        const obj = {};
+        headers.forEach((h, idx) => {
+          if (h) obj[h] = rows[i][idx] || "";
+        });
+        const imgUrl = normalizeSingleImageUrl(obj.hinhanh || obj.anh || obj.linkanh || obj.image || obj.img || "");
+        const showVal = normalizeHeaderKey(obj.hienthi || obj.hien || obj.show || obj.trangthai || "co");
+        const isShown = ["co", "yes", "true", "1", "x", "hienthi", "active"].includes(showVal);
+        if (imgUrl && isShown) {
+          reviews.push({ id: reviews.length + 1, image: imgUrl });
+        }
+      }
+      return reviews;
+    }
+
+    function fetchCustomerReviewsTab(info, doneCallback) {
+      const sheetName = "Danh_Gia";
+      const cbName = "gvizReviews_" + Date.now() + "_" + Math.floor(Math.random() * 1000);
+      const s = document.createElement("script");
+      let settled = false;
+
+      const finish = (reviewsData) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(t);
+        delete window[cbName];
+        if (s.parentNode) s.parentNode.removeChild(s);
+        if (Array.isArray(reviewsData)) {
+          customerReviews = reviewsData;
+        }
+        renderCustomerReviews();
+        if (typeof doneCallback === "function") doneCallback();
+      };
+
+      const t = setTimeout(async () => {
+        try {
+          const rCsv = await fetch(`https://docs.google.com/spreadsheets/d/${info.sheetId}/gviz/tq?sheet=${encodeURIComponent(sheetName)}&tqx=out:csv`);
+          if (rCsv.ok) {
+            const txt = await rCsv.text();
+            finish(parseReviewsFromCsvText(txt));
+            return;
+          }
+        } catch (e) {}
+        finish(null);
+      }, 4500);
+
+      window[cbName] = function (resp) {
+        if (!resp || resp.status === "error" || !resp.table) {
+          finish(null);
+          return;
+        }
+        finish(parseReviewsFromGvizTable(resp.table));
+      };
+
+      s.onerror = function () {
+        finish(null);
+      };
+
+      s.src = `https://docs.google.com/spreadsheets/d/${info.sheetId}/gviz/tq?sheet=${encodeURIComponent(sheetName)}&tqx=out:json;responseHandler:${cbName}`;
+      document.body.appendChild(s);
+    }
+
     async function fallbackCsvFetch(info, url, isManualTest) {
       try {
         const csvUrl = `https://docs.google.com/spreadsheets/d/${info.sheetId}/export?format=csv&gid=${info.gid}`;
@@ -1019,17 +1582,20 @@
         if (!res.ok) throw new Error("HTTP " + res.status);
         const text = await res.text();
         const products = parseCsvText(text);
-        applyLoadedProducts(products, url, isManualTest);
+        fetchCustomerReviewsTab(info, () => {
+          applyLoadedProducts(products, info.sheetId, isManualTest);
+        });
       } catch (err) {
         if (isManualTest) {
           showAdminSyncStatus(
             false,
-            "Chưa kết nối được: Hãy chắc chắn file trên Google Drive là Google Trang tính (không phải đuôi .xlsx) và đã bật Chia sẻ → Bất kỳ ai có đường liên kết (Người xem)."
+            "Chưa kết nối được: Hãy chắc chắn file trên Google Drive là Google Trang tính và đã bật Chia sẻ → Bất kỳ ai có đường liên kết (Người xem)."
           );
         } else if (allProducts.length === 0) {
           allProducts = [...SAMPLE_PRODUCTS];
           renderCategoryButtons();
           onFilterChanged();
+          renderCustomerReviews();
         }
       }
     }
@@ -1160,11 +1726,13 @@
       return products;
     }
 
-    function applyLoadedProducts(products, url, isManualTest) {
+    function applyLoadedProducts(products, sheetId, isManualTest) {
       allProducts = products;
       isUsingSheetData = true;
-      appConfig.sheetUrl = url;
-      localStorage.setItem("mai_and_more_config_v4", JSON.stringify(appConfig));
+      if (sheetId) {
+        appConfig.vaultToken = _0xEncode(sheetId, _0xGetMasterPin());
+      }
+      localStorage.setItem("mai_and_more_config_v5", JSON.stringify(appConfig));
 
       selectedCategory = "Tất cả";
       currentPage = 1;
@@ -1176,7 +1744,7 @@
       badge.classList.add("inline-flex");
 
       if (isManualTest) {
-        showAdminSyncStatus(true, `Kết nối thành công! Đã tải ${products.length} mẫu hoa từ Google Sheets.`);
+        showAdminSyncStatus(true, `Kết nối thành công! Đã tải ${products.length} mẫu hoa từ kho dữ liệu của tiệm.`);
         updateConfigPreview();
       }
     }
@@ -1320,8 +1888,8 @@
                   </span>
                   ${
                     item.featured
-                      ? `<span class="inline-flex items-center gap-1 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-gradient-to-r from-[#D92D4B] to-[#F05252] text-white text-[10px] sm:text-xs font-extrabold uppercase tracking-wider shadow-md shrink-0">
-                          <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-[#FDE047] shrink-0" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
+                      ? `<span class="inline-flex items-center gap-1 px-2 sm:px-2.5 py-0.5 rounded-full bg-[#D92D4B] text-white text-[10px] sm:text-[11px] font-bold shadow-sm shrink-0">
+                          <svg class="w-3 h-3 fill-[#FDE047] shrink-0" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
                           <span>HOT</span>
                         </span>`
                       : ""
@@ -1408,29 +1976,6 @@
           : `Trang ${currentPage}/${totalPages} • Mỗi trang hiển thị tối đa 6 mẫu`;
     }
 
-    function setupModalImageSwipe() {
-      const stage = document.getElementById("modal-img-stage");
-      if (!stage) return;
-      let startX = 0;
-      let startY = 0;
-
-      stage.addEventListener("touchstart", (e) => {
-        if (!e.touches || e.touches.length === 0) return;
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-      }, { passive: true });
-
-      stage.addEventListener("touchend", (e) => {
-        if (!currentModalProduct || !currentModalProduct.images || currentModalProduct.images.length <= 1) return;
-        if (!e.changedTouches || e.changedTouches.length === 0) return;
-        const dx = e.changedTouches[0].clientX - startX;
-        const dy = e.changedTouches[0].clientY - startY;
-        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
-          changeModalImage(dx < 0 ? 1 : -1);
-        }
-      }, { passive: true });
-    }
-
     function setupGridSwipe() {
       const grid = document.getElementById("products-grid");
       let touchStartX = 0;
@@ -1457,8 +2002,6 @@
       }, { passive: true });
     }
 
-    let isModalImgZoomed = false;
-
     function getModalNavigationList() {
       return filteredProducts && filteredProducts.length > 0 ? filteredProducts : allProducts;
     }
@@ -1483,21 +2026,12 @@
       openProductModal(nextProd.id);
     }
 
-    function toggleModalImageZoom() {
-      const mainImg = document.getElementById("modal-main-img");
-      if (!mainImg) return;
-      isModalImgZoomed = !isModalImgZoomed;
-      mainImg.style.transform = isModalImgZoomed ? "scale(1.65)" : "scale(1)";
-      mainImg.style.cursor = isModalImgZoomed ? "zoom-out" : "zoom-in";
-    }
-
     function openProductModal(productId) {
       const product = allProducts.find(p => p.id === productId);
       if (!product) return;
 
       currentModalProduct = product;
       currentModalImageIndex = 0;
-      isModalImgZoomed = false;
 
       const list = getModalNavigationList();
       const idx = list.findIndex(p => p.id === product.id);
@@ -1507,23 +2041,19 @@
       document.getElementById("modal-mobile-title-bar").textContent = product.name;
       document.getElementById("modal-category").textContent = product.category;
       document.getElementById("modal-status").textContent = product.status;
+      const modalHot = document.getElementById("modal-hot");
+      if (modalHot) {
+        if (product.featured) {
+          modalHot.classList.remove("hidden");
+          modalHot.classList.add("inline-flex");
+        } else {
+          modalHot.classList.add("hidden");
+          modalHot.classList.remove("inline-flex");
+        }
+      }
       document.getElementById("modal-title").textContent = product.name;
       document.getElementById("modal-price").textContent = formatVND(product.price);
       document.getElementById("modal-desc").textContent = product.description;
-
-      const mobileHot = document.getElementById("modal-mobile-hot");
-      const desktopHot = document.getElementById("modal-desktop-hot");
-      if (product.featured) {
-        mobileHot.classList.remove("hidden");
-        mobileHot.classList.add("inline-flex");
-        desktopHot.classList.remove("hidden");
-        desktopHot.classList.add("inline-flex");
-      } else {
-        mobileHot.classList.add("hidden");
-        mobileHot.classList.remove("inline-flex");
-        desktopHot.classList.add("hidden");
-        desktopHot.classList.remove("inline-flex");
-      }
 
       const prevProdBtn = document.getElementById("modal-prev-product-btn");
       const nextProdBtn = document.getElementById("modal-next-product-btn");
@@ -1551,12 +2081,8 @@
       if (currentModalImageIndex < 0) currentModalImageIndex = images.length - 1;
       if (currentModalImageIndex >= images.length) currentModalImageIndex = 0;
 
-      isModalImgZoomed = false;
+      resetZoom("product");
       const mainImg = document.getElementById("modal-main-img");
-      mainImg.style.transform = "scale(1)";
-      mainImg.style.cursor = "zoom-in";
-      mainImg.ondblclick = toggleModalImageZoom;
-
       const currentSrc = images[currentModalImageIndex];
       mainImg.removeAttribute("data-retry");
       mainImg.setAttribute("data-orig-src", currentSrc);
@@ -1624,6 +2150,7 @@
     }
 
     function hideProductModal() {
+      resetZoom("product");
       const modal = document.getElementById("product-modal");
       modal.classList.add("hidden");
       modal.classList.remove("flex");
@@ -1636,20 +2163,24 @@
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(msg).then(() => {
           showToast("Đã sao chép lời nhắn đặt hoa! Bạn có thể dán gửi Zalo/FB ngay.");
-        }).catch(() => fallbackCopyText(msg));
+        }).catch(() => fallbackCopyText(msg, "Đã sao chép lời nhắn đặt hoa! Bạn có thể dán gửi Zalo/FB ngay."));
       } else {
-        fallbackCopyText(msg);
+        fallbackCopyText(msg, "Đã sao chép lời nhắn đặt hoa! Bạn có thể dán gửi Zalo/FB ngay.");
       }
     }
 
-    function fallbackCopyText(text) {
+    function fallbackCopyText(text, successMsg) {
       const ta = document.createElement("textarea");
       ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
       document.body.appendChild(ta);
       ta.select();
-      document.execCommand("copy");
+      try {
+        document.execCommand("copy");
+        showToast(successMsg);
+      } catch (e) {}
       document.body.removeChild(ta);
-      showToast("Đã sao chép lời nhắn đặt hoa!");
     }
 
     function openAdminAccess() {
@@ -1676,20 +2207,10 @@
       lucide.createIcons();
     }
 
-    async function verifyAdminPin() {
+    function verifyAdminPin() {
       const entered = document.getElementById("pin-input").value.trim();
-      if (!entered) {
-        document.getElementById("pin-error").classList.remove("hidden");
-        return;
-      }
-      const enteredHash = await hashPinSHA256(entered);
-      const targetHash = appConfig.adminPinHash || DEFAULT_CONFIG.adminPinHash;
-
-      // Hỗ trợ kiểm tra cả mã băm có salt và mã băm chuẩn của PIN mặc định
-      const rawHashBuffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(entered));
-      const rawHash = Array.from(new Uint8Array(rawHashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
-
-      if (enteredHash === targetHash || rawHash === targetHash) {
+      const validPin = getActiveAdminPin();
+      if (entered && entered === validPin) {
         closePinModal();
         openAdminDashboard();
       } else {
@@ -1698,7 +2219,7 @@
     }
 
     function openAdminDashboard() {
-      document.getElementById("admin-sheet-url").value = appConfig.sheetUrl || "";
+      document.getElementById("admin-sheet-url").value = "";
       document.getElementById("admin-zalo").value = appConfig.zaloUrl || "";
       document.getElementById("admin-fb").value = appConfig.facebookUrl || "";
       document.getElementById("admin-ig").value = appConfig.instagramUrl || "";
@@ -1733,28 +2254,43 @@
     }
 
     function testAndSyncSheet() {
-      const url = document.getElementById("admin-sheet-url").value.trim();
-      if (!url) {
-        showAdminSyncStatus(false, "Vui lòng dán đường link Google Sheets vào ô phía trên.");
+      const rawInput = document.getElementById("admin-sheet-url").value.trim();
+      const targetUrl = rawInput || resolveActiveSheetUrl();
+      if (!targetUrl) {
+        showAdminSyncStatus(false, "Vui lòng dán đường link bảng tính vào ô phía trên.");
         return;
       }
-      fetchGoogleSheetData(url, true);
+      fetchGoogleSheetData(targetUrl, true);
     }
 
-    async function getDraftConfig() {
-      const newPinRaw = document.getElementById("admin-pin").value.trim();
-      const pinHash = newPinRaw ? await hashPinSHA256(newPinRaw) : (appConfig.adminPinHash || DEFAULT_CONFIG.adminPinHash);
+    function getDraftConfig() {
+      const rawUrlInput = document.getElementById("admin-sheet-url").value.trim();
+      const newPinInput = document.getElementById("admin-pin").value.trim();
+
+      let token = appConfig.vaultToken || DEFAULT_CONFIG.vaultToken;
+      if (rawUrlInput) {
+        const info = extractSheetInfo(rawUrlInput);
+        if (info && info.sheetId) {
+          token = _0xEncode(info.sheetId, _0xGetMasterPin());
+        }
+      }
+
+      let pinToken = appConfig.pinToken || DEFAULT_CONFIG.pinToken;
+      if (newPinInput) {
+        pinToken = _0xEncode(newPinInput, _0xVault.k);
+      }
+
       return {
         shopName: appConfig.shopName,
         slogan: appConfig.slogan,
         heroImage: appConfig.heroImage,
-        sheetUrl: document.getElementById("admin-sheet-url").value.trim(),
+        vaultToken: token,
+        pinToken: pinToken,
         zaloUrl: document.getElementById("admin-zalo").value.trim() || "https://zalo.me",
         facebookUrl: document.getElementById("admin-fb").value.trim() || "https://facebook.com",
         instagramUrl: document.getElementById("admin-ig").value.trim() || "https://instagram.com",
         phone: document.getElementById("admin-phone").value.trim() || "0981011115",
-        orderHours: document.getElementById("admin-hours").value.trim() || "Nhận đơn online cả ngày",
-        adminPinHash: pinHash
+        orderHours: document.getElementById("admin-hours").value.trim() || "Nhận đơn online cả ngày"
       };
     }
 
@@ -1763,35 +2299,33 @@
   shopName: ${JSON.stringify(cfg.shopName)},
   slogan: ${JSON.stringify(cfg.slogan)},
   heroImage: ${JSON.stringify(cfg.heroImage)},
-  sheetUrl: ${JSON.stringify(cfg.sheetUrl)},
+  vaultToken: ${JSON.stringify(cfg.vaultToken)},
+  pinToken: ${JSON.stringify(cfg.pinToken)},
   zaloUrl: ${JSON.stringify(cfg.zaloUrl)},
   facebookUrl: ${JSON.stringify(cfg.facebookUrl)},
   instagramUrl: ${JSON.stringify(cfg.instagramUrl)},
   phone: ${JSON.stringify(cfg.phone)},
-  orderHours: ${JSON.stringify(cfg.orderHours)},
-  adminPinHash: ${JSON.stringify(cfg.adminPinHash)}
+  orderHours: ${JSON.stringify(cfg.orderHours)}
 };`;
     }
 
-    async function updateConfigPreview() {
-      const draft = await getDraftConfig();
+    function updateConfigPreview() {
+      const draft = getDraftConfig();
       appConfig = { ...draft };
-      localStorage.setItem("mai_and_more_config_v4", JSON.stringify(appConfig));
+      localStorage.setItem("mai_and_more_config_v5", JSON.stringify(appConfig));
       applyConfigToUI();
       document.getElementById("config-preview-box").textContent = buildConfigCode(draft);
     }
 
-    async function copyGeneratedConfig() {
-      const draft = await getDraftConfig();
+    function copyGeneratedConfig() {
+      const draft = getDraftConfig();
       const code = buildConfigCode(draft);
-      fallbackCopyText(code);
-      showToast("Đã sao chép mã DEFAULT_CONFIG đã mã hóa SHA-256!");
+      fallbackCopyText(code, "Đã sao chép mã cấu hình bảo mật!");
     }
 
     function copySheetHeaders() {
       const headers = "Ten_Mau\tGia\tDanh_Muc\tHinh_Anh\tMo_Ta\tTrang_Thai\tNoi_Bat";
-      fallbackCopyText(headers);
-      showToast("Đã sao chép 7 tiêu đề cột! Dán vào ô A1 trên Google Sheets.");
+      fallbackCopyText(headers, "Đã sao chép 7 tiêu đề cột!");
     }
 
     function downloadSampleCsv() {
@@ -1825,19 +2359,134 @@
     }
 
     document.addEventListener("keydown", (e) => {
-      // Tổ hợp phím bí mật Alt + Shift + M để mở Cổng Chủ Tiệm
-      if (e.altKey && e.shiftKey && e.key.toLowerCase() === "m") {
-        e.preventDefault();
-        openAdminAccess();
-        return;
-      }
       const modal = document.getElementById("product-modal");
       if (!modal.classList.contains("hidden")) {
         if (e.key === "Escape") hideProductModal();
         if (e.key === "ArrowLeft") changeModalImage(-1);
         if (e.key === "ArrowRight") changeModalImage(1);
+        if (e.key === "+" || e.key === "=") adjustZoom("product", 0.4);
+        if (e.key === "-") adjustZoom("product", -0.4);
+        if (e.key === "0") resetZoom("product");
+      }
+      const lb = document.getElementById("review-lightbox");
+      if (lb && !lb.classList.contains("hidden")) {
+        if (e.key === "Escape") hideReviewLightbox();
+        if (e.key === "ArrowLeft") navigateReviewLightbox(-1);
+        if (e.key === "ArrowRight") navigateReviewLightbox(1);
+        if (e.key === "+" || e.key === "=") adjustZoom("review", 0.4);
+        if (e.key === "-") adjustZoom("review", -0.4);
+        if (e.key === "0") resetZoom("review");
       }
     });
+
+    function renderCustomerReviews() {
+      const track = document.getElementById("reviews-track");
+      const emptyNote = document.getElementById("reviews-empty-note");
+      if (!track) return;
+
+      if (!customerReviews || customerReviews.length === 0) {
+        track.innerHTML = "";
+        if (emptyNote) emptyNote.classList.remove("hidden");
+        return;
+      }
+
+      if (emptyNote) emptyNote.classList.add("hidden");
+      track.innerHTML = customerReviews.map((rev, idx) => `
+        <button
+          type="button"
+          onclick="openReviewLightbox(${idx})"
+          class="group shrink-0 snap-start w-44 sm:w-56 aspect-[3/4] rounded-2xl overflow-hidden bg-white border border-[#EFE5DF] card-shadow card-shadow-hover transition-all duration-300 relative focus:outline-none"
+          aria-label="Phóng to ảnh đánh giá ${idx + 1}"
+        >
+          <img
+            src="${rev.image}"
+            data-orig-src="${rev.image}"
+            alt="Ảnh khách đánh giá ${idx + 1}"
+            referrerpolicy="no-referrer"
+            onerror="handleImageError(this)"
+            class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+          />
+          <span class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-white/90 text-[#54433B] shadow-sm flex items-center justify-center opacity-90 group-hover:scale-105 transition-transform">
+            <i data-lucide="zoom-in" class="w-4 h-4"></i>
+          </span>
+        </button>
+      `).join("");
+
+      lucide.createIcons();
+    }
+
+    function scrollReviewsTrack(direction) {
+      const track = document.getElementById("reviews-track");
+      if (!track) return;
+      const step = Math.max(200, Math.round(track.clientWidth * 0.75));
+      track.scrollBy({ left: direction * step, behavior: "smooth" });
+    }
+
+    function openReviewLightbox(index) {
+      if (!customerReviews || customerReviews.length === 0) return;
+      currentReviewLightboxIdx = (index + customerReviews.length) % customerReviews.length;
+      updateReviewLightbox();
+      const lb = document.getElementById("review-lightbox");
+      if (lb) {
+        lb.classList.remove("hidden");
+        lb.classList.add("flex");
+        document.body.style.overflow = "hidden";
+      }
+      lucide.createIcons();
+    }
+
+    function updateReviewLightbox() {
+      if (!customerReviews || customerReviews.length === 0) return;
+      resetZoom("review");
+      const item = customerReviews[currentReviewLightboxIdx];
+      const imgEl = document.getElementById("review-lightbox-img");
+      const counterEl = document.getElementById("review-lightbox-counter");
+      const prevBtn = document.getElementById("review-lb-prev");
+      const nextBtn = document.getElementById("review-lb-next");
+
+      if (imgEl) {
+        imgEl.removeAttribute("data-retry");
+        imgEl.setAttribute("data-orig-src", item.image);
+        imgEl.onerror = function () { handleImageError(this); };
+        imgEl.src = item.image;
+      }
+      if (counterEl) {
+        counterEl.textContent = `Đánh giá ${currentReviewLightboxIdx + 1} / ${customerReviews.length}`;
+      }
+      const hasMultiple = customerReviews.length > 1;
+      [prevBtn, nextBtn].forEach(btn => {
+        if (!btn) return;
+        if (hasMultiple) {
+          btn.classList.remove("hidden");
+          btn.classList.add("flex");
+        } else {
+          btn.classList.add("hidden");
+          btn.classList.remove("flex");
+        }
+      });
+    }
+
+    function navigateReviewLightbox(step) {
+      if (!customerReviews || customerReviews.length <= 1) return;
+      currentReviewLightboxIdx = (currentReviewLightboxIdx + step + customerReviews.length) % customerReviews.length;
+      updateReviewLightbox();
+    }
+
+    function closeReviewLightbox(event) {
+      if (event && event.target && event.target.id === "review-lightbox") {
+        hideReviewLightbox();
+      }
+    }
+
+    function hideReviewLightbox() {
+      resetZoom("review");
+      const lb = document.getElementById("review-lightbox");
+      if (lb) {
+        lb.classList.add("hidden");
+        lb.classList.remove("flex");
+        document.body.style.overflow = "";
+      }
+    }
   </script>
 </body>
 </html>
