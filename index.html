@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mai &amp; More — More than flowers</title>
+  <title>Mai &amp; More — Hoa Lụa Nghệ Thuật Lưu Giữ Kỷ Niệm</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
@@ -23,21 +23,6 @@
     .card-shadow-hover:hover {
       box-shadow: 0 18px 36px -12px rgba(84, 67, 59, 0.16);
     }
-    @keyframes hotPulse {
-      0%, 100% {
-        box-shadow: 0 4px 12px rgba(225, 29, 72, 0.42);
-        transform: scale(1);
-      }
-      50% {
-        box-shadow: 0 6px 18px rgba(225, 29, 72, 0.65);
-        transform: scale(1.04);
-      }
-    }
-    .hot-badge {
-      background: linear-gradient(135deg, #F43F5E 0%, #E11D48 55%, #BE123C 100%);
-      animation: hotPulse 2.4s infinite ease-in-out;
-    }
-    /* Accordion: trên mobile chỉ đóng/mở bằng class .active khi chạm; trên desktop hỗ trợ cả hover chuột */
     .accordion-content {
       display: grid;
       grid-template-rows: 0fr;
@@ -93,7 +78,8 @@
       instagramUrl: "https://www.instagram.com/oomaichua/",
       phone: "0981011115",
       orderHours: "Nhận đơn online cả ngày",
-      adminPin: "25100510"
+      // Mã băm SHA-256 của mã PIN mặc định (không lưu pass thô trong mã nguồn)
+      adminPinHash: "91616c17d45f1215499a145594c0219c6b4b386787424a782071333d9d450205"
     };
   </script>
 
@@ -106,7 +92,7 @@
         </div>
         <div class="min-w-0">
           <span id="header-shop-name" class="block text-lg sm:text-2xl font-bold tracking-tight text-[#54433B] leading-none truncate">Mai &amp; More</span>
-          <span id="header-slogan" class="block text-[11px] sm:text-xs tracking-[0.12em] sm:tracking-[0.16em] italic text-[#8E7970] mt-1 leading-tight truncate">More than flowers</span>
+          <span id="header-slogan" class="block text-[9px] sm:text-[11px] tracking-[0.08em] sm:tracking-[0.14em] uppercase text-[#8E7970] mt-1 leading-tight line-clamp-2 sm:line-clamp-1">More than flowers</span>
         </div>
       </a>
 
@@ -125,53 +111,45 @@
 
   <!-- ==================== HERO BANNER ==================== -->
   <section id="hero" class="pastel-gradient border-b border-[#EFE5DF] overflow-hidden">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-      <div class="lg:col-span-6 space-y-5 sm:space-y-6">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-6 space-y-6">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#E8D8D2] text-xs font-bold tracking-wider uppercase text-[#8B6B61]">
           <i data-lucide="heart" class="w-3.5 h-3.5 text-[#C07A84] fill-[#C07A84]"></i>
           <span>Hoa lụa nghệ thuật lưu giữ kỷ niệm</span>
         </div>
 
-        <h1 class="text-3xl sm:text-5xl font-bold text-[#54433B] leading-[1.18]">
+        <h1 class="text-4xl sm:text-5xl font-bold text-[#54433B] leading-[1.18]">
           Gói Trọn Yêu Thương Trong Từng Cánh Hoa Mềm
         </h1>
 
-        <p class="text-base sm:text-xl text-[#6E5B52] leading-relaxed">
+        <p class="text-lg sm:text-xl text-[#6E5B52] leading-relaxed">
           Không phải ai cũng biết mình đáng yêu thế nào – nên đôi khi, một bó hoa nhỏ là cách để nhắc rằng bạn thật sự rất đặc biệt. 💐
         </p>
 
-        <div class="flex flex-wrap items-center gap-3 sm:gap-4 pt-1">
-          <a href="#bo-suu-tap" class="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#54433B] hover:bg-[#3F312B] text-[#FDFBF7] text-sm sm:text-base font-bold transition-all shadow-sm">
+        <div class="flex flex-wrap items-center gap-4 pt-1">
+          <a href="#bo-suu-tap" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#54433B] hover:bg-[#3F312B] text-[#FDFBF7] text-base font-bold transition-all shadow-sm">
             <span>Khám phá bộ sưu tập</span>
             <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
           </a>
 
-          <div class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-full bg-white/85 border border-[#E5D8D0] text-xs sm:text-sm text-[#54433B]">
+          <div class="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-white/85 border border-[#E5D8D0] text-sm text-[#54433B]">
             <span class="w-2.5 h-2.5 rounded-full bg-[#7C9882] animate-pulse"></span>
             <span id="hero-order-hours" class="font-bold">Nhận đơn online cả ngày</span>
           </div>
         </div>
 
-        <!-- Nút liên hệ nhanh Zalo, Facebook, Instagram hiển thị bằng SVG trực tiếp -->
         <div class="flex flex-wrap items-center gap-2 pt-1">
-          <a id="hero-zalo" href="https://zalo.me/0981011115" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/95 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-xs sm:text-sm font-bold text-[#54433B] shadow-sm transition-colors">
-            <svg class="w-4 h-4 shrink-0" viewBox="0 0 48 48" fill="none">
-              <rect width="48" height="48" rx="12" fill="#0068FF"/>
-              <path d="M13.5 16.5H22.2L13.5 27.5H22.5M25.5 21.5V27.5M25.5 17.5V18.2M31 20.5C28.8 20.5 27 22.1 27 24C27 25.9 28.8 27.5 31 27.5C33.2 27.5 35 25.9 35 24C35 22.1 33.2 20.5 31 20.5Z" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M11 33.5L15.5 31.8C18.1 33.1 21 33.8 24 33.8C33.4 33.8 41 27.8 41 20.4" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
-            </svg>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#8E7970] mr-1">Liên hệ nhanh:</span>
+          <a id="hero-zalo" href="https://zalo.me/0981011115" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-white border border-[#E2D3CA] text-xs font-bold text-[#54433B] shadow-sm transition-all">
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#0068FF"/><text x="12" y="15.5" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="bold" font-size="8.5">Zalo</text></svg>
             <span>Zalo</span>
           </a>
-          <a id="hero-fb" href="https://www.facebook.com/mai.maiquynhhhh" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/95 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-xs sm:text-sm font-bold text-[#54433B] shadow-sm transition-colors">
-            <svg class="w-4 h-4 text-[#1877F2] shrink-0" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
-            </svg>
+          <a id="hero-fb" href="https://www.facebook.com/mai.maiquynhhhh" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-white border border-[#E2D3CA] text-xs font-bold text-[#54433B] shadow-sm transition-all">
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             <span>Facebook</span>
           </a>
-          <a id="hero-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/95 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-xs sm:text-sm font-bold text-[#54433B] shadow-sm transition-colors">
-            <svg class="w-4 h-4 text-[#E4405F] shrink-0" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
-            </svg>
+          <a id="hero-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-white border border-[#E2D3CA] text-xs font-bold text-[#54433B] shadow-sm transition-all">
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="igGradHero" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FD5949"/><stop offset="50%" stop-color="#D6249F"/><stop offset="100%" stop-color="#285AEB"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGradHero)"/><circle cx="12" cy="12" r="4.5" stroke="#FFFFFF" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="#FFFFFF"/></svg>
             <span>Instagram</span>
           </a>
         </div>
@@ -203,7 +181,7 @@
   </section>
 
   <!-- ==================== TÂM HUYẾT CỦA TIỆM ==================== -->
-  <section id="tam-huyet" class="py-10 sm:py-12 md:py-14 border-b border-[#EFE5DF] bg-[#FDFBF7]">
+  <section id="tam-huyet" class="py-12 md:py-14 border-b border-[#EFE5DF] bg-[#FDFBF7]">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
         <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#9E5A63]">Điều nhỏ xinh từ Mai &amp; More</span>
@@ -274,19 +252,18 @@
     </div>
   </section>
 
-  <!-- ==================== BỘ SƯU TẬP MẪU HOA ==================== -->
-  <main id="bo-suu-tap" class="py-10 sm:py-12 md:py-16">
-    <div class="max-w-5xl mx-auto px-3 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+  <!-- ==================== BỘ SƯU TẬP MẪU HOA (LƯỚI 6 Ô GỌN ĐẸP + PHÂN TRANG) ==================== -->
+  <main id="bo-suu-tap" class="py-12 md:py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-8">
         <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#7C9882]">Danh mục thiết kế</span>
-        <h2 class="text-2xl sm:text-4xl font-bold text-[#54433B] mt-1">Bộ Sưu Tập Hoa Lụa Kỷ Niệm</h2>
-        <p class="text-sm sm:text-base text-[#7E6B62] mt-1.5">Chạm vào từng mẫu hoa để xem đầy đủ góc chụp và thông tin chi tiết</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-[#54433B] mt-1">Bộ Sưu Tập Hoa Lụa Kỷ Niệm</h2>
+        <p class="text-base text-[#7E6B62] mt-2">Chọn mẫu hoa ưng ý và bấm vào từng bó để xem đầy đủ các góc chụp chi tiết</p>
       </div>
 
-      <div class="bg-white p-3 sm:p-4 rounded-2xl border border-[#EFE5DF] card-shadow mb-5 sm:mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 sm:gap-4">
+      <div class="bg-white p-3.5 sm:p-4 rounded-2xl border border-[#EFE5DF] card-shadow mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
         <div id="category-filters" class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0"></div>
 
-        <!-- Thanh tìm kiếm & sắp xếp: xếp 2 ô 1 hàng trên mobile, mũi tên căn giữa chuẩn -->
         <div class="grid grid-cols-2 sm:flex sm:flex-row items-center gap-2 sm:gap-2.5">
           <div class="relative min-w-0">
             <i data-lucide="search" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#9A867D] absolute left-3 sm:left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
@@ -314,7 +291,7 @@
         </div>
       </div>
 
-      <div class="flex items-center justify-between text-xs sm:text-sm text-[#8E7970] mb-4 sm:mb-5">
+      <div class="flex items-center justify-between text-sm text-[#8E7970] mb-5">
         <p id="result-count">Đang tải danh sách mẫu hoa...</p>
         <div id="sheet-sync-badge" class="hidden items-center gap-1.5 text-xs text-[#5D7A63] bg-[#EEF3EF] px-3 py-1 rounded-full">
           <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i>
@@ -322,10 +299,10 @@
         </div>
       </div>
 
-      <!-- Khung lưới 6 ô -->
+      <!-- Khung lưới 6 ô (2 cột trên mobile kiểu sàn TMĐT, 3 cột x 2 hàng trên màn hình lớn) -->
       <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5"></div>
 
-      <!-- Thanh điều hướng sang trang -->
+      <!-- Thanh điều hướng sang trang luôn gọn đẹp trên màn hình -->
       <div id="pagination-bar" class="mt-7 pt-5 border-t border-[#EFE5DF] flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-2">
           <button
@@ -351,7 +328,7 @@
           </button>
         </div>
 
-        <p id="pagination-info" class="text-xs sm:text-sm text-[#8E7970]">
+        <p id="pagination-info" class="text-sm text-[#8E7970]">
           Trang 1/1 • Lướt ngang hoặc bấm Sau để xem thêm mẫu
         </p>
       </div>
@@ -396,22 +373,15 @@
           <h3 class="text-lg font-bold text-[#54433B] mb-3">Đặt Hoa Trực Tiếp Qua</h3>
           <div class="flex flex-wrap gap-2.5">
             <a id="footer-zalo" href="https://zalo.me/0981011115" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-sm font-bold text-[#54433B] transition-colors">
-              <svg class="w-4 h-4 shrink-0" viewBox="0 0 48 48" fill="none">
-                <rect width="48" height="48" rx="12" fill="#0068FF"/>
-                <path d="M13.5 16.5H22.2L13.5 27.5H22.5M25.5 21.5V27.5M25.5 17.5V18.2M31 20.5C28.8 20.5 27 22.1 27 24C27 25.9 28.8 27.5 31 27.5C33.2 27.5 35 25.9 35 24C35 22.1 33.2 20.5 31 20.5Z" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#0068FF"/><text x="12" y="15.5" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="bold" font-size="8.5">Zalo</text></svg>
               <span>Zalo Tiệm Hoa</span>
             </a>
             <a id="footer-fb" href="https://www.facebook.com/mai.maiquynhhhh" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-sm font-bold text-[#54433B] transition-colors">
-              <svg class="w-4 h-4 text-[#1877F2] shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
-              </svg>
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
               <span>Facebook</span>
             </a>
             <a id="footer-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-sm font-bold text-[#54433B] transition-colors">
-              <svg class="w-4 h-4 text-[#E4405F] shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
-              </svg>
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="igGradFooter" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FD5949"/><stop offset="50%" stop-color="#D6249F"/><stop offset="100%" stop-color="#285AEB"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGradFooter)"/><circle cx="12" cy="12" r="4.5" stroke="#FFFFFF" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="#FFFFFF"/></svg>
               <span>Instagram</span>
             </a>
           </div>
@@ -419,179 +389,145 @@
       </div>
 
       <div class="pt-6 flex items-center justify-between text-sm text-[#8E7970]">
-        <p>© 2026 <span id="copyright-shop-name">Mai &amp; More</span> — More than flowers.</p>
-        <button
-          onclick="openAdminAccess()"
-          title="Khu vực dành riêng cho chủ tiệm"
-          class="p-2 rounded-full text-[#B8A69E] hover:text-[#54433B] hover:bg-white/60 transition-colors"
-          aria-label="Cổng chủ tiệm"
-        >
-          <i data-lucide="lock" class="w-4 h-4"></i>
-        </button>
+        <p>© 2026 <span id="copyright-shop-name">Mai &amp; More</span>. Gói trọn yêu thương trong từng cánh hoa.</p>
+        <span class="text-xs text-[#A49188]">Hoa lụa nghệ thuật lưu giữ kỷ niệm</span>
       </div>
     </div>
   </footer>
 
   <!-- ==================== MODAL CHI TIẾT MẪU HOA ==================== -->
-  <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm p-2 sm:p-5" onclick="closeProductModal(event)">
-    <!-- Hai nút mũi tên mờ 2 bên để chuyển sang bó trước / bó tiếp theo -->
+  <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm px-9 sm:px-14 py-3 sm:py-5" onclick="closeProductModal(event)">
+    <!-- Mũi tên mờ bên trái để quay về bó trước -->
     <button
       id="modal-prev-product-btn"
       type="button"
       onclick="event.stopPropagation(); navigateModalProduct(-1)"
-      class="fixed left-1.5 sm:left-5 top-1/2 -translate-y-1/2 z-[60] w-8 h-12 sm:w-11 sm:h-14 rounded-full bg-white/30 hover:bg-white/70 active:bg-white/85 text-white hover:text-[#54433B] backdrop-blur-md border border-white/35 flex items-center justify-center shadow-lg transition-all disabled:opacity-15 disabled:pointer-events-none"
+      class="fixed left-1.5 sm:left-5 top-1/2 -translate-y-1/2 z-30 w-8 h-12 sm:w-11 sm:h-14 rounded-full bg-white/30 hover:bg-white/65 active:bg-white/80 text-white hover:text-[#54433B] backdrop-blur-md border border-white/35 flex items-center justify-center shadow-lg transition-all disabled:opacity-15 disabled:pointer-events-none"
       aria-label="Bó hoa trước"
       title="Bó hoa trước"
     >
       <i data-lucide="chevron-left" class="w-5 h-5 sm:w-6 sm:h-6"></i>
     </button>
 
+    <!-- Mũi tên mờ bên phải để chuyển sang bó tiếp theo -->
     <button
       id="modal-next-product-btn"
       type="button"
       onclick="event.stopPropagation(); navigateModalProduct(1)"
-      class="fixed right-1.5 sm:right-5 top-1/2 -translate-y-1/2 z-[60] w-8 h-12 sm:w-11 sm:h-14 rounded-full bg-white/30 hover:bg-white/70 active:bg-white/85 text-white hover:text-[#54433B] backdrop-blur-md border border-white/35 flex items-center justify-center shadow-lg transition-all disabled:opacity-15 disabled:pointer-events-none"
+      class="fixed right-1.5 sm:right-5 top-1/2 -translate-y-1/2 z-30 w-8 h-12 sm:w-11 sm:h-14 rounded-full bg-white/30 hover:bg-white/65 active:bg-white/80 text-white hover:text-[#54433B] backdrop-blur-md border border-white/35 flex items-center justify-center shadow-lg transition-all disabled:opacity-15 disabled:pointer-events-none"
       aria-label="Bó hoa tiếp theo"
       title="Bó hoa tiếp theo"
     >
       <i data-lucide="chevron-right" class="w-5 h-5 sm:w-6 sm:h-6"></i>
     </button>
 
-    <div class="bg-[#FDFBF7] rounded-2xl sm:rounded-3xl max-w-4xl w-[95%] sm:w-full mx-auto overflow-hidden border border-[#E8DCD4] shadow-2xl flex flex-col max-h-[92vh]" onclick="event.stopPropagation()">
-      <!-- Thanh điều hướng cố định phía trên modal -->
-      <div class="flex items-center justify-between gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-white/95 border-b border-[#EFE5DF] shrink-0">
-        <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
-          <span id="modal-category" class="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#F7E7E9] text-[#9E5A63] text-[11px] sm:text-xs font-bold truncate">Hoa lụa</span>
-          <span id="modal-status" class="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#EEF3EF] text-[#5D7A63] text-[11px] sm:text-xs font-bold shrink-0">Còn hàng</span>
-          <span id="modal-hot-badge" class="hidden hot-badge items-center gap-1 px-2.5 py-0.5 rounded-full text-white text-[10px] sm:text-xs font-bold tracking-wider uppercase border border-white/70 shrink-0">
-            <i data-lucide="flame" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FDE047] fill-[#FDE047] shrink-0"></i>
+    <div class="bg-[#FDFBF7] rounded-2xl sm:rounded-3xl max-w-4xl w-full overflow-y-auto md:overflow-hidden border border-[#E8DCD4] shadow-2xl grid grid-cols-1 md:grid-cols-12 max-h-[88vh]" onclick="event.stopPropagation()">
+      <!-- Thanh tiêu đề cố định trên mobile -->
+      <div class="md:hidden sticky top-0 z-20 flex items-center justify-between px-3 py-2 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-[#EFE5DF]">
+        <div class="flex items-center gap-1.5 min-w-0">
+          <span id="modal-mobile-pos" class="px-2 py-0.5 rounded-full bg-[#F7E7E9] text-[#9E5A63] text-[11px] font-bold shrink-0">1/1</span>
+          <span id="modal-mobile-hot" class="hidden items-center gap-0.5 px-2 py-0.5 rounded-full bg-gradient-to-r from-[#D92D4B] to-[#F05252] text-white text-[10px] font-extrabold uppercase tracking-wider shrink-0">
+            <svg class="w-2.5 h-2.5 fill-[#FDE047] shrink-0" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
             <span>HOT</span>
           </span>
+          <span id="modal-mobile-title-bar" class="text-xs font-bold text-[#54433B] truncate">Chi tiết mẫu hoa</span>
         </div>
-
-        <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <span id="modal-product-position" class="text-[11px] sm:text-xs font-bold text-[#8E7970] px-2.5 py-1 rounded-full bg-[#F5EFEA]">Mẫu 1/1</span>
-          <button onclick="hideProductModal()" class="p-1.5 rounded-full hover:bg-[#EFE5DF] text-[#7E6B62]" aria-label="Đóng">
-            <i data-lucide="x" class="w-5 h-5"></i>
-          </button>
-        </div>
+        <button onclick="hideProductModal()" class="w-7 h-7 rounded-full bg-[#F5EFEA] hover:bg-[#EFE5DF] text-[#54433B] flex items-center justify-center shrink-0" aria-label="Đóng">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
       </div>
 
-      <!-- Nội dung cuộn mượt trên mobile, chia 2 cột trên màn hình lớn -->
-      <div class="overflow-y-auto flex-1 grid grid-cols-1 lg:grid-cols-12">
-        <!-- Khu vực trình chiếu ảnh -->
-        <div class="lg:col-span-7 bg-[#F5EFEA] relative flex flex-col justify-between p-1.5 sm:p-4 select-none">
-          <div
-            id="gallery-viewport"
-            onwheel="handleGalleryWheel(event)"
-            onmousedown="handleGalleryMouseDown(event)"
-            onmousemove="handleGalleryMouseMove(event)"
-            onmouseup="handleGalleryMouseUp()"
-            onmouseleave="handleGalleryMouseUp()"
-            ondblclick="toggleQuickZoom()"
-            ontouchstart="handleGalleryTouchStart(event)"
-            ontouchmove="handleGalleryTouchMove(event)"
-            ontouchend="handleGalleryTouchEnd(event)"
-            class="relative w-full h-[58vh] min-h-[380px] sm:h-[410px] lg:h-[460px] flex items-center justify-center rounded-xl sm:rounded-2xl overflow-hidden bg-white/95 border border-[#EAE0D9]"
+      <div class="md:col-span-7 bg-[#F5EFEA] relative flex flex-col justify-between p-2 sm:p-4 select-none">
+        <div id="modal-img-stage" class="relative w-full h-[52vh] min-h-[330px] sm:h-80 md:h-[400px] flex items-center justify-center rounded-xl sm:rounded-2xl overflow-hidden bg-white/80 border border-[#EAE0D9] touch-pan-y">
+          <img
+            id="modal-main-img"
+            src=""
+            alt="Ảnh chi tiết mẫu hoa"
+            referrerpolicy="no-referrer"
+            class="max-w-full max-h-full w-auto h-auto object-contain transition-transform duration-200"
+          />
+
+          <button
+            id="modal-prev-btn"
+            onclick="changeModalImage(-1)"
+            class="hidden absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#54433B] shadow-md items-center justify-center transition-transform active:scale-95"
+            aria-label="Ảnh trước"
           >
-            <img
-              id="modal-main-img"
-              src=""
-              alt="Ảnh chi tiết mẫu hoa"
-              referrerpolicy="no-referrer"
-              draggable="false"
-              style="transform: translate(0px, 0px) scale(1);"
-              class="w-full h-full sm:w-auto sm:h-auto max-w-full max-h-full object-contain transition-transform duration-150 ease-out cursor-zoom-in"
-            />
+            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+          </button>
+          <button
+            id="modal-next-btn"
+            onclick="changeModalImage(1)"
+            class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#54433B] shadow-md items-center justify-center transition-transform active:scale-95"
+            aria-label="Ảnh tiếp theo"
+          >
+            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+          </button>
 
-            <!-- Nút chuyển ảnh trong bó hoa: ẩn trên điện thoại để thoáng ảnh, hiện trên máy tính -->
-            <button
-              id="modal-prev-btn"
-              onclick="changeModalImage(-1)"
-              class="hidden absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#54433B] shadow-md items-center justify-center transition-transform active:scale-95 z-10"
-              aria-label="Ảnh trước"
-            >
-              <i data-lucide="chevron-left" class="w-5 h-5"></i>
-            </button>
-            <button
-              id="modal-next-btn"
-              onclick="changeModalImage(1)"
-              class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#54433B] shadow-md items-center justify-center transition-transform active:scale-95 z-10"
-              aria-label="Ảnh tiếp theo"
-            >
-              <i data-lucide="chevron-right" class="w-5 h-5"></i>
-            </button>
-
-            <div id="modal-img-counter" class="hidden absolute bottom-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-black/55 text-white text-[11px] font-bold pointer-events-none">
-              1 / 1
-            </div>
+          <div id="modal-img-counter" class="hidden absolute bottom-2 right-2 px-2 py-0.5 rounded-full bg-black/60 text-white text-[10px] sm:text-xs font-bold">
+            1 / 1
           </div>
-
-          <!-- Hàng ảnh thu nhỏ khi có nhiều ảnh -->
-          <div id="modal-thumbnails" class="hidden items-center gap-2 mt-2 pb-0.5 overflow-x-auto justify-center"></div>
         </div>
 
-        <!-- Khu vực thông tin chi tiết & đặt hoa -->
-        <div class="lg:col-span-5 p-4 sm:p-6 flex flex-col justify-between gap-4">
-          <div>
-            <div class="flex items-start justify-between gap-3">
-              <h3 id="modal-title" class="text-xl sm:text-3xl font-bold text-[#54433B] leading-snug">Tên mẫu hoa</h3>
-              <p id="modal-price" class="text-lg sm:text-2xl font-bold text-[#9E5A63] shrink-0">380.000đ</p>
-            </div>
+        <div id="modal-thumbnails" class="hidden items-center gap-1.5 sm:gap-2 mt-2 sm:mt-3 overflow-x-auto pb-0.5 justify-center"></div>
+      </div>
 
-            <div class="mt-3 pt-3 border-t border-[#EFE5DF] space-y-3">
-              <div>
-                <p class="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#8E7970] mb-1">Mô tả thiết kế</p>
-                <p id="modal-desc" class="text-sm sm:text-base text-[#6E5B52] leading-relaxed whitespace-pre-line">Mô tả chi tiết bó hoa</p>
-              </div>
-
-              <div class="p-3 rounded-2xl bg-[#FAF4F0] border border-[#EFE3DA] text-xs sm:text-sm text-[#6E5B52] space-y-1.5">
-                <p class="flex items-start gap-2">
-                  <i data-lucide="flower-2" class="w-4 h-4 text-[#9E5A63] shrink-0 mt-0.5"></i>
-                  <span><strong class="text-[#54433B]">Chất liệu:</strong> Hoa lụa nghệ thuật cao cấp, bền đẹp lâu dài</span>
-                </p>
-                <p class="flex items-start gap-2">
-                  <i data-lucide="gift" class="w-4 h-4 text-[#5D7A63] shrink-0 mt-0.5"></i>
-                  <span><strong class="text-[#54433B]">Quà đi kèm:</strong> Tặng thiệp viết tay &amp; túi đựng xinh xắn</span>
-                </p>
-                <p class="flex items-start gap-2">
-                  <i data-lucide="tag" class="w-4 h-4 text-[#8B6B61] shrink-0 mt-0.5"></i>
-                  <span><strong class="text-[#54433B]">Ưu đãi số lượng:</strong> Mua số lượng lớn (&gt;3 bó) để nhận giá ưu đãi</span>
-                </p>
-              </div>
+      <div class="md:col-span-5 p-3.5 sm:p-6 flex flex-col justify-between md:overflow-y-auto">
+        <div>
+          <div class="flex items-start justify-between gap-2">
+            <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+              <span id="modal-category" class="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#F7E7E9] text-[#9E5A63] text-[11px] sm:text-xs font-bold">Hoa lụa</span>
+              <span id="modal-status" class="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#EEF3EF] text-[#5D7A63] text-[11px] sm:text-xs font-bold">Còn hàng</span>
+              <span id="modal-desktop-hot" class="hidden items-center gap-1 px-2.5 py-0.5 sm:py-1 rounded-full bg-gradient-to-r from-[#D92D4B] to-[#F05252] text-white text-[11px] sm:text-xs font-extrabold uppercase tracking-wider">
+                <svg class="w-3 h-3 fill-[#FDE047] shrink-0" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
+                <span>HOT</span>
+              </span>
             </div>
+            <button onclick="hideProductModal()" class="hidden md:flex p-1.5 rounded-full hover:bg-[#EFE5DF] text-[#7E6B62]" aria-label="Đóng">
+              <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
           </div>
 
-          <div class="pt-3 border-t border-[#EFE5DF] space-y-2.5">
-            <button
-              onclick="copyOrderMessage()"
-              class="w-full py-2.5 sm:py-3 px-4 rounded-full bg-[#54433B] hover:bg-[#3E302A] text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-colors shadow-sm"
-            >
-              <i data-lucide="copy" class="w-4 h-4 shrink-0"></i>
-              <span>Đặt mẫu này ngay (Sao chép lời nhắn)</span>
-            </button>
+          <div class="mt-2 sm:mt-3 flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1 md:block">
+            <h3 id="modal-title" class="text-base sm:text-2xl md:text-3xl font-bold text-[#54433B] leading-snug">Tên mẫu hoa</h3>
+            <p id="modal-price" class="text-base sm:text-2xl font-bold text-[#9E5A63] md:mt-1.5 shrink-0">380.000đ</p>
+          </div>
 
-            <div class="grid grid-cols-3 gap-2">
-              <a id="modal-zalo" href="https://zalo.me/0981011115" target="_blank" rel="noopener" class="py-2 px-2.5 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-center text-xs sm:text-sm font-bold text-[#54433B] transition-colors flex items-center justify-center gap-1.5">
-                <svg class="w-4 h-4 shrink-0" viewBox="0 0 48 48" fill="none">
-                  <rect width="48" height="48" rx="12" fill="#0068FF"/>
-                  <path d="M13.5 16.5H22.2L13.5 27.5H22.5M25.5 21.5V27.5M25.5 17.5V18.2M31 20.5C28.8 20.5 27 22.1 27 24C27 25.9 28.8 27.5 31 27.5C33.2 27.5 35 25.9 35 24C35 22.1 33.2 20.5 31 20.5Z" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span>Zalo</span>
-              </a>
-              <a id="modal-fb" href="https://www.facebook.com/mai.maiquynhhhh" target="_blank" rel="noopener" class="py-2 px-2.5 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-center text-xs sm:text-sm font-bold text-[#54433B] transition-colors flex items-center justify-center gap-1.5">
-                <svg class="w-4 h-4 text-[#1877F2] shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
-                </svg>
-                <span>Facebook</span>
-              </a>
-              <a id="modal-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="py-2 px-2.5 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-center text-xs sm:text-sm font-bold text-[#54433B] transition-colors flex items-center justify-center gap-1.5">
-                <svg class="w-4 h-4 text-[#E4405F] shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
-                </svg>
-                <span>Instagram</span>
-              </a>
+          <div class="mt-2.5 sm:mt-4 pt-2.5 sm:pt-4 border-t border-[#EFE5DF] space-y-2.5 sm:space-y-3">
+            <div>
+              <p class="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#8E7970] mb-1">Mô tả thiết kế</p>
+              <p id="modal-desc" class="text-xs sm:text-base text-[#6E5B52] leading-relaxed whitespace-pre-line">Mô tả chi tiết bó hoa</p>
             </div>
+
+            <div class="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#FAF4F0] border border-[#EFE3DA] text-xs sm:text-sm text-[#6E5B52] space-y-1">
+              <p><strong class="text-[#54433B]">Quà đi kèm:</strong> Tặng thiệp viết tay &amp; túi đựng xinh xắn</p>
+              <p><strong class="text-[#54433B]">Ưu đãi số lượng:</strong> Mua số lượng lớn (&gt;3 bó) để nhận giá ưu đãi</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3.5 sm:mt-5 pt-3 sm:pt-4 border-t border-[#EFE5DF] space-y-2">
+          <button
+            onclick="copyOrderMessage()"
+            class="w-full py-2.5 sm:py-3 px-3 rounded-full bg-[#54433B] hover:bg-[#3E302A] text-white font-bold text-xs sm:text-base flex items-center justify-center gap-1.5 sm:gap-2 transition-colors shadow-sm"
+          >
+            <i data-lucide="copy" class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0"></i>
+            <span class="truncate">Đặt mẫu này ngay (Sao chép lời nhắn)</span>
+          </button>
+
+          <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
+            <a id="modal-zalo" href="https://zalo.me/0981011115" target="_blank" rel="noopener" class="py-1.5 sm:py-2 px-2 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-[#54433B] transition-colors">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#0068FF"/><text x="12" y="15.5" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="bold" font-size="8.5">Zalo</text></svg>
+              <span>Zalo</span>
+            </a>
+            <a id="modal-fb" href="https://www.facebook.com/mai.maiquynhhhh" target="_blank" rel="noopener" class="py-1.5 sm:py-2 px-2 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-[#54433B] transition-colors">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              <span>Facebook</span>
+            </a>
+            <a id="modal-ig" href="https://www.instagram.com/oomaichua/" target="_blank" rel="noopener" class="py-1.5 sm:py-2 px-2 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-[#54433B] transition-colors">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="igGradModal" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FD5949"/><stop offset="50%" stop-color="#D6249F"/><stop offset="100%" stop-color="#285AEB"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGradModal)"/><circle cx="12" cy="12" r="4.5" stroke="#FFFFFF" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="#FFFFFF"/></svg>
+              <span>Instagram</span>
+            </a>
           </div>
         </div>
       </div>
@@ -729,9 +665,9 @@
             <input id="admin-hours" type="text" oninput="updateConfigPreview()" class="w-full px-3.5 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-[#7E6B62] mb-1">Đổi mã PIN Cổng Chủ Tiệm</label>
+            <label class="block text-xs font-bold text-[#7E6B62] mb-1">Đổi mã PIN mới (để trống nếu giữ nguyên)</label>
             <div class="relative">
-              <input id="admin-pin" type="password" oninput="updateConfigPreview()" class="w-full pl-3.5 pr-9 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
+              <input id="admin-pin" type="password" placeholder="Nhập PIN mới..." oninput="updateConfigPreview()" class="w-full pl-3.5 pr-9 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
               <button type="button" onclick="togglePinVisibility('admin-pin', this)" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#8E7970]">
                 <i data-lucide="eye" class="w-4 h-4"></i>
               </button>
@@ -852,28 +788,28 @@
     let currentModalProduct = null;
     let currentModalImageIndex = 0;
 
-    // Trạng thái phóng to / kéo ảnh
-    let zoomScale = 1;
-    let panX = 0;
-    let panY = 0;
-    let isDragging = false;
-    let dragStartX = 0;
-    let dragStartY = 0;
-    let touchStartDist = 0;
-    let initialPinchScale = 1;
-    let lastTouchX = 0;
-    let lastTouchY = 0;
-    let swipeStartX = 0;
-    let swipeStartY = 0;
+    // Mã băm SHA-256 của đường dẫn bí mật "#quynhmai" (không lưu chữ thô trong mã nguồn)
+    const ADMIN_ROUTE_HASH = "30e24455d176e1f277c3e4582e7e7a5680f9b4d0f00e6014d9f55b708b8d47b4";
+
+    async function checkSecretRoute() {
+      const currentHash = window.location.hash.replace(/^#/, "").trim().toLowerCase();
+      if (!currentHash) return;
+      const hashBuffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("mai_route_" + currentHash));
+      const hex = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+      if (hex === ADMIN_ROUTE_HASH) {
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+        openAdminAccess();
+      }
+    }
 
     document.addEventListener("DOMContentLoaded", () => {
       loadSavedConfig();
       applyConfigToUI();
       setupGridSwipe();
+      setupModalImageSwipe();
 
-      if (window.location.hash === "#quanly") {
-        openAdminAccess();
-      }
+      checkSecretRoute();
+      window.addEventListener("hashchange", checkSecretRoute);
 
       if (appConfig.sheetUrl && appConfig.sheetUrl.trim() !== "") {
         fetchGoogleSheetData(appConfig.sheetUrl, false);
@@ -895,14 +831,14 @@
           appConfig = {
             ...DEFAULT_CONFIG,
             ...parsed,
-            slogan: DEFAULT_CONFIG.slogan,
             heroImage: DEFAULT_CONFIG.heroImage || parsed.heroImage || "",
             sheetUrl: DEFAULT_CONFIG.sheetUrl || parsed.sheetUrl || "",
+            slogan: DEFAULT_CONFIG.slogan,
             zaloUrl: DEFAULT_CONFIG.zaloUrl || parsed.zaloUrl || "https://zalo.me",
             facebookUrl: DEFAULT_CONFIG.facebookUrl || parsed.facebookUrl || "https://facebook.com",
             instagramUrl: DEFAULT_CONFIG.instagramUrl || parsed.instagramUrl || "https://instagram.com",
             phone: DEFAULT_CONFIG.phone || parsed.phone || "0981011115",
-            adminPin: DEFAULT_CONFIG.adminPin || parsed.adminPin || "25100510"
+            adminPinHash: parsed.adminPinHash || DEFAULT_CONFIG.adminPinHash
           };
         }
       } catch (e) {
@@ -910,33 +846,31 @@
       }
     }
 
+    async function hashPinSHA256(pinStr) {
+      const msgBuffer = new TextEncoder().encode("mai_and_more_salt_" + String(pinStr).trim());
+      const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
     function applyConfigToUI() {
-      const setTxt = (id, val) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = val;
-      };
-      const setHref = (id, val) => {
-        const el = document.getElementById(id);
-        if (el) el.href = val;
-      };
+      document.getElementById("header-shop-name").textContent = appConfig.shopName;
+      document.getElementById("header-slogan").textContent = appConfig.slogan;
+      document.getElementById("hero-order-hours").textContent = appConfig.orderHours;
+      document.getElementById("footer-shop-name").textContent = appConfig.shopName;
+      document.getElementById("copyright-shop-name").textContent = appConfig.shopName;
+      document.getElementById("footer-order-hours").textContent = appConfig.orderHours;
+      document.getElementById("footer-phone").textContent = appConfig.phone;
 
-      setTxt("header-shop-name", appConfig.shopName);
-      setTxt("header-slogan", appConfig.slogan);
-      setTxt("hero-order-hours", appConfig.orderHours);
-      setTxt("footer-shop-name", appConfig.shopName);
-      setTxt("copyright-shop-name", appConfig.shopName);
-      setTxt("footer-order-hours", appConfig.orderHours);
-      setTxt("footer-phone", appConfig.phone);
-
-      setHref("hero-zalo", appConfig.zaloUrl);
-      setHref("hero-fb", appConfig.facebookUrl);
-      setHref("hero-ig", appConfig.instagramUrl);
-      setHref("footer-zalo", appConfig.zaloUrl);
-      setHref("footer-fb", appConfig.facebookUrl);
-      setHref("footer-ig", appConfig.instagramUrl);
-      setHref("modal-zalo", appConfig.zaloUrl);
-      setHref("modal-fb", appConfig.facebookUrl);
-      setHref("modal-ig", appConfig.instagramUrl);
+      if (document.getElementById("hero-zalo")) document.getElementById("hero-zalo").href = appConfig.zaloUrl;
+      if (document.getElementById("hero-fb")) document.getElementById("hero-fb").href = appConfig.facebookUrl;
+      if (document.getElementById("hero-ig")) document.getElementById("hero-ig").href = appConfig.instagramUrl;
+      document.getElementById("footer-zalo").href = appConfig.zaloUrl;
+      document.getElementById("footer-fb").href = appConfig.facebookUrl;
+      document.getElementById("footer-ig").href = appConfig.instagramUrl;
+      document.getElementById("modal-zalo").href = appConfig.zaloUrl;
+      document.getElementById("modal-fb").href = appConfig.facebookUrl;
+      document.getElementById("modal-ig").href = appConfig.instagramUrl;
 
       const heroImg = document.getElementById("hero-img");
       if (heroImg && appConfig.heroImage) {
@@ -1357,13 +1291,10 @@
         if (item.status.toLowerCase().includes("đặt")) statusBadgeClass = "bg-[#FEF3C7] text-[#92400E]";
         if (item.status.toLowerCase().includes("hết")) statusBadgeClass = "bg-[#FEE2E2] text-[#991B1B]";
 
-        // Viền mặc định cho tất cả thẻ sản phẩm (không làm viền đỏ)
-        const cardBorderClass = "border-[#EFE5DF]";
-
         return `
           <article
             onclick="openProductModal(${item.id})"
-            class="group cursor-pointer bg-white rounded-xl sm:rounded-2xl overflow-hidden border ${cardBorderClass} card-shadow card-shadow-hover transition-all duration-300 flex flex-col justify-between"
+            class="group cursor-pointer bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-[#EFE5DF] card-shadow card-shadow-hover transition-all duration-300 flex flex-col justify-between"
           >
             <div>
               <div class="relative aspect-[3/4] sm:aspect-[4/3] bg-[#F5EFEA] overflow-hidden">
@@ -1384,28 +1315,28 @@
                 }
 
                 <div class="absolute top-1.5 sm:top-2.5 left-1.5 sm:left-2.5 right-1.5 sm:right-2.5 flex items-center justify-between gap-1 pointer-events-none">
-                  <span class="px-2 sm:px-2.5 py-0.5 rounded-full bg-white/95 backdrop-blur-sm text-[10px] sm:text-[11px] font-bold text-[#54433B] shadow-sm truncate max-w-[60%]">
+                  <span class="px-2 sm:px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-sm text-[10px] sm:text-[11px] font-bold text-[#54433B] shadow-sm truncate max-w-[65%]">
                     ${item.category}
                   </span>
                   ${
                     item.featured
-                      ? `<span class="inline-flex items-center gap-1 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-gradient-to-r from-[#D92D4B] to-[#F05252] text-white text-[10px] sm:text-xs font-extrabold uppercase tracking-wider shadow-md ring-2 ring-white/95 shrink-0">
-                          <i data-lucide="flame" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FDE047] fill-[#FDE047] shrink-0"></i>
+                      ? `<span class="inline-flex items-center gap-1 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-gradient-to-r from-[#D92D4B] to-[#F05252] text-white text-[10px] sm:text-xs font-extrabold uppercase tracking-wider shadow-md shrink-0">
+                          <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-[#FDE047] shrink-0" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
                           <span>HOT</span>
                         </span>`
                       : ""
                   }
                 </div>
 
-                <div class="absolute bottom-1.5 sm:bottom-2.5 left-1.5 sm:left-2.5 pointer-events-none">
-                  <span class="px-2 sm:px-2.5 py-0.5 rounded-full ${statusBadgeClass} text-[10px] sm:text-[11px] font-bold shadow-sm inline-block">
+                <div class="absolute bottom-1.5 sm:bottom-2.5 left-1.5 sm:left-2.5 flex items-center pointer-events-none">
+                  <span class="px-2 sm:px-2.5 py-0.5 rounded-full ${statusBadgeClass} text-[10px] sm:text-[11px] font-bold shadow-sm truncate">
                     ${item.status}
                   </span>
                 </div>
               </div>
 
-              <div class="p-2.5 sm:p-3.5 pb-1 sm:pb-1.5">
-                <h3 class="text-xs sm:text-base font-bold text-[#54433B] line-clamp-2 sm:line-clamp-1 group-hover:text-[#9E5A63] transition-colors leading-snug">
+              <div class="p-2 sm:p-3.5 pb-1 sm:pb-1.5">
+                <h3 class="text-xs sm:text-base font-bold text-[#54433B] line-clamp-2 sm:line-clamp-1 leading-snug group-hover:text-[#9E5A63] transition-colors">
                   ${item.name}
                 </h3>
                 <p class="hidden sm:block text-sm text-[#7E6B62] line-clamp-2 mt-1 leading-snug">
@@ -1414,7 +1345,7 @@
               </div>
             </div>
 
-            <div class="px-2.5 sm:px-3.5 pb-2.5 sm:pb-3.5 pt-1 sm:pt-2 mt-0.5 sm:mt-1 sm:border-t sm:border-[#F6EFEA] flex items-end justify-between gap-1">
+            <div class="px-2 sm:px-3.5 pb-2 sm:pb-3.5 pt-1 sm:pt-2 mt-0.5 sm:mt-1 sm:border-t sm:border-[#F6EFEA] flex items-end justify-between gap-1">
               <div class="min-w-0">
                 <span class="hidden sm:block text-[10px] text-[#9A867D] leading-none">Giá mẫu hoa</span>
                 <span class="text-xs sm:text-base font-bold text-[#9E5A63] leading-tight block sm:mt-0.5 truncate">${formatVND(item.price)}</span>
@@ -1430,7 +1361,7 @@
       const emptySlots = Math.max(0, ITEMS_PER_PAGE - pageItems.length);
       for (let i = 0; i < emptySlots; i++) {
         html += `
-          <div class="rounded-xl sm:rounded-2xl border-2 border-dashed border-[#E5D8D0] bg-[#FAF6F2]/65 min-h-[210px] sm:min-h-[270px] flex flex-col items-center justify-center p-3 sm:p-5 text-center text-[#B9A79E] select-none">
+          <div class="rounded-xl sm:rounded-2xl border-2 border-dashed border-[#E5D8D0] bg-[#FAF6F2]/65 min-h-[195px] sm:min-h-[268px] flex flex-col items-center justify-center p-3 sm:p-5 text-center text-[#B9A79E] select-none">
             <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/85 border border-[#EAE0D9] flex items-center justify-center mb-1.5 sm:mb-2">
               <i data-lucide="flower-2" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D1BFB6]"></i>
             </div>
@@ -1477,6 +1408,29 @@
           : `Trang ${currentPage}/${totalPages} • Mỗi trang hiển thị tối đa 6 mẫu`;
     }
 
+    function setupModalImageSwipe() {
+      const stage = document.getElementById("modal-img-stage");
+      if (!stage) return;
+      let startX = 0;
+      let startY = 0;
+
+      stage.addEventListener("touchstart", (e) => {
+        if (!e.touches || e.touches.length === 0) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }, { passive: true });
+
+      stage.addEventListener("touchend", (e) => {
+        if (!currentModalProduct || !currentModalProduct.images || currentModalProduct.images.length <= 1) return;
+        if (!e.changedTouches || e.changedTouches.length === 0) return;
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+          changeModalImage(dx < 0 ? 1 : -1);
+        }
+      }, { passive: true });
+    }
+
     function setupGridSwipe() {
       const grid = document.getElementById("products-grid");
       let touchStartX = 0;
@@ -1503,7 +1457,8 @@
       }, { passive: true });
     }
 
-    /* ==================== CHUYỂN QUA LẠI GIỮA CÁC BÓ HOA TRONG MODAL ==================== */
+    let isModalImgZoomed = false;
+
     function getModalNavigationList() {
       return filteredProducts && filteredProducts.length > 0 ? filteredProducts : allProducts;
     }
@@ -1528,122 +1483,12 @@
       openProductModal(nextProd.id);
     }
 
-    /* ==================== PHÓNG TO / KÉO ẢNH CHI TIẾT ==================== */
-    function updateImageTransform() {
-      const img = document.getElementById("modal-main-img");
-      if (!img) return;
-      img.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomScale})`;
-      img.style.cursor = zoomScale > 1 ? (isDragging ? "grabbing" : "grab") : "zoom-in";
-    }
-
-    function adjustZoom(delta) {
-      zoomScale = Math.min(4, Math.max(1, Number((zoomScale + delta).toFixed(2))));
-      if (zoomScale === 1) {
-        panX = 0;
-        panY = 0;
-      }
-      updateImageTransform();
-    }
-
-    function resetZoom() {
-      zoomScale = 1;
-      panX = 0;
-      panY = 0;
-      updateImageTransform();
-    }
-
-    function toggleQuickZoom() {
-      if (zoomScale > 1) {
-        resetZoom();
-      } else {
-        zoomScale = 2.2;
-        updateImageTransform();
-      }
-    }
-
-    function handleGalleryWheel(e) {
-      e.preventDefault();
-      const delta = e.deltaY < 0 ? 0.35 : -0.35;
-      adjustZoom(delta);
-    }
-
-    function handleGalleryMouseDown(e) {
-      if (zoomScale <= 1) return;
-      e.preventDefault();
-      isDragging = true;
-      dragStartX = e.clientX - panX;
-      dragStartY = e.clientY - panY;
-      updateImageTransform();
-    }
-
-    function handleGalleryMouseMove(e) {
-      if (!isDragging || zoomScale <= 1) return;
-      panX = e.clientX - dragStartX;
-      panY = e.clientY - dragStartY;
-      updateImageTransform();
-    }
-
-    function handleGalleryMouseUp() {
-      if (!isDragging) return;
-      isDragging = false;
-      updateImageTransform();
-    }
-
-    function getTouchDistance(touches) {
-      const dx = touches[0].clientX - touches[1].clientX;
-      const dy = touches[0].clientY - touches[1].clientY;
-      return Math.hypot(dx, dy);
-    }
-
-    function handleGalleryTouchStart(e) {
-      if (e.touches.length === 2) {
-        touchStartDist = getTouchDistance(e.touches);
-        initialPinchScale = zoomScale;
-      } else if (e.touches.length === 1) {
-        swipeStartX = e.touches[0].clientX;
-        swipeStartY = e.touches[0].clientY;
-        if (zoomScale > 1) {
-          isDragging = true;
-          lastTouchX = e.touches[0].clientX - panX;
-          lastTouchY = e.touches[0].clientY - panY;
-        }
-      }
-    }
-
-    function handleGalleryTouchMove(e) {
-      if (e.touches.length === 2 && touchStartDist > 0) {
-        e.preventDefault();
-        const dist = getTouchDistance(e.touches);
-        zoomScale = Math.min(4, Math.max(1, Number((initialPinchScale * (dist / touchStartDist)).toFixed(2))));
-        if (zoomScale === 1) {
-          panX = 0;
-          panY = 0;
-        }
-        updateImageTransform();
-      } else if (e.touches.length === 1 && isDragging && zoomScale > 1) {
-        e.preventDefault();
-        panX = e.touches[0].clientX - lastTouchX;
-        panY = e.touches[0].clientY - lastTouchY;
-        updateImageTransform();
-      }
-    }
-
-    function handleGalleryTouchEnd(e) {
-      if (e.touches.length < 2) {
-        touchStartDist = 0;
-      }
-      if (e.touches.length === 0) {
-        if (!isDragging && zoomScale === 1 && e.changedTouches && e.changedTouches.length === 1) {
-          const dx = e.changedTouches[0].clientX - swipeStartX;
-          const dy = e.changedTouches[0].clientY - swipeStartY;
-          if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.3) {
-            if (currentModalProduct && currentModalProduct.images && currentModalProduct.images.length > 1) {
-              changeModalImage(dx < 0 ? 1 : -1);
-            }
-          }
-        }
-        isDragging = false;
-      }
+    function toggleModalImageZoom() {
+      const mainImg = document.getElementById("modal-main-img");
+      if (!mainImg) return;
+      isModalImgZoomed = !isModalImgZoomed;
+      mainImg.style.transform = isModalImgZoomed ? "scale(1.65)" : "scale(1)";
+      mainImg.style.cursor = isModalImgZoomed ? "zoom-out" : "zoom-in";
     }
 
     function openProductModal(productId) {
@@ -1652,28 +1497,32 @@
 
       currentModalProduct = product;
       currentModalImageIndex = 0;
-      resetZoom();
+      isModalImgZoomed = false;
 
       const list = getModalNavigationList();
       const idx = list.findIndex(p => p.id === product.id);
-      const posLabel = idx >= 0 ? `Mẫu ${idx + 1}/${list.length}` : "Chi tiết";
+      const posText = idx >= 0 ? `Mẫu ${idx + 1}/${list.length}` : "Chi tiết";
 
+      document.getElementById("modal-mobile-pos").textContent = posText;
+      document.getElementById("modal-mobile-title-bar").textContent = product.name;
       document.getElementById("modal-category").textContent = product.category;
       document.getElementById("modal-status").textContent = product.status;
-      document.getElementById("modal-product-position").textContent = posLabel;
       document.getElementById("modal-title").textContent = product.name;
       document.getElementById("modal-price").textContent = formatVND(product.price);
       document.getElementById("modal-desc").textContent = product.description;
 
-      const hotBadge = document.getElementById("modal-hot-badge");
-      if (hotBadge) {
-        if (product.featured) {
-          hotBadge.classList.remove("hidden");
-          hotBadge.classList.add("inline-flex");
-        } else {
-          hotBadge.classList.add("hidden");
-          hotBadge.classList.remove("inline-flex");
-        }
+      const mobileHot = document.getElementById("modal-mobile-hot");
+      const desktopHot = document.getElementById("modal-desktop-hot");
+      if (product.featured) {
+        mobileHot.classList.remove("hidden");
+        mobileHot.classList.add("inline-flex");
+        desktopHot.classList.remove("hidden");
+        desktopHot.classList.add("inline-flex");
+      } else {
+        mobileHot.classList.add("hidden");
+        mobileHot.classList.remove("inline-flex");
+        desktopHot.classList.add("hidden");
+        desktopHot.classList.remove("inline-flex");
       }
 
       const prevProdBtn = document.getElementById("modal-prev-product-btn");
@@ -1695,8 +1544,6 @@
 
     function updateModalGallery() {
       if (!currentModalProduct) return;
-      resetZoom();
-
       const images = currentModalProduct.images && currentModalProduct.images.length > 0
         ? currentModalProduct.images
         : [""];
@@ -1704,7 +1551,12 @@
       if (currentModalImageIndex < 0) currentModalImageIndex = images.length - 1;
       if (currentModalImageIndex >= images.length) currentModalImageIndex = 0;
 
+      isModalImgZoomed = false;
       const mainImg = document.getElementById("modal-main-img");
+      mainImg.style.transform = "scale(1)";
+      mainImg.style.cursor = "zoom-in";
+      mainImg.ondblclick = toggleModalImageZoom;
+
       const currentSrc = images[currentModalImageIndex];
       mainImg.removeAttribute("data-retry");
       mainImg.setAttribute("data-orig-src", currentSrc);
@@ -1717,12 +1569,11 @@
       const thumbContainer = document.getElementById("modal-thumbnails");
 
       if (images.length > 1) {
-        prevBtn.classList.add("hidden", "sm:flex");
-        prevBtn.classList.remove("flex");
-        nextBtn.classList.add("hidden", "sm:flex");
-        nextBtn.classList.remove("flex");
-
-        counter.classList.add("hidden", "sm:block");
+        prevBtn.classList.remove("hidden", "flex");
+        prevBtn.classList.add("hidden", "md:flex");
+        nextBtn.classList.remove("hidden", "flex");
+        nextBtn.classList.add("hidden", "md:flex");
+        counter.classList.remove("hidden");
         counter.textContent = `${currentModalImageIndex + 1} / ${images.length}`;
 
         thumbContainer.classList.remove("hidden");
@@ -1731,7 +1582,7 @@
           <button
             type="button"
             onclick="setModalImage(${idx})"
-            class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden border-2 shrink-0 transition-all ${
+            class="w-11 h-11 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl overflow-hidden border-2 shrink-0 transition-all ${
               idx === currentModalImageIndex ? "border-[#9E5A63] scale-105 shadow-sm" : "border-transparent opacity-65 hover:opacity-100"
             }"
           >
@@ -1747,11 +1598,10 @@
         `).join("");
       } else {
         prevBtn.classList.add("hidden");
-        prevBtn.classList.remove("flex", "sm:flex");
+        prevBtn.classList.remove("flex", "md:flex");
         nextBtn.classList.add("hidden");
-        nextBtn.classList.remove("flex", "sm:flex");
+        nextBtn.classList.remove("flex", "md:flex");
         counter.classList.add("hidden");
-        counter.classList.remove("sm:block");
         thumbContainer.classList.add("hidden");
         thumbContainer.classList.remove("flex");
       }
@@ -1826,10 +1676,20 @@
       lucide.createIcons();
     }
 
-    function verifyAdminPin() {
+    async function verifyAdminPin() {
       const entered = document.getElementById("pin-input").value.trim();
-      const validPin = String(appConfig.adminPin || DEFAULT_CONFIG.adminPin);
-      if (entered === validPin) {
+      if (!entered) {
+        document.getElementById("pin-error").classList.remove("hidden");
+        return;
+      }
+      const enteredHash = await hashPinSHA256(entered);
+      const targetHash = appConfig.adminPinHash || DEFAULT_CONFIG.adminPinHash;
+
+      // Hỗ trợ kiểm tra cả mã băm có salt và mã băm chuẩn của PIN mặc định
+      const rawHashBuffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(entered));
+      const rawHash = Array.from(new Uint8Array(rawHashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+
+      if (enteredHash === targetHash || rawHash === targetHash) {
         closePinModal();
         openAdminDashboard();
       } else {
@@ -1844,7 +1704,7 @@
       document.getElementById("admin-ig").value = appConfig.instagramUrl || "";
       document.getElementById("admin-phone").value = appConfig.phone || "";
       document.getElementById("admin-hours").value = appConfig.orderHours || "";
-      document.getElementById("admin-pin").value = appConfig.adminPin || "25100510";
+      document.getElementById("admin-pin").value = "";
 
       updateConfigPreview();
       const adminModal = document.getElementById("admin-modal");
@@ -1881,7 +1741,9 @@
       fetchGoogleSheetData(url, true);
     }
 
-    function getDraftConfig() {
+    async function getDraftConfig() {
+      const newPinRaw = document.getElementById("admin-pin").value.trim();
+      const pinHash = newPinRaw ? await hashPinSHA256(newPinRaw) : (appConfig.adminPinHash || DEFAULT_CONFIG.adminPinHash);
       return {
         shopName: appConfig.shopName,
         slogan: appConfig.slogan,
@@ -1892,12 +1754,11 @@
         instagramUrl: document.getElementById("admin-ig").value.trim() || "https://instagram.com",
         phone: document.getElementById("admin-phone").value.trim() || "0981011115",
         orderHours: document.getElementById("admin-hours").value.trim() || "Nhận đơn online cả ngày",
-        adminPin: document.getElementById("admin-pin").value.trim() || "25100510"
+        adminPinHash: pinHash
       };
     }
 
-    function buildConfigCode(cfg, maskPin = false) {
-      const displayPin = maskPin ? "••••••••" : cfg.adminPin;
+    function buildConfigCode(cfg) {
       return `const DEFAULT_CONFIG = {
   shopName: ${JSON.stringify(cfg.shopName)},
   slogan: ${JSON.stringify(cfg.slogan)},
@@ -1908,23 +1769,23 @@
   instagramUrl: ${JSON.stringify(cfg.instagramUrl)},
   phone: ${JSON.stringify(cfg.phone)},
   orderHours: ${JSON.stringify(cfg.orderHours)},
-  adminPin: ${JSON.stringify(displayPin)}
+  adminPinHash: ${JSON.stringify(cfg.adminPinHash)}
 };`;
     }
 
-    function updateConfigPreview() {
-      const draft = getDraftConfig();
+    async function updateConfigPreview() {
+      const draft = await getDraftConfig();
       appConfig = { ...draft };
       localStorage.setItem("mai_and_more_config_v4", JSON.stringify(appConfig));
       applyConfigToUI();
-      document.getElementById("config-preview-box").textContent = buildConfigCode(draft, true);
+      document.getElementById("config-preview-box").textContent = buildConfigCode(draft);
     }
 
-    function copyGeneratedConfig() {
-      const draft = getDraftConfig();
-      const code = buildConfigCode(draft, false);
+    async function copyGeneratedConfig() {
+      const draft = await getDraftConfig();
+      const code = buildConfigCode(draft);
       fallbackCopyText(code);
-      showToast("Đã sao chép mã DEFAULT_CONFIG! Hãy dán đè vào file index.html.");
+      showToast("Đã sao chép mã DEFAULT_CONFIG đã mã hóa SHA-256!");
     }
 
     function copySheetHeaders() {
@@ -1964,11 +1825,17 @@
     }
 
     document.addEventListener("keydown", (e) => {
+      // Tổ hợp phím bí mật Alt + Shift + M để mở Cổng Chủ Tiệm
+      if (e.altKey && e.shiftKey && e.key.toLowerCase() === "m") {
+        e.preventDefault();
+        openAdminAccess();
+        return;
+      }
       const modal = document.getElementById("product-modal");
       if (!modal.classList.contains("hidden")) {
         if (e.key === "Escape") hideProductModal();
-        if (e.key === "ArrowLeft") navigateModalProduct(-1);
-        if (e.key === "ArrowRight") navigateModalProduct(1);
+        if (e.key === "ArrowLeft") changeModalImage(-1);
+        if (e.key === "ArrowRight") changeModalImage(1);
       }
     });
   </script>
