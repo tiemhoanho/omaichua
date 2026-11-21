@@ -123,11 +123,11 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 175%;
-        height: 175%;
-        transform: translate(-50%, -50%) scale(0.58);
+        width: 720px;
+        height: 720px;
+        transform: translate(-50%, -50%) scale(0.46);
         transform-origin: center center;
-        pointer-events: none;
+        pointer-events: auto;
       }
 
       .responsive-video-frame iframe.yt-video-embed {
@@ -776,7 +776,7 @@
           <button
             id="modal-prev-btn"
             onclick="changeModalImage(-1)"
-            class="hidden absolute left-2.5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-white text-[#54433B] shadow-md items-center justify-center transition-transform active:scale-95"
+            class="hidden md:flex absolute left-2.5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-[#54433B] shadow-md items-center justify-center transition-transform active:scale-95"
             aria-label="Ảnh trước"
           >
             <i data-lucide="chevron-left" class="w-5 h-5"></i>
@@ -784,7 +784,7 @@
           <button
             id="modal-next-btn"
             onclick="changeModalImage(1)"
-            class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-white text-[#54433B] shadow-md items-center justify-center transition-transform active:scale-95"
+            class="hidden md:flex absolute right-2.5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-[#54433B] shadow-md items-center justify-center transition-transform active:scale-95"
             aria-label="Ảnh tiếp theo"
           >
             <i data-lucide="chevron-right" class="w-5 h-5"></i>
@@ -1604,12 +1604,24 @@
       }
     }
 
+    function activateDriveIframeOnMobile(iframeEl) {
+      const container = iframeEl ? iframeEl.closest(".responsive-video-frame") : null;
+      if (!container) return;
+      const overlay = container.querySelector(".mobile-tap-overlay");
+      iframeEl.style.pointerEvents = "none";
+      if (overlay) {
+        overlay.classList.remove("pointer-events-none");
+        overlay.classList.add("pointer-events-auto");
+      }
+    }
+
     function buildVideoPlayerHtml(mediaItem, autoplay = true) {
       if (!mediaItem) return "";
-      const mobileTapOverlay = `
+      const isDrive = mediaItem.provider === "drive";
+      const mobileTapOverlay = isDrive ? "" : `
         <div
           onclick="event.stopPropagation(); toggleMobileVideoPlay(this)"
-          class="md:hidden absolute inset-0 z-[5] flex items-center justify-center cursor-pointer"
+          class="mobile-tap-overlay md:hidden absolute inset-0 z-[5] pointer-events-auto flex items-center justify-center cursor-pointer"
           aria-label="Chạm để tạm dừng hoặc phát tiếp"
         >
           <span class="mobile-pause-badge hidden w-12 h-12 rounded-full bg-black/60 text-white backdrop-blur-sm flex items-center justify-center shadow-lg">
@@ -1621,31 +1633,8 @@
       if (mediaItem.provider === "youtube") {
         return `<div class="responsive-video-frame" data-paused="0"><iframe src="${mediaItem.url}" class="yt-video-embed" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>${mobileTapOverlay}</div>`;
       }
-      if (mediaItem.provider === "drive") {
-        const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-        if (isMobile && mediaItem.id) {
-          const directStreamUrl = `https://drive.google.com/uc?export=download&id=${mediaItem.id}`;
-          const fallbackIframe = encodeURIComponent(
-            `<iframe src="${mediaItem.url}" class="drive-video-embed" allow="autoplay; fullscreen" allowfullscreen></iframe>`
-          );
-          return `
-            <div class="responsive-video-frame" data-paused="0">
-              <video
-                src="${directStreamUrl}"
-                poster="${mediaItem.thumb || ""}"
-                ${autoplay ? "autoplay" : ""}
-                muted
-                loop
-                playsinline
-                webkit-playsinline
-                onerror="const p=this.parentElement; if(p){ this.remove(); p.insertAdjacentHTML('afterbegin', decodeURIComponent('${fallbackIframe}')); }"
-                class="direct-video-player w-full h-full object-contain bg-black"
-              ></video>
-              ${mobileTapOverlay}
-            </div>
-          `;
-        }
-        return `<div class="responsive-video-frame" data-paused="0"><iframe src="${mediaItem.url}" class="drive-video-embed" allow="autoplay; fullscreen" allowfullscreen></iframe>${mobileTapOverlay}</div>`;
+      if (isDrive) {
+        return `<div class="responsive-video-frame" data-paused="0"><iframe src="${mediaItem.url}" class="drive-video-embed" allow="autoplay; fullscreen" allowfullscreen></iframe></div>`;
       }
       return `<div class="responsive-video-frame" data-paused="0"><video src="${mediaItem.url}" ${autoplay ? "autoplay" : ""} controls muted loop playsinline webkit-playsinline class="direct-video-player w-full h-full object-contain bg-black"></video>${mobileTapOverlay}</div>`;
     }
@@ -2430,10 +2419,10 @@
       const thumbContainer = document.getElementById("modal-thumbnails");
 
       if (items.length > 1) {
-        prevBtn.classList.remove("hidden", "flex");
-        prevBtn.classList.add("flex");
-        nextBtn.classList.remove("hidden", "flex");
-        nextBtn.classList.add("flex");
+        prevBtn.classList.remove("hidden", "flex", "md:flex");
+        prevBtn.classList.add("hidden", "md:flex");
+        nextBtn.classList.remove("hidden", "flex", "md:flex");
+        nextBtn.classList.add("hidden", "md:flex");
         counter.classList.remove("hidden");
         counter.textContent = `${currentModalImageIndex + 1} / ${items.length}`;
 
