@@ -161,18 +161,18 @@
     }
 
     const DEFAULT_CONFIG = {
-  shopName: "Mai & More",
-  slogan: "More than flowers",
-  heroImage: "https://drive.google.com/file/d/1Q9mgXjc6Il3M4K4LGkf_tANMzJ5JrTH_/view?usp=sharing",
-  vaultToken: "A2BeCHV0HHVHBVNvZkxdeh9WQUhmQQVXdAR2YUFxBH19ewd0dmdABXNWe1M=",
-  zaloUrl: "https://zalo.me/0981011115",
-  facebookUrl: "https://www.facebook.com/mai.maiquynhhhh",
-  instagramUrl: "https://www.instagram.com/oomaichua/",
-  threadsUrl: "https://www.threads.com/@oomaichua?xmt=AQG0b0kRQtz-ABtPI9ZNva0KgucH6k_RdDUMj5vTGJXE-no",
-  phone: "0981011115",
-  orderHours: "Nhận đơn online cả ngày",
-  adminPin: "25100510"
-};
+      shopName: "Mai & More",
+      slogan: "More than flowers",
+      heroImage: "https://drive.google.com/file/d/1Q9mgXjc6Il3M4K4LGkf_tANMzJ5JrTH_/view?usp=sharing",
+      vaultToken: _0x5a2e[0],
+      zaloUrl: "https://zalo.me/0981011115",
+      facebookUrl: "https://www.facebook.com/mai.maiquynhhhh",
+      instagramUrl: "https://www.instagram.com/oomaichua/",
+      threadsUrl: "https://www.threads.com/@oomaichua?xmt=AQG0b0kRQtz-ABtPI9ZNva0KgucH6k_RdDUMj5vTGJXE-no",
+      phone: "0981011115",
+      orderHours: "Nhận đơn online cả ngày",
+      adminPin: "25100510"
+    };
   </script>
 
   <!-- ==================== HEADER ==================== -->
@@ -497,7 +497,6 @@
       <div class="flex items-center justify-between gap-2 px-1 sm:px-2 pb-2 border-b border-[#EFE5DF] shrink-0">
         <div class="flex items-center gap-2 min-w-0">
           <span id="review-lightbox-counter" class="text-xs sm:text-sm font-bold text-[#54433B] whitespace-nowrap">Đánh giá 1 / 1</span>
-          <span class="hidden md:inline text-xs text-[#8E7970]">• Lăn chuột hoặc chụm 2 ngón để phóng to/thu nhỏ, kéo để xem chi tiết</span>
         </div>
 
         <div class="flex items-center gap-1.5 shrink-0">
@@ -548,6 +547,8 @@
           draggable="false"
           class="zoom-target max-w-full max-h-full w-auto h-auto object-contain select-none"
         />
+
+        <div id="review-lightbox-video-wrap" class="hidden w-full h-full items-center justify-center bg-black/95"></div>
 
         <button
           id="review-lb-prev"
@@ -625,6 +626,10 @@
               <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#101010"/><path d="M15.85 11.45c-.15-.08-.31-.15-.47-.22-.25-2.18-1.46-3.44-3.56-3.46-1.42-.01-2.61.6-3.27 1.68l1.25.86c.48-.72 1.24-1.05 2.01-1.04 1.24.01 1.94.64 2.13 1.78-.65-.12-1.36-.16-2.12-.11-2.14.13-3.51 1.29-3.42 2.91.05.91.52 1.72 1.32 2.24.67.44 1.54.66 2.44.61 1.19-.07 2.13-.52 2.78-1.34.49-.62.8-1.41.94-2.41.56.34.98.78 1.21 1.31.38.89.41 2.34-.78 3.53-1.05 1.05-2.31 1.5-4.21 1.52-2.11-.02-3.71-.69-4.75-2.01-.98-1.24-1.49-3.03-1.51-5.32.02-2.29.53-4.08 1.51-5.32 1.04-1.32 2.64-1.99 4.75-2.01 2.13.02 3.76.7 4.83 2.02.53.65.93 1.46 1.19 2.41l1.46-.39c-.32-1.16-.82-2.16-1.49-2.98C16.71 4.1 14.69 3.22 12.11 3.2h-.02c-2.57.02-4.57.9-5.94 2.63-1.22 1.54-1.85 3.66-1.87 6.3v.02c.02 2.64.65 4.76 1.87 6.3 1.37 1.73 3.37 2.61 5.94 2.63h.02c2.3-.02 3.94-.63 5.28-1.97 1.73-1.73 1.68-3.89 1.11-5.21-.41-.95-1.18-1.73-2.65-2.45zm-3.53 3.75c-.99.06-2.03-.39-2.08-1.29-.04-.67.47-1.41 1.99-1.5.22-.01.43-.02.64-.02.56 0 1.09.05 1.57.16-.18 1.98-1.12 2.59-2.12 2.65z" fill="#FFFFFF"/></svg>
               <span>Threads</span>
             </a>
+            <button type="button" onclick="openQrModal()" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F7E7E9] hover:bg-[#F0D6DA] border border-[#E5C9CE] text-sm font-bold text-[#54433B] transition-colors">
+              <i data-lucide="qr-code" class="w-4 h-4 text-[#9E5A63]"></i>
+              <span>Mã QR Tiệm Hoa</span>
+            </button>
           </div>
         </div>
       </div>
@@ -689,7 +694,9 @@
             class="zoom-target max-w-full max-h-full w-auto h-auto object-contain select-none"
           />
 
-          <div class="absolute top-2.5 right-2.5 z-10 flex items-center gap-1 bg-white/90 backdrop-blur-md px-2 py-1 rounded-full border border-[#E5D8D0] shadow-sm">
+          <div id="modal-main-video-wrap" class="hidden w-full h-full items-center justify-center bg-black"></div>
+
+          <div id="product-zoom-toolbar" class="absolute top-2.5 right-2.5 z-10 flex items-center gap-1 bg-white/90 backdrop-blur-md px-2 py-1 rounded-full border border-[#E5D8D0] shadow-sm">
             <button
               type="button"
               onclick="event.stopPropagation(); adjustZoom('product', -0.4)"
@@ -738,10 +745,6 @@
 
           <div id="modal-img-counter" class="hidden absolute bottom-2 right-2 z-10 px-2.5 py-0.5 rounded-full bg-black/60 text-white text-[10px] sm:text-xs font-bold">
             1 / 1
-          </div>
-
-          <div class="hidden md:block absolute bottom-2 left-2.5 z-10 px-2.5 py-0.5 rounded-full bg-white/85 text-[11px] text-[#7E6B62] pointer-events-none">
-            Lăn chuột để phóng to • Kéo để soi chi tiết
           </div>
         </div>
 
@@ -814,6 +817,81 @@
     </div>
   </div>
 
+  <!-- ==================== MODAL TẠO & TẢI MÃ QR TRANG WEB ==================== -->
+  <div id="qr-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/55 backdrop-blur-sm p-4" onclick="if(event.target===this) closeQrModal()">
+    <div class="bg-[#FDFBF7] rounded-3xl max-w-md w-full p-6 border border-[#E8DCD4] shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-[#EFE5DF]">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-full bg-[#F7E7E9] text-[#9E5A63] flex items-center justify-center">
+            <i data-lucide="qr-code" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-[#54433B] leading-tight">Mã QR Trang Web Tiệm Hoa</h3>
+            <p class="text-xs text-[#8E7970]">Quét để mở ngay bộ sưu tập Mai &amp; More</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeQrModal()" class="p-1.5 rounded-full hover:bg-[#EFE5DF] text-[#7E6B62]" aria-label="Đóng">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-[#7E6B62] mb-1.5">Đường link trang web của bạn</label>
+        <div class="flex gap-2">
+          <input
+            id="qr-url-input"
+            type="url"
+            placeholder="Dán link trang web của tiệm (VD: https://...)"
+            oninput="updateQrCodeImage()"
+            class="flex-1 px-3.5 py-2 rounded-xl bg-white border border-[#DFD1C8] text-sm text-[#54433B] focus:outline-none focus:border-[#9E5A63]"
+          />
+          <button
+            type="button"
+            onclick="copyQrWebsiteUrl()"
+            class="px-3.5 py-2 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#DFD1C8] text-xs font-bold text-[#54433B] shrink-0 transition-colors"
+            title="Sao chép đường link"
+          >
+            Sao chép
+          </button>
+        </div>
+        <p id="qr-preview-warning" class="hidden text-[11px] text-[#9E5A63] mt-1.5 leading-snug">
+          Lưu ý: Bạn đang mở trong khung xem trước nội bộ. Hãy dán đường link trang web chính thức (GitHub Pages / Vercel / tên miền của bạn) vào ô trên để tạo mã QR chuẩn cho khách quét nhé!
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl p-5 border border-[#EFE5DF] flex flex-col items-center justify-center text-center shadow-inner">
+        <div class="p-3 rounded-2xl bg-[#FDFBF7] border-2 border-[#E8CFD3] shadow-sm">
+          <img
+            id="qr-code-img"
+            src=""
+            alt="Mã QR liên kết trang web Mai & More"
+            class="w-52 h-52 sm:w-56 sm:h-56 object-contain"
+          />
+        </div>
+        <p id="qr-shop-caption" class="mt-3 text-base font-bold text-[#54433B]">Mai &amp; More — Hoa Lụa Nghệ Thuật</p>
+        <p id="qr-url-caption" class="text-xs text-[#8E7970] break-all max-w-xs mt-0.5"></p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2.5 pt-1">
+        <button
+          type="button"
+          onclick="downloadQrPng()"
+          class="py-2.5 px-4 rounded-xl bg-[#54433B] hover:bg-[#3F312B] text-white font-bold text-sm inline-flex items-center justify-center gap-2 transition-colors shadow-sm"
+        >
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span>Tải ảnh QR (.png)</span>
+        </button>
+        <button
+          type="button"
+          onclick="closeQrModal()"
+          class="py-2.5 px-4 rounded-xl bg-white hover:bg-[#F7E7E9] border border-[#DFD1C8] text-[#54433B] font-bold text-sm transition-colors"
+        >
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ==================== MODAL XÁC THỰC MÃ PIN CHỦ TIỆM ==================== -->
   <div id="pin-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm p-4" onclick="if(event.target===this) closePinModal()">
     <div class="bg-[#FDFBF7] rounded-3xl max-w-sm w-full p-6 border border-[#E8DCD4] shadow-2xl">
@@ -879,8 +957,8 @@
         <p class="text-sm text-[#6E5B52] leading-relaxed">
           Dòng 1 dùng đúng 7 tiêu đề:
           <code class="bg-[#F7E7E9] px-1.5 py-0.5 rounded text-xs font-bold">Ten_Mau, Gia, Danh_Muc, Hinh_Anh, Mo_Ta, Trang_Thai, Noi_Bat</code>.
-          Mỗi bó hoa có thể dán <strong>nhiều link ảnh</strong> vào ô <code class="bg-[#F5EFEA] px-1 rounded text-xs">Hinh_Anh</code>, ngăn cách nhau bằng dấu phẩy <code class="bg-[#F5EFEA] px-1 rounded text-xs">,</code>.
-          Tab <code class="bg-[#F7E7E9] px-1.5 py-0.5 rounded text-xs font-bold">Danh_Gia</code> dùng 2 cột <code class="bg-[#F5EFEA] px-1 rounded text-xs">Hinh_Anh</code> và <code class="bg-[#F5EFEA] px-1 rounded text-xs">Hien_Thi</code> (nhập <code class="bg-[#F5EFEA] px-1 rounded text-xs">Có</code> để hiển thị ảnh khách đánh giá).
+          Mỗi bó hoa có thể dán <strong>nhiều link ảnh hoặc video</strong> vào ô <code class="bg-[#F5EFEA] px-1 rounded text-xs">Hinh_Anh</code>, ngăn cách nhau bằng dấu phẩy <code class="bg-[#F5EFEA] px-1 rounded text-xs">,</code>.
+          Tab <code class="bg-[#F7E7E9] px-1.5 py-0.5 rounded text-xs font-bold">Danh_Gia</code> dùng 2 cột <code class="bg-[#F5EFEA] px-1 rounded text-xs">Hinh_Anh</code> và <code class="bg-[#F5EFEA] px-1 rounded text-xs">Hien_Thi</code> (nhập <code class="bg-[#F5EFEA] px-1 rounded text-xs">Có</code> để hiển thị đánh giá).
         </p>
         <div class="flex flex-wrap gap-2.5 pt-1">
           <button onclick="downloadSampleCsv()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#5D7A63] hover:bg-[#4C6651] text-white text-sm font-bold transition-colors">
@@ -1397,12 +1475,109 @@
       return url;
     }
 
-    function parseImageList(rawCell) {
+    // ==================== NHẬN DIỆN & XỬ LÝ ĐA PHƯƠNG TIỆN (ẢNH + VIDEO) ====================
+    function extractDriveFileId(url) {
+      if (!url) return "";
+      const s = String(url);
+      const m1 = s.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (m1) return m1[1];
+      const m2 = s.match(/drive\.google\.com\/(?:open|uc|thumbnail)\?.*id=([a-zA-Z0-9_-]+)/);
+      if (m2) return m2[1];
+      const m3 = s.match(/lh3\.googleusercontent\.com\/d\/([a-zA-Z0-9_-]+)/);
+      if (m3) return m3[1];
+      return "";
+    }
+
+    function extractYoutubeId(url) {
+      if (!url) return "";
+      const s = String(url);
+      const m = s.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+      return m ? m[1] : "";
+    }
+
+    function parseMediaItem(rawUrl) {
+      if (!rawUrl) return null;
+      let clean = String(rawUrl).trim().replace(/^["']+|["']+$/g, "").trim();
+      if (!clean) return null;
+
+      let forceVideo = false;
+      if (/\/video\/?(\?.*)?$/i.test(clean)) {
+        forceVideo = true;
+        clean = clean.replace(/\/video\/?(\?.*)?$/i, "$1").trim();
+      } else if (/^video\s*:/i.test(clean)) {
+        forceVideo = true;
+        clean = clean.replace(/^video\s*:/i, "").trim();
+      }
+
+      const ytId = extractYoutubeId(clean);
+      if (ytId) {
+        return {
+          type: "video",
+          provider: "youtube",
+          id: ytId,
+          url: `https://www.youtube.com/embed/${ytId}?rel=0&playsinline=1`,
+          thumb: `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`,
+          origUrl: clean
+        };
+      }
+
+      const isDirectVideoExt = /\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i.test(clean);
+      const isGoogleVideoHost = /googlevideo\.com|cloudinary\.com\/.*\/video\/upload/i.test(clean);
+
+      if (isDirectVideoExt || isGoogleVideoHost) {
+        return {
+          type: "video",
+          provider: "direct",
+          url: clean,
+          thumb: "",
+          origUrl: clean
+        };
+      }
+
+      const driveId = extractDriveFileId(clean);
+      if (driveId && (forceVideo || /\/preview(\?|$)/i.test(clean))) {
+        return {
+          type: "video",
+          provider: "drive",
+          id: driveId,
+          url: `https://drive.google.com/file/d/${driveId}/preview`,
+          thumb: `https://drive.google.com/thumbnail?id=${driveId}&sz=w1000`,
+          origUrl: clean
+        };
+      }
+
+      if (forceVideo) {
+        return {
+          type: "video",
+          provider: "direct",
+          url: clean,
+          thumb: "",
+          origUrl: clean
+        };
+      }
+
+      const imgUrl = normalizeSingleImageUrl(clean);
+      if (!imgUrl) return null;
+      return {
+        type: "image",
+        provider: driveId ? "drive" : "direct",
+        id: driveId,
+        url: imgUrl,
+        thumb: imgUrl,
+        origUrl: clean
+      };
+    }
+
+    function parseMediaList(rawCell) {
       if (!rawCell) return [];
       return String(rawCell)
         .split(/[\n,;]+/)
-        .map(item => normalizeSingleImageUrl(item))
+        .map(item => parseMediaItem(item))
         .filter(Boolean);
+    }
+
+    function parseImageList(rawCell) {
+      return parseMediaList(rawCell).map(m => m.url);
     }
 
     function extractSheetInfo(url) {
@@ -1496,11 +1671,12 @@
           const cell = cells[idx];
           obj[h] = cell ? (cell.v !== null && cell.v !== undefined ? String(cell.v) : (cell.f || "")) : "";
         });
-        const imgUrl = normalizeSingleImageUrl(obj.hinhanh || obj.anh || obj.linkanh || obj.image || obj.img || "");
+        const rawMedia = obj.hinhanh || obj.anh || obj.video || obj.media || obj.linkanh || obj.image || obj.img || "";
+        const mediaItem = parseMediaItem(rawMedia);
         const showVal = normalizeHeaderKey(obj.hienthi || obj.hien || obj.show || obj.trangthai || "co");
         const isShown = ["co", "yes", "true", "1", "x", "hienthi", "active"].includes(showVal);
-        if (imgUrl && isShown) {
-          reviews.push({ id: reviews.length + 1, image: imgUrl });
+        if (mediaItem && isShown) {
+          reviews.push({ id: reviews.length + 1, image: mediaItem.url, media: mediaItem });
         }
       }
       return reviews;
@@ -1548,11 +1724,12 @@
         headers.forEach((h, idx) => {
           if (h) obj[h] = rows[i][idx] || "";
         });
-        const imgUrl = normalizeSingleImageUrl(obj.hinhanh || obj.anh || obj.linkanh || obj.image || obj.img || "");
+        const rawMedia = obj.hinhanh || obj.anh || obj.video || obj.media || obj.linkanh || obj.image || obj.img || "";
+        const mediaItem = parseMediaItem(rawMedia);
         const showVal = normalizeHeaderKey(obj.hienthi || obj.hien || obj.show || obj.trangthai || "co");
         const isShown = ["co", "yes", "true", "1", "x", "hienthi", "active"].includes(showVal);
-        if (imgUrl && isShown) {
-          reviews.push({ id: reviews.length + 1, image: imgUrl });
+        if (mediaItem && isShown) {
+          reviews.push({ id: reviews.length + 1, image: mediaItem.url, media: mediaItem });
         }
       }
       return reviews;
@@ -1656,8 +1833,9 @@
       const rawPrice = getField(["gia", "giaban", "giatien", "price"]).replace(/[^\d]/g, "");
       const price = rawPrice ? parseInt(rawPrice, 10) : 0;
       const category = getField(["danhmuc", "chude", "loaihoa", "loai", "category"]) || "Hoa lụa";
-      const rawImg = getField(["hinhanh", "anh", "linkanh", "image", "images", "img"]);
-      const images = parseImageList(rawImg);
+      const rawImg = getField(["hinhanh", "anh", "video", "media", "linkanh", "image", "images", "img"]);
+      const media = parseMediaList(rawImg);
+      const images = media.map(m => m.url);
       const description = getField(["mota", "chitiet", "ghichu", "description", "desc"]) || "Thiết kế hoa lụa cao cấp lưu giữ kỷ niệm từ Mai & More.";
       const status = getField(["trangthai", "tinhtrang", "status"]) || "Còn hàng";
       const featuredRaw = normalizeHeaderKey(getField(["noibat", "bestseller", "hot", "featured"]));
@@ -1668,6 +1846,7 @@
         name,
         price,
         category,
+        media,
         images,
         description,
         status,
@@ -1883,11 +2062,60 @@
       const grid = document.getElementById("products-grid");
 
       let html = pageItems.map(item => {
-        const coverImg = item.images && item.images.length > 0 ? item.images[0] : "";
+        const mediaList = item.media && item.media.length > 0
+          ? item.media
+          : (item.images || []).map(u => parseMediaItem(u)).filter(Boolean);
+        const coverMedia = mediaList.length > 0 ? mediaList[0] : null;
+        const hasAnyVideo = mediaList.some(m => m.type === "video");
 
         let statusBadgeClass = "bg-[#EEF3EF] text-[#5D7A63]";
         if (item.status.toLowerCase().includes("đặt")) statusBadgeClass = "bg-[#FEF3C7] text-[#92400E]";
         if (item.status.toLowerCase().includes("hết")) statusBadgeClass = "bg-[#FEE2E2] text-[#991B1B]";
+
+        let coverHtml = `
+          <div class="w-full h-full flex flex-col items-center justify-center text-[#B4A096] p-4 text-center">
+            <i data-lucide="image" class="w-7 h-7 mb-1 opacity-60"></i>
+            <span class="text-xs">Chưa có hình ảnh</span>
+          </div>
+        `;
+
+        if (coverMedia) {
+          if (coverMedia.type === "video" && coverMedia.provider === "direct") {
+            coverHtml = `
+              <video
+                src="${coverMedia.url}"
+                muted
+                loop
+                autoplay
+                playsinline
+                preload="metadata"
+                class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+              ></video>
+            `;
+          } else if (coverMedia.type === "video") {
+            coverHtml = `
+              <img
+                src="${coverMedia.thumb}"
+                data-orig-src="${coverMedia.thumb}"
+                alt="${item.name}"
+                referrerpolicy="no-referrer"
+                onerror="handleImageError(this)"
+                class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+              />
+            `;
+          } else {
+            coverHtml = `
+              <img
+                src="${coverMedia.url}"
+                data-orig-src="${coverMedia.url}"
+                alt="${item.name}"
+                referrerpolicy="no-referrer"
+                onerror="handleImageError(this)"
+                class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+              />
+            `;
+          }
+        }
 
         return `
           <article
@@ -1896,21 +2124,7 @@
           >
             <div>
               <div class="relative aspect-[3/4] sm:aspect-[4/3] bg-[#F5EFEA] overflow-hidden">
-                ${
-                  coverImg
-                    ? `<img
-                        src="${coverImg}"
-                        data-orig-src="${coverImg}"
-                        alt="${item.name}"
-                        referrerpolicy="no-referrer"
-                        onerror="handleImageError(this)"
-                        class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                      />`
-                    : `<div class="w-full h-full flex flex-col items-center justify-center text-[#B4A096] p-4 text-center">
-                        <i data-lucide="image" class="w-7 h-7 mb-1 opacity-60"></i>
-                        <span class="text-xs">Chưa có hình ảnh</span>
-                      </div>`
-                }
+                ${coverHtml}
 
                 <div class="absolute top-1.5 sm:top-2.5 left-1.5 sm:left-2.5 right-1.5 sm:right-2.5 flex items-center justify-between gap-1 pointer-events-none">
                   <span class="px-2 sm:px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-sm text-[10px] sm:text-[11px] font-bold text-[#54433B] shadow-sm truncate max-w-[65%]">
@@ -1926,10 +2140,18 @@
                   }
                 </div>
 
-                <div class="absolute bottom-1.5 sm:bottom-2.5 left-1.5 sm:left-2.5 flex items-center pointer-events-none">
+                <div class="absolute bottom-1.5 sm:bottom-2.5 left-1.5 sm:left-2.5 right-1.5 sm:right-2.5 flex items-center justify-between gap-1 pointer-events-none">
                   <span class="px-2 sm:px-2.5 py-0.5 rounded-full ${statusBadgeClass} text-[10px] sm:text-[11px] font-bold shadow-sm truncate">
                     ${item.status}
                   </span>
+                  ${
+                    hasAnyVideo
+                      ? `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-sm text-white text-[10px] sm:text-[11px] font-bold shadow-sm shrink-0">
+                          <i data-lucide="play" class="w-2.5 h-2.5 fill-white"></i>
+                          <span>Video</span>
+                        </span>`
+                      : ""
+                  }
                 </div>
               </div>
 
@@ -2104,54 +2326,120 @@
 
     function updateModalGallery() {
       if (!currentModalProduct) return;
-      const images = currentModalProduct.images && currentModalProduct.images.length > 0
-        ? currentModalProduct.images
-        : [""];
+      const mediaList = currentModalProduct.media && currentModalProduct.media.length > 0
+        ? currentModalProduct.media
+        : (currentModalProduct.images || []).map(u => parseMediaItem(u)).filter(Boolean);
 
-      if (currentModalImageIndex < 0) currentModalImageIndex = images.length - 1;
-      if (currentModalImageIndex >= images.length) currentModalImageIndex = 0;
+      const items = mediaList.length > 0 ? mediaList : [{ type: "image", url: "", thumb: "" }];
+
+      if (currentModalImageIndex < 0) currentModalImageIndex = items.length - 1;
+      if (currentModalImageIndex >= items.length) currentModalImageIndex = 0;
 
       resetZoom("product");
+      const currentMedia = items[currentModalImageIndex];
       const mainImg = document.getElementById("modal-main-img");
-      const currentSrc = images[currentModalImageIndex];
-      mainImg.removeAttribute("data-retry");
-      mainImg.setAttribute("data-orig-src", currentSrc);
-      mainImg.onerror = function () { handleImageError(this); };
-      mainImg.src = currentSrc || "";
+      const videoWrap = document.getElementById("modal-main-video-wrap");
+      const zoomToolbar = document.getElementById("product-zoom-toolbar");
+
+      if (currentMedia.type === "video") {
+        mainImg.classList.add("hidden");
+        if (zoomToolbar) zoomToolbar.classList.add("hidden");
+        videoWrap.classList.remove("hidden");
+        videoWrap.classList.add("flex");
+
+        if (currentMedia.provider === "direct") {
+          videoWrap.innerHTML = `
+            <video
+              src="${currentMedia.url}"
+              controls
+              autoplay
+              playsinline
+              class="w-full h-full max-h-full object-contain bg-black"
+            ></video>
+          `;
+        } else {
+          videoWrap.innerHTML = `
+            <iframe
+              src="${currentMedia.url}"
+              class="w-full h-full border-0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+              title="Video mẫu hoa ${currentModalProduct.name}"
+            ></iframe>
+          `;
+        }
+      } else {
+        videoWrap.innerHTML = "";
+        videoWrap.classList.add("hidden");
+        videoWrap.classList.remove("flex");
+        mainImg.classList.remove("hidden");
+        if (zoomToolbar) zoomToolbar.classList.remove("hidden");
+
+        const currentSrc = currentMedia.url;
+        mainImg.removeAttribute("data-retry");
+        mainImg.setAttribute("data-orig-src", currentSrc);
+        mainImg.onerror = function () { handleImageError(this); };
+        mainImg.src = currentSrc || "";
+      }
 
       const prevBtn = document.getElementById("modal-prev-btn");
       const nextBtn = document.getElementById("modal-next-btn");
       const counter = document.getElementById("modal-img-counter");
       const thumbContainer = document.getElementById("modal-thumbnails");
 
-      if (images.length > 1) {
+      if (items.length > 1) {
         prevBtn.classList.remove("hidden", "flex");
         prevBtn.classList.add("hidden", "md:flex");
         nextBtn.classList.remove("hidden", "flex");
         nextBtn.classList.add("hidden", "md:flex");
         counter.classList.remove("hidden");
-        counter.textContent = `${currentModalImageIndex + 1} / ${images.length}`;
+        counter.textContent = `${currentModalImageIndex + 1} / ${items.length}`;
 
         thumbContainer.classList.remove("hidden");
         thumbContainer.classList.add("flex");
-        thumbContainer.innerHTML = images.map((imgUrl, idx) => `
-          <button
-            type="button"
-            onclick="setModalImage(${idx})"
-            class="w-11 h-11 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl overflow-hidden border-2 shrink-0 transition-all ${
-              idx === currentModalImageIndex ? "border-[#9E5A63] scale-105 shadow-sm" : "border-transparent opacity-65 hover:opacity-100"
-            }"
-          >
-            <img
-              src="${imgUrl}"
-              data-orig-src="${imgUrl}"
-              referrerpolicy="no-referrer"
-              onerror="handleImageError(this)"
-              class="w-full h-full object-cover"
-              alt="Ảnh nhỏ ${idx + 1}"
-            />
-          </button>
-        `).join("");
+        thumbContainer.innerHTML = items.map((mItem, idx) => {
+          const isSelected = idx === currentModalImageIndex;
+          const borderCls = isSelected ? "border-[#9E5A63] scale-105 shadow-sm" : "border-transparent opacity-65 hover:opacity-100";
+
+          if (mItem.type === "video") {
+            const thumbContent = mItem.thumb
+              ? `<img src="${mItem.thumb}" data-orig-src="${mItem.thumb}" referrerpolicy="no-referrer" onerror="handleImageError(this)" class="w-full h-full object-cover" alt="Video ${idx + 1}" />`
+              : `<div class="w-full h-full bg-[#2D2420] flex items-center justify-center text-white"></div>`;
+            return `
+              <button
+                type="button"
+                onclick="setModalImage(${idx})"
+                class="relative w-11 h-11 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl overflow-hidden border-2 shrink-0 transition-all ${borderCls}"
+                title="Xem video ${idx + 1}"
+              >
+                ${thumbContent}
+                <span class="absolute inset-0 bg-black/30 flex items-center justify-center">
+                  <span class="w-5 h-5 rounded-full bg-white/90 text-[#9E5A63] flex items-center justify-center shadow">
+                    <i data-lucide="play" class="w-3 h-3 fill-[#9E5A63] ml-0.5"></i>
+                  </span>
+                </span>
+              </button>
+            `;
+          }
+
+          return `
+            <button
+              type="button"
+              onclick="setModalImage(${idx})"
+              class="w-11 h-11 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl overflow-hidden border-2 shrink-0 transition-all ${borderCls}"
+            >
+              <img
+                src="${mItem.url}"
+                data-orig-src="${mItem.url}"
+                referrerpolicy="no-referrer"
+                onerror="handleImageError(this)"
+                class="w-full h-full object-cover"
+                alt="Ảnh nhỏ ${idx + 1}"
+              />
+            </button>
+          `;
+        }).join("");
+        lucide.createIcons();
       } else {
         prevBtn.classList.add("hidden");
         prevBtn.classList.remove("flex", "md:flex");
@@ -2181,6 +2469,8 @@
 
     function hideProductModal() {
       resetZoom("product");
+      const videoWrap = document.getElementById("modal-main-video-wrap");
+      if (videoWrap) videoWrap.innerHTML = "";
       const modal = document.getElementById("product-modal");
       modal.classList.add("hidden");
       modal.classList.remove("flex");
@@ -2464,28 +2754,74 @@
       }
 
       if (emptyNote) emptyNote.classList.add("hidden");
-      track.innerHTML = customerReviews.map((rev, idx) => `
-        <button
-          type="button"
-          onclick="if(!reviewClickSuppressed) openReviewLightbox(${idx})"
-          draggable="false"
-          class="group shrink-0 snap-start w-[calc(50%-6px)] sm:w-56 aspect-[3/4] rounded-2xl overflow-hidden bg-white border border-[#EFE5DF] card-shadow card-shadow-hover transition-all duration-300 relative focus:outline-none"
-          aria-label="Phóng to ảnh đánh giá ${idx + 1}"
-        >
-          <img
-            src="${rev.image}"
-            data-orig-src="${rev.image}"
-            alt="Ảnh khách đánh giá ${idx + 1}"
-            referrerpolicy="no-referrer"
+      track.innerHTML = customerReviews.map((rev, idx) => {
+        const media = rev.media || parseMediaItem(rev.image);
+        const isVideo = media && media.type === "video";
+
+        let previewEl = "";
+        if (isVideo && media.provider === "direct") {
+          previewEl = `
+            <video
+              src="${media.url}"
+              muted
+              loop
+              autoplay
+              playsinline
+              preload="metadata"
+              class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 pointer-events-none"
+            ></video>
+          `;
+        } else if (isVideo) {
+          previewEl = `
+            <img
+              src="${media.thumb}"
+              data-orig-src="${media.thumb}"
+              alt="Video khách đánh giá ${idx + 1}"
+              referrerpolicy="no-referrer"
+              draggable="false"
+              onerror="handleImageError(this)"
+              class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 pointer-events-none"
+            />
+          `;
+        } else {
+          const imgSrc = media ? media.url : rev.image;
+          previewEl = `
+            <img
+              src="${imgSrc}"
+              data-orig-src="${imgSrc}"
+              alt="Ảnh khách đánh giá ${idx + 1}"
+              referrerpolicy="no-referrer"
+              draggable="false"
+              onerror="handleImageError(this)"
+              class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 pointer-events-none"
+            />
+          `;
+        }
+
+        const badgeIcon = isVideo
+          ? `<span class="absolute inset-0 flex items-center justify-center pointer-events-none">
+               <span class="w-11 h-11 rounded-full bg-black/55 backdrop-blur-sm text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                 <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
+               </span>
+             </span>
+             <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-black/65 text-white text-[10px] font-bold">Video</span>`
+          : `<span class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-white/90 text-[#54433B] shadow-sm flex items-center justify-center opacity-90 group-hover:scale-105 transition-transform">
+               <i data-lucide="zoom-in" class="w-4 h-4"></i>
+             </span>`;
+
+        return `
+          <button
+            type="button"
+            onclick="if(!reviewClickSuppressed) openReviewLightbox(${idx})"
             draggable="false"
-            onerror="handleImageError(this)"
-            class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 pointer-events-none"
-          />
-          <span class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-white/90 text-[#54433B] shadow-sm flex items-center justify-center opacity-90 group-hover:scale-105 transition-transform">
-            <i data-lucide="zoom-in" class="w-4 h-4"></i>
-          </span>
-        </button>
-      `).join("");
+            class="group shrink-0 snap-start w-[calc(50%-6px)] sm:w-56 aspect-[3/4] rounded-2xl overflow-hidden bg-white border border-[#EFE5DF] card-shadow card-shadow-hover transition-all duration-300 relative focus:outline-none"
+            aria-label="Xem đánh giá ${idx + 1}"
+          >
+            ${previewEl}
+            ${badgeIcon}
+          </button>
+        `;
+      }).join("");
 
       lucide.createIcons();
     }
@@ -2514,17 +2850,57 @@
       if (!customerReviews || customerReviews.length === 0) return;
       resetZoom("review");
       const item = customerReviews[currentReviewLightboxIdx];
+      const media = item.media || parseMediaItem(item.image);
+      const isVideo = media && media.type === "video";
+
       const imgEl = document.getElementById("review-lightbox-img");
+      const videoWrap = document.getElementById("review-lightbox-video-wrap");
       const counterEl = document.getElementById("review-lightbox-counter");
       const prevBtn = document.getElementById("review-lb-prev");
       const nextBtn = document.getElementById("review-lb-next");
 
-      if (imgEl) {
-        imgEl.removeAttribute("data-retry");
-        imgEl.setAttribute("data-orig-src", item.image);
-        imgEl.onerror = function () { handleImageError(this); };
-        imgEl.src = item.image;
+      if (isVideo && videoWrap) {
+        if (imgEl) imgEl.classList.add("hidden");
+        videoWrap.classList.remove("hidden");
+        videoWrap.classList.add("flex");
+
+        if (media.provider === "direct") {
+          videoWrap.innerHTML = `
+            <video
+              src="${media.url}"
+              controls
+              autoplay
+              playsinline
+              class="w-full h-full max-h-full object-contain bg-black"
+            ></video>
+          `;
+        } else {
+          videoWrap.innerHTML = `
+            <iframe
+              src="${media.url}"
+              class="w-full h-full border-0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+              title="Video khách đánh giá ${currentReviewLightboxIdx + 1}"
+            ></iframe>
+          `;
+        }
+      } else {
+        if (videoWrap) {
+          videoWrap.innerHTML = "";
+          videoWrap.classList.add("hidden");
+          videoWrap.classList.remove("flex");
+        }
+        if (imgEl) {
+          const src = media ? media.url : item.image;
+          imgEl.classList.remove("hidden");
+          imgEl.removeAttribute("data-retry");
+          imgEl.setAttribute("data-orig-src", src);
+          imgEl.onerror = function () { handleImageError(this); };
+          imgEl.src = src;
+        }
       }
+
       if (counterEl) {
         counterEl.textContent = `Đánh giá ${currentReviewLightboxIdx + 1} / ${customerReviews.length}`;
       }
@@ -2555,11 +2931,114 @@
 
     function hideReviewLightbox() {
       resetZoom("review");
+      const videoWrap = document.getElementById("review-lightbox-video-wrap");
+      if (videoWrap) videoWrap.innerHTML = "";
       const lb = document.getElementById("review-lightbox");
       if (lb) {
         lb.classList.add("hidden");
         lb.classList.remove("flex");
         document.body.style.overflow = "";
+      }
+    }
+
+    // ==================== TẠO & TẢI MÃ QR LIÊN KẾT TRANG WEB ====================
+    function getDefaultShareableUrl() {
+      if (appConfig.websiteUrl && String(appConfig.websiteUrl).trim()) {
+        return String(appConfig.websiteUrl).trim();
+      }
+      const loc = window.location.href.split("#")[0];
+      if (loc.startsWith("http://") || loc.startsWith("https://")) {
+        return loc;
+      }
+      return "https://mai-and-more.github.io";
+    }
+
+    function openQrModal() {
+      const modal = document.getElementById("qr-modal");
+      const input = document.getElementById("qr-url-input");
+      if (!modal || !input) return;
+
+      input.value = getDefaultShareableUrl();
+      updateQrCodeImage();
+
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      lucide.createIcons();
+    }
+
+    function closeQrModal() {
+      const modal = document.getElementById("qr-modal");
+      if (!modal) return;
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    function updateQrCodeImage() {
+      const input = document.getElementById("qr-url-input");
+      const img = document.getElementById("qr-code-img");
+      const caption = document.getElementById("qr-url-caption");
+      const shopCaption = document.getElementById("qr-shop-caption");
+      const warning = document.getElementById("qr-preview-warning");
+      if (!input || !img) return;
+
+      const rawUrl = input.value.trim() || getDefaultShareableUrl();
+      if (rawUrl.startsWith("http://") || rawUrl.startsWith("https://")) {
+        appConfig.websiteUrl = rawUrl;
+        try {
+          localStorage.setItem("mai_and_more_config_v4", JSON.stringify(appConfig));
+        } catch (e) {}
+      }
+
+      const isInternalPreview =
+        rawUrl.includes("usercontent.goog") ||
+        rawUrl.includes("localhost") ||
+        rawUrl.startsWith("blob:") ||
+        rawUrl.startsWith("file:");
+
+      if (warning) {
+        if (isInternalPreview) {
+          warning.classList.remove("hidden");
+        } else {
+          warning.classList.add("hidden");
+        }
+      }
+
+      if (shopCaption) {
+        shopCaption.textContent = `${appConfig.shopName} — Hoa Lụa Nghệ Thuật`;
+      }
+      if (caption) {
+        caption.textContent = rawUrl;
+      }
+
+      img.crossOrigin = "anonymous";
+      img.src = `https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=12&color=54433B&bgcolor=FDFBF7&data=${encodeURIComponent(rawUrl)}`;
+    }
+
+    function copyQrWebsiteUrl() {
+      const input = document.getElementById("qr-url-input");
+      if (!input) return;
+      fallbackCopyText(input.value.trim(), "Đã sao chép đường link trang web!");
+    }
+
+    async function downloadQrPng() {
+      const input = document.getElementById("qr-url-input");
+      const rawUrl = (input && input.value.trim()) || getDefaultShareableUrl();
+      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=900x900&margin=16&color=54433B&bgcolor=FDFBF7&data=${encodeURIComponent(rawUrl)}`;
+
+      try {
+        const res = await fetch(qrApiUrl);
+        const blob = await res.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = "ma-qr-tiem-hoa-mai-and-more.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+        showToast("Đã tải ảnh mã QR chất lượng cao về máy!");
+      } catch (e) {
+        window.open(qrApiUrl, "_blank", "noopener");
       }
     }
   </script>
