@@ -98,6 +98,55 @@
       will-change: transform;
       transform-origin: center center;
     }
+
+    /* Giao diện xem video: Máy tính giữ nguyên trình phát chuẩn, điện thoại ẩn nút & chạm để phát/tạm dừng */
+    .responsive-video-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .responsive-video-frame iframe.drive-video-embed,
+    .responsive-video-frame iframe.yt-video-embed {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    @media (max-width: 767px) {
+      .responsive-video-frame iframe.drive-video-embed {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 175%;
+        height: 175%;
+        transform: translate(-50%, -50%) scale(0.58);
+        transform-origin: center center;
+        pointer-events: none;
+      }
+
+      .responsive-video-frame iframe.yt-video-embed {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: calc(100% + 140px);
+        top: -70px;
+        pointer-events: none;
+      }
+
+      .responsive-video-frame video.direct-video-player {
+        pointer-events: none;
+      }
+
+      .responsive-video-frame video.direct-video-player::-webkit-media-controls {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body class="antialiased selection:bg-[#F7E7E9] selection:text-[#54433B]">
@@ -161,18 +210,18 @@
     }
 
     const DEFAULT_CONFIG = {
-  shopName: "Mai & More",
-  slogan: "More than flowers",
-  heroImage: "https://drive.google.com/file/d/1Q9mgXjc6Il3M4K4LGkf_tANMzJ5JrTH_/view?usp=sharing",
-  vaultToken: "A2BeCHV0HHVHBVNvZkxdeh9WQUhmQQVXdAR2YUFxBH19ewd0dmdABXNWe1M=",
-  zaloUrl: "https://zalo.me/0981011115",
-  facebookUrl: "https://www.facebook.com/mai.maiquynhhhh",
-  instagramUrl: "https://www.instagram.com/oomaichua/",
-  threadsUrl: "https://www.threads.com/@oomaichua?xmt=AQG0b0kRQtz-ABtPI9ZNva0KgucH6k_RdDUMj5vTGJXE-no",
-  phone: "0981011115",
-  orderHours: "Nhận đơn online cả ngày",
-  adminPin: "25100510"
-};
+      shopName: "Mai & More",
+      slogan: "More than flowers",
+      heroImage: "https://drive.google.com/file/d/1Q9mgXjc6Il3M4K4LGkf_tANMzJ5JrTH_/view?usp=sharing",
+      vaultToken: _0x5a2e[0],
+      zaloUrl: "https://zalo.me/0981011115",
+      facebookUrl: "https://www.facebook.com/mai.maiquynhhhh",
+      instagramUrl: "https://www.instagram.com/oomaichua/",
+      threadsUrl: "https://www.threads.com/@oomaichua?xmt=AQG0b0kRQtz-ABtPI9ZNva0KgucH6k_RdDUMj5vTGJXE-no",
+      phone: "0981011115",
+      orderHours: "Nhận đơn online cả ngày",
+      adminPin: "25100510"
+    };
   </script>
 
   <!-- ==================== HEADER ==================== -->
@@ -1449,7 +1498,7 @@
           type: "video",
           provider: "youtube",
           id: ytId,
-          url: `https://www.youtube.com/embed/${ytId}?rel=0&playsinline=1`,
+          url: `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&loop=1&playlist=${ytId}&rel=0&playsinline=1`,
           thumb: `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`,
           origUrl: clean
         };
@@ -1519,16 +1568,86 @@
       return [];
     }
 
+    function toggleMobileVideoPlay(overlayEl) {
+      const container = overlayEl.closest(".responsive-video-frame");
+      if (!container) return;
+      const badge = container.querySelector(".mobile-pause-badge");
+      const isPaused = container.getAttribute("data-paused") === "1";
+      const videoEl = container.querySelector("video.direct-video-player");
+      const iframeEl = container.querySelector("iframe");
+
+      if (videoEl) {
+        if (videoEl.paused) {
+          videoEl.play().catch(() => {});
+          container.setAttribute("data-paused", "0");
+          if (badge) badge.classList.add("hidden");
+        } else {
+          videoEl.pause();
+          container.setAttribute("data-paused", "1");
+          if (badge) badge.classList.remove("hidden");
+        }
+        return;
+      }
+
+      if (iframeEl) {
+        if (!isPaused) {
+          iframeEl.setAttribute("data-orig-src", iframeEl.src);
+          iframeEl.src = "about:blank";
+          container.setAttribute("data-paused", "1");
+          if (badge) badge.classList.remove("hidden");
+        } else {
+          const savedSrc = iframeEl.getAttribute("data-orig-src");
+          if (savedSrc) iframeEl.src = savedSrc;
+          container.setAttribute("data-paused", "0");
+          if (badge) badge.classList.add("hidden");
+        }
+      }
+    }
+
     function buildVideoPlayerHtml(mediaItem, autoplay = true) {
       if (!mediaItem) return "";
+      const mobileTapOverlay = `
+        <div
+          onclick="event.stopPropagation(); toggleMobileVideoPlay(this)"
+          class="md:hidden absolute inset-0 z-[5] flex items-center justify-center cursor-pointer"
+          aria-label="Chạm để tạm dừng hoặc phát tiếp"
+        >
+          <span class="mobile-pause-badge hidden w-12 h-12 rounded-full bg-black/60 text-white backdrop-blur-sm flex items-center justify-center shadow-lg">
+            <svg class="w-6 h-6 fill-white ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </div>
+      `;
+
       if (mediaItem.provider === "youtube") {
-        const autoParam = autoplay ? "&autoplay=1" : "";
-        return `<iframe src="${mediaItem.url}${autoParam}" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+        return `<div class="responsive-video-frame" data-paused="0"><iframe src="${mediaItem.url}" class="yt-video-embed" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>${mobileTapOverlay}</div>`;
       }
       if (mediaItem.provider === "drive") {
-        return `<iframe src="${mediaItem.url}" class="w-full h-full border-0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+        const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+        if (isMobile && mediaItem.id) {
+          const directStreamUrl = `https://drive.google.com/uc?export=download&id=${mediaItem.id}`;
+          const fallbackIframe = encodeURIComponent(
+            `<iframe src="${mediaItem.url}" class="drive-video-embed" allow="autoplay; fullscreen" allowfullscreen></iframe>`
+          );
+          return `
+            <div class="responsive-video-frame" data-paused="0">
+              <video
+                src="${directStreamUrl}"
+                poster="${mediaItem.thumb || ""}"
+                ${autoplay ? "autoplay" : ""}
+                muted
+                loop
+                playsinline
+                webkit-playsinline
+                onerror="const p=this.parentElement; if(p){ this.remove(); p.insertAdjacentHTML('afterbegin', decodeURIComponent('${fallbackIframe}')); }"
+                class="direct-video-player w-full h-full object-contain bg-black"
+              ></video>
+              ${mobileTapOverlay}
+            </div>
+          `;
+        }
+        return `<div class="responsive-video-frame" data-paused="0"><iframe src="${mediaItem.url}" class="drive-video-embed" allow="autoplay; fullscreen" allowfullscreen></iframe>${mobileTapOverlay}</div>`;
       }
-      return `<video src="${mediaItem.url}" controls ${autoplay ? "autoplay" : ""} playsinline class="max-w-full max-h-full w-auto h-auto object-contain bg-black"></video>`;
+      return `<div class="responsive-video-frame" data-paused="0"><video src="${mediaItem.url}" ${autoplay ? "autoplay" : ""} controls muted loop playsinline webkit-playsinline class="direct-video-player w-full h-full object-contain bg-black"></video>${mobileTapOverlay}</div>`;
     }
 
     function extractSheetInfo(url) {
@@ -1920,18 +2039,11 @@
       const container = document.getElementById("category-filters");
       const categories = ["Tất cả"];
 
-      if (isUsingSheetData && allProducts.length > 0) {
+      if (allProducts.length > 0) {
         const dynamicCats = [...new Set(
           allProducts.flatMap(p => (Array.isArray(p.categories) && p.categories.length > 0 ? p.categories : [p.category])).filter(Boolean)
         )];
         dynamicCats.forEach(c => {
-          if (!categories.includes(c)) categories.push(c);
-        });
-      } else if (allProducts.length > 0) {
-        const sampleCats = [...new Set(
-          allProducts.flatMap(p => (Array.isArray(p.categories) && p.categories.length > 0 ? p.categories : [p.category])).filter(Boolean)
-        )];
-        sampleCats.forEach(c => {
           if (!categories.includes(c)) categories.push(c);
         });
       }
