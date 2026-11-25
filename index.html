@@ -91,6 +91,8 @@
     /* Căn giữa dải ảnh nhỏ; nếu quá dài thì vẫn cuộn ngang được */
     #modal-thumbnails > :first-child { margin-left: auto; }
     #modal-thumbnails > :last-child { margin-right: auto; }
+    #review-thumbnails > :first-child { margin-left: auto; }
+    #review-thumbnails > :last-child { margin-right: auto; }
 
     .zoom-stage {
       touch-action: none;
@@ -354,15 +356,23 @@
   <path d="M243 98 C232 80 210 76 196 84 C203 102 226 109 243 98 Z" fill="#94B98A"/>
   <path d="M240 96 C226 90 212 86 200 84" fill="none" stroke="#DCEBD7" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- thân quả = bông hồng -->
-  <circle cx="240" cy="190" r="84" fill="url(#omc-plum)"/>
-  <!-- cánh hoa xoắn -->
-  <g fill="none" stroke="#BF4570" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
-    <path d="M240 192 c-9 -2 -10 -15 1 -17 c14 -2 21 12 12 23 c-13 15 -37 7 -39 -13 c-2 -23 24 -38 45 -27 c25 13 24 47 3 60"/>
-    <path d="M178 160 c8 -30 40 -50 72 -42"/>
-    <path d="M300 214 c-8 26 -34 42 -62 38"/>
+  <!-- bông hồng nhiều lớp cánh -->
+  <g fill="#F9A8C3" stroke="#E0678F" stroke-width="3">
+    <circle cx="240.0" cy="144.0" r="44"/>
+    <circle cx="283.7" cy="175.8" r="44"/>
+    <circle cx="267.0" cy="227.2" r="44"/>
+    <circle cx="213.0" cy="227.2" r="44"/>
+    <circle cx="196.3" cy="175.8" r="44"/>
   </g>
-  <path d="M184 215 c4 14 14 26 28 33" fill="none" stroke="#FFD3E1" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <g fill="#F47FA6" stroke="#D9577F" stroke-width="3">
+    <circle cx="254.1" cy="170.6" r="30"/>
+    <circle cx="262.8" cy="197.4" r="30"/>
+    <circle cx="240.0" cy="214.0" r="30"/>
+    <circle cx="217.2" cy="197.4" r="30"/>
+    <circle cx="225.9" cy="170.6" r="30"/>
+  </g>
+  <circle cx="240" cy="190" r="20" fill="#E2628C" stroke="#C24A74" stroke-width="3"/>
+  <path d="M240 190 c-6 0 -7 -8 0 -9 c9 -1 13 8 7 14" fill="none" stroke="#FFD3E1" stroke-width="3" stroke-linecap="round"/>
 
   <!-- đường muối ô mai -->
   <g fill="#FFFFFF" opacity="0.9">
@@ -377,8 +387,8 @@
   </g>
 
   <!-- hai cánh tay ôm quanh quả, hai bàn tay đan trước ngực -->
-  <path d="M338 140 C352 252 282 306 202 256" fill="none" stroke="#9E5A63" stroke-width="17" stroke-linecap="round"/>
-  <path d="M142 140 C128 252 198 306 278 256" fill="none" stroke="#B26E78" stroke-width="17" stroke-linecap="round"/>
+  <path d="M344 140 C358 252 282 306 202 256" fill="none" stroke="#9E5A63" stroke-width="17" stroke-linecap="round"/>
+  <path d="M136 140 C122 252 198 306 278 256" fill="none" stroke="#B26E78" stroke-width="17" stroke-linecap="round"/>
   <circle cx="202" cy="256" r="12" fill="#F7D7C8"/>
   <circle cx="278" cy="256" r="12" fill="#FBE3D6"/>
 
@@ -699,8 +709,8 @@
   </section>
 
   <!-- ==================== LIGHTBOX PHÓNG TO ẢNH / VIDEO ĐÁNH GIÁ ==================== -->
-  <div id="review-lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-2 sm:p-4" onclick="closeReviewLightbox(event)">
-    <div class="relative w-full md:w-[92vw] lg:w-[88vw] max-w-6xl bg-[#FDFBF7] rounded-2xl sm:rounded-3xl p-2.5 sm:p-4 border border-[#E8DCD4] shadow-2xl flex flex-col max-h-[94vh]" onclick="event.stopPropagation()">
+  <div id="review-lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-[#FDFBF7] md:bg-black/80 md:backdrop-blur-sm p-0 md:p-4" onclick="closeReviewLightbox(event)">
+    <div class="relative w-full h-[100dvh] md:h-auto md:w-[92vw] lg:w-[88vw] max-w-6xl bg-[#FDFBF7] rounded-none md:rounded-3xl p-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] sm:p-4 border-0 md:border border-[#E8DCD4] md:shadow-2xl flex flex-col md:max-h-[94vh]" onclick="event.stopPropagation()">
       <div class="flex items-center justify-between gap-2 px-1 sm:px-2 pb-2 border-b border-[#EFE5DF] shrink-0">
         <div class="flex items-center gap-2 min-w-0">
           <span id="review-lightbox-counter" class="text-xs sm:text-sm font-bold text-[#54433B] whitespace-nowrap">Đánh giá 1 / 1</span>
@@ -747,7 +757,7 @@
         </div>
       </div>
 
-      <div id="review-zoom-stage" class="zoom-stage relative mt-2.5 bg-[#F5EFEA] rounded-xl sm:rounded-2xl overflow-hidden flex items-center justify-center w-full h-[76vh] md:h-[82vh] cursor-grab">
+      <div id="review-zoom-stage" class="zoom-stage relative mt-2.5 bg-[#F5EFEA] rounded-xl sm:rounded-2xl overflow-hidden flex items-center justify-center w-full flex-1 min-h-0 md:flex-none md:h-[82vh] cursor-grab">
         <img
           id="review-lightbox-img"
           src=""
@@ -779,6 +789,9 @@
           <i data-lucide="chevron-right" class="w-5 h-5 sm:w-6 sm:h-6"></i>
         </button>
       </div>
+
+      <!-- Dải ảnh nhỏ các đánh giá -->
+      <div id="review-thumbnails" class="hidden items-center gap-2 pt-2.5 pb-0.5 overflow-x-auto justify-start shrink-0"></div>
     </div>
   </div>
 
@@ -3777,6 +3790,53 @@
       lucide.createIcons();
     }
 
+    function renderReviewThumbs() {
+      const box = document.getElementById("review-thumbnails");
+      if (!box) return;
+      if (!customerReviews || customerReviews.length <= 1) {
+        box.classList.add("hidden");
+        box.classList.remove("flex");
+        return;
+      }
+      box.classList.remove("hidden");
+      box.classList.add("flex");
+      if (box.dataset.count !== String(customerReviews.length)) {
+        box.dataset.count = String(customerReviews.length);
+        box.innerHTML = customerReviews.map((rv, idx) => {
+          const m = rv.media || parseMediaItem(rv.image);
+          const isVideo = m && m.type === "video";
+          const src = isVideo ? (m.thumb || "") : ((m && m.url) || rv.image || "");
+          return `
+            <button type="button" data-rv-idx="${idx}" onclick="jumpReviewLightbox(${idx})"
+              class="relative w-11 h-11 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl overflow-hidden border-2 shrink-0 transition-all bg-[#2A211E]"
+              aria-label="Xem đánh giá ${idx + 1}">
+              ${src
+                ? `<img src="${src}" data-orig-src="${src}" referrerpolicy="no-referrer" onerror="handleImageError(this)" class="w-full h-full object-cover" alt="Đánh giá ${idx + 1}" />`
+                : `<div class="w-full h-full flex items-center justify-center text-white"><i data-lucide="video" class="w-5 h-5"></i></div>`}
+              ${isVideo
+                ? `<span class="absolute inset-0 bg-black/30 flex items-center justify-center"><span class="w-5 h-5 rounded-full bg-white/90 text-[#9E5A63] flex items-center justify-center shadow"><i data-lucide="play" class="w-2.5 h-2.5 fill-[#9E5A63]"></i></span></span>`
+                : ""}
+            </button>`;
+        }).join("");
+        lucide.createIcons();
+      }
+      box.querySelectorAll("button[data-rv-idx]").forEach(btn => {
+        const active = Number(btn.dataset.rvIdx) === currentReviewLightboxIdx;
+        btn.classList.toggle("border-[#9E5A63]", active);
+        btn.classList.toggle("scale-105", active);
+        btn.classList.toggle("shadow-sm", active);
+        btn.classList.toggle("border-transparent", !active);
+        btn.classList.toggle("opacity-65", !active);
+        if (active) btn.scrollIntoView({ block: "nearest", inline: "center" });
+      });
+    }
+
+    function jumpReviewLightbox(idx) {
+      if (!customerReviews || idx === currentReviewLightboxIdx) return;
+      currentReviewLightboxIdx = idx;
+      updateReviewLightbox();
+    }
+
     function updateReviewLightbox() {
       if (!customerReviews || customerReviews.length === 0) return;
       resetZoom("review");
@@ -3821,6 +3881,7 @@
       if (counterEl) {
         counterEl.textContent = `Đánh giá ${currentReviewLightboxIdx + 1} / ${customerReviews.length}`;
       }
+      renderReviewThumbs();
       const hasMultiple = customerReviews.length > 1;
       [prevBtn, nextBtn].forEach(btn => {
         if (!btn) return;
