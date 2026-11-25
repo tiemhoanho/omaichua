@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mai &amp; More — Hoa Lụa Nghệ Thuật Lưu Giữ Kỷ Niệm</title>
+  <title>omaichua — Hoa Lụa Nghệ Thuật Lưu Giữ Kỷ Niệm</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
@@ -17,7 +17,7 @@
       color: #54433B;
     }
 
-    /* Bảng màu pastel dịu nhẹ, ấm áp đặc trưng của Mai & More */
+    /* Bảng màu pastel dịu nhẹ, ấm áp đặc trưng của omaichua */
     .pastel-gradient {
       background: linear-gradient(135deg, #FDFBF7 0%, #F7E7E9 55%, #F2EAE4 100%);
     }
@@ -152,6 +152,45 @@
       }
     }
 
+    /* Hiệu ứng động nút BUY NOW!: thẻ đung đưa như treo dây + nảy nhẹ + vòng sáng lan tỏa */
+    .buy-tag-svg {
+      position: relative;
+      transform-origin: 51% 25%;
+      animation:
+        buy-swing 2.6s ease-in-out infinite,
+        buy-hop 4.5s ease-in-out infinite;
+    }
+    .buy-tag-ring {
+      position: absolute;
+      left: 11.8%;
+      top: 17.4%;
+      width: 76.4%;
+      height: 73%;
+      border-radius: 9999px;
+      background: rgba(248, 142, 180, 0.55);
+      pointer-events: none;
+      animation: buy-ring 2.2s ease-out infinite;
+    }
+    @keyframes buy-swing {
+      0%, 100% { rotate: -7deg; }
+      50% { rotate: 7deg; }
+    }
+    @keyframes buy-hop {
+      0%, 78%, 100% { translate: 0 0; scale: 1; }
+      84% { translate: 0 -7px; scale: 1.08; }
+      90% { translate: 0 0; scale: 0.97; }
+      95% { translate: 0 -3px; scale: 1.03; }
+    }
+    @keyframes buy-ring {
+      0% { transform: scale(0.85); opacity: 0.65; }
+      80%, 100% { transform: scale(1.5); opacity: 0; }
+    }
+    #floating-contact-wrapper.open .buy-tag-svg { animation-play-state: paused; }
+    #floating-contact-wrapper.open .buy-tag-ring { display: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .buy-tag-svg, .buy-tag-ring { animation: none; }
+    }
+
     /* Hiệu ứng bung 4 logo liên hệ thành cung tròn quanh nút BUY NOW! ở góc phải dưới */
     .contact-arc-item {
       position: absolute;
@@ -265,7 +304,7 @@
           <rect width="600" height="600" fill="#F7E7E9"/>
           <circle cx="300" cy="260" r="70" fill="#FDFBF7" opacity="0.85"/>
           <text x="300" y="270" font-family="Times New Roman, serif" font-size="42" fill="#9E5A63" text-anchor="middle">❀</text>
-          <text x="300" y="370" font-family="Times New Roman, serif" font-size="22" fill="#54433B" text-anchor="middle">Mai &amp; More</text>
+          <text x="300" y="370" font-family="Times New Roman, serif" font-size="22" fill="#54433B" text-anchor="middle">omaichua</text>
           <text x="300" y="402" font-family="Times New Roman, serif" font-size="15" fill="#8E7970" text-anchor="middle">Ảnh mẫu hoa đang được cập nhật</text>
         </svg>
       `);
@@ -273,8 +312,8 @@
 
     // Mã PIN đã được băm một chiều (SHA-256), không lưu số gốc trong mã nguồn
     const DEFAULT_CONFIG = {
-      shopName: "Mai & More",
-      slogan: "More than flowers",
+      shopName: "omaichua",
+      slogan: "Mỗi bó hoa là một cái ôm",
       heroImage: "https://drive.google.com/file/d/1Q9mgXjc6Il3M4K4LGkf_tANMzJ5JrTH_/view?usp=sharing",
       vaultToken: "A2BeCHV0HHVHBVNvZkxdeh9WQUhmQQVXdAR2YUFxBH19ewd0dmdABXNWe1M=",
       zaloUrl: "https://zalo.me/0981011115",
@@ -295,18 +334,84 @@
     });
   </script>
 
+  <!-- Biểu tượng logo dùng chung (header + cửa sổ xem logo đầy đủ) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="omc-plum" cx="38%" cy="32%" r="75%">
+        <stop offset="0" stop-color="#FFB3CC"/><stop offset="0.55" stop-color="#F27AA0"/><stop offset="1" stop-color="#D9577F"/>
+      </radialGradient>
+    </defs>
+    <symbol id="omc-mark" viewBox="72 57 336 336">
+  <!-- nền tròn kem -->
+  <circle cx="240" cy="225" r="168" fill="#FDF1F3"/>
+  <circle cx="240" cy="225" r="168" fill="none" stroke="#EBCBD2" stroke-width="2" stroke-dasharray="2 9" stroke-linecap="round"/>
+
+  <g transform="translate(0 22)">
+  <!-- cuống + lá (quả ô mai) -->
+  <path d="M240 112 C240 96 246 84 258 74" fill="none" stroke="#54433B" stroke-width="6" stroke-linecap="round"/>
+  <path d="M252 88 C262 62 294 58 308 66 C302 92 274 102 252 88 Z" fill="#7FA877"/>
+  <path d="M256 86 C272 80 286 76 300 68" fill="none" stroke="#DCEBD7" stroke-width="2" stroke-linecap="round"/>
+  <path d="M243 98 C232 80 210 76 196 84 C203 102 226 109 243 98 Z" fill="#94B98A"/>
+  <path d="M240 96 C226 90 212 86 200 84" fill="none" stroke="#DCEBD7" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- thân quả = bông hồng -->
+  <circle cx="240" cy="190" r="84" fill="url(#omc-plum)"/>
+  <!-- cánh hoa xoắn -->
+  <g fill="none" stroke="#BF4570" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <path d="M240 192 c-9 -2 -10 -15 1 -17 c14 -2 21 12 12 23 c-13 15 -37 7 -39 -13 c-2 -23 24 -38 45 -27 c25 13 24 47 3 60"/>
+    <path d="M178 160 c8 -30 40 -50 72 -42"/>
+    <path d="M300 214 c-8 26 -34 42 -62 38"/>
+  </g>
+  <path d="M184 215 c4 14 14 26 28 33" fill="none" stroke="#FFD3E1" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- đường muối ô mai -->
+  <g fill="#FFFFFF" opacity="0.9">
+    <circle cx="190" cy="140" r="2.6"/><circle cx="212" cy="118" r="2"/><circle cx="276" cy="124" r="2.6"/>
+    <circle cx="300" cy="158" r="2"/><circle cx="168" cy="196" r="2.2"/><circle cx="312" cy="196" r="2.6"/>
+    <circle cx="226" cy="262" r="2"/><circle cx="262" cy="258" r="2.4"/><circle cx="288" cy="236" r="2"/>
+  </g>
+  <!-- lấp lánh -->
+  <g fill="#F5C26B">
+    <path d="M122 120 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 Z"/>
+    <path d="M360 100 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3 Z"/>
+  </g>
+
+  <!-- hai cánh tay ôm quanh quả, hai bàn tay đan trước ngực -->
+  <path d="M338 140 C352 252 282 306 202 256" fill="none" stroke="#9E5A63" stroke-width="17" stroke-linecap="round"/>
+  <path d="M142 140 C128 252 198 306 278 256" fill="none" stroke="#B26E78" stroke-width="17" stroke-linecap="round"/>
+  <circle cx="202" cy="256" r="12" fill="#F7D7C8"/>
+  <circle cx="278" cy="256" r="12" fill="#FBE3D6"/>
+
+  </g>
+
+    </symbol>
+  </svg>
+
+  <!-- ==================== XEM LOGO ĐẦY ĐỦ ==================== -->
+  <div id="logo-modal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4" onclick="if(event.target===this) closeLogoModal()">
+    <div class="relative bg-[#FDFBF7] rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-md px-4 pt-6 pb-5">
+      <button type="button" onclick="closeLogoModal()" aria-label="Đóng" class="absolute top-3 right-3 p-2 rounded-full bg-[#F5EFEA] hover:bg-[#EFE5DF] text-[#54433B]">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <svg viewBox="0 0 480 450" class="w-full h-auto block" role="img" aria-label="Logo omaichua">
+        <use href="#omc-mark" x="72" y="35" width="336" height="336"/>
+        <text x="240" y="428" text-anchor="middle" font-family="inherit" font-size="58" font-weight="700" fill="#54433B" letter-spacing="2">omaichua</text>
+      </svg>
+    </div>
+  </div>
+
   <!-- ==================== HEADER ==================== -->
   <header class="sticky top-0 z-40 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-[#EFE5DF]">
     <div class="max-w-5xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
-      <a href="#" class="flex items-center gap-2.5 sm:gap-3 group min-w-0">
-        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#F7E7E9] border border-[#E8CFD3] flex items-center justify-center text-[#9E5A63] shrink-0 transition-transform duration-300 group-hover:scale-105">
-          <i data-lucide="flower-2" class="w-4 h-4 sm:w-5 sm:h-5"></i>
-        </div>
-        <div class="min-w-0">
-          <span id="header-shop-name" class="block text-lg sm:text-2xl font-bold tracking-tight text-[#54433B] leading-none truncate">Mai &amp; More</span>
-          <span id="header-slogan" class="block text-[9px] sm:text-[11px] tracking-[0.1em] sm:tracking-[0.14em] uppercase text-[#8E7970] mt-1 truncate">More than flowers</span>
-        </div>
-      </a>
+      <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+        <button type="button" onclick="openLogoModal()" aria-label="Xem logo omaichua" title="Xem logo đầy đủ" class="w-11 h-11 sm:w-14 sm:h-14 shrink-0 rounded-full overflow-hidden transition-transform duration-300 hover:scale-105 active:scale-95 focus:outline-none">
+          <svg viewBox="0 0 336 336" class="w-full h-full block bg-[#FDF1F3]" aria-hidden="true"><use href="#omc-mark" x="-42" y="-42" width="420" height="420"/></svg>
+        </button>
+        <a href="#" class="block min-w-0">
+          <span id="header-shop-name" class="block text-lg sm:text-2xl font-bold tracking-tight text-[#54433B] leading-none truncate">omaichua</span>
+          <span id="header-slogan" class="block text-[9px] sm:text-[11px] tracking-[0.1em] sm:tracking-[0.14em] uppercase text-[#8E7970] mt-1 truncate">Mỗi bó hoa là một cái ôm</span>
+        </a>
+      </div>
 
       <nav class="hidden md:flex items-center gap-5 lg:gap-7 text-sm lg:text-base font-bold text-[#6E5B52]">
         <a href="#tam-huyet" class="hover:text-[#9E5A63] transition-colors whitespace-nowrap">Tâm huyết của tiệm</a>
@@ -396,7 +501,7 @@
           <img
             id="hero-img"
             src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1000&q=80"
-            alt="Bó hoa lụa nghệ thuật Mai & More"
+            alt="Bó hoa lụa nghệ thuật omaichua"
             referrerpolicy="no-referrer"
             onerror="handleImageError(this)"
             class="w-full h-full object-cover"
@@ -420,7 +525,7 @@
   <section id="tam-huyet" class="py-12 md:py-14 border-b border-[#EFE5DF] bg-[#FDFBF7]">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
-        <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#9E5A63]">Điều nhỏ xinh từ Mai &amp; More</span>
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#9E5A63]">Điều nhỏ xinh từ omaichua</span>
         <h2 class="text-2xl sm:text-3xl font-bold text-[#54433B] mt-1">Tâm Huyết Của Tiệm</h2>
       </div>
 
@@ -646,7 +751,7 @@
         <img
           id="review-lightbox-img"
           src=""
-          alt="Ảnh khách đánh giá Mai & More"
+          alt="Ảnh khách đánh giá omaichua"
           referrerpolicy="no-referrer"
           draggable="false"
           class="zoom-target max-w-full max-h-full w-auto h-auto object-contain select-none"
@@ -686,7 +791,7 @@
             <div class="w-9 h-9 rounded-full bg-[#F7E7E9] border border-[#E5C9CE] flex items-center justify-center text-[#9E5A63]">
               <i data-lucide="flower-2" class="w-4 h-4"></i>
             </div>
-            <span id="footer-shop-name" class="text-2xl font-bold text-[#54433B]">Mai &amp; More</span>
+            <span id="footer-shop-name" class="text-2xl font-bold text-[#54433B]">omaichua</span>
           </div>
           <p class="text-base text-[#6E5B52] mt-3 leading-relaxed">
             Chuyên thiết kế hoa lụa nghệ thuật lưu giữ kỷ niệm cho các dịp đặc biệt: tặng người yêu, tri ân thầy cô, sinh nhật và lễ kỷ niệm.
@@ -735,7 +840,7 @@
       </div>
 
       <div class="pt-6 flex items-center justify-between text-sm text-[#8E7970]">
-        <p>© 2026 <span id="copyright-shop-name">Mai &amp; More</span>. Gói trọn yêu thương trong từng cánh hoa.</p>
+        <p>© 2026 <span id="copyright-shop-name">omaichua</span>. Gói trọn yêu thương trong từng cánh hoa.</p>
         <button
           onclick="openAdminAccess()"
           title="Khu vực dành riêng cho chủ tiệm"
@@ -813,7 +918,8 @@
       aria-expanded="false"
       class="relative z-10 w-[68px] h-[68px] sm:w-[76px] sm:h-[76px] flex items-center justify-center transition-transform duration-300 hover:scale-105 active:scale-95 focus:outline-none drop-shadow-md"
     >
-      <svg viewBox="0 0 220 230" class="w-full h-full block overflow-visible" aria-hidden="true">
+      <span class="buy-tag-ring" aria-hidden="true"></span>
+      <svg viewBox="0 0 220 230" class="buy-tag-svg w-full h-full block overflow-visible" aria-hidden="true">
         <!-- Bóng đổ xanh đậm lệch dưới thẻ tròn -->
         <circle cx="110" cy="134" r="84" fill="#081C3A"/>
         <!-- Thân thẻ tròn màu hồng pastel -->
@@ -2591,7 +2697,7 @@
       const rawImg = getField(["hinhanh", "anh", "video", "media", "linkanh", "image", "images", "img"]);
       const media = parseMediaList(rawImg);
       const images = media.map(m => m.url);
-      const description = getField(["mota", "chitiet", "ghichu", "description", "desc"]) || "Thiết kế hoa lụa cao cấp lưu giữ kỷ niệm từ Mai & More.";
+      const description = getField(["mota", "chitiet", "ghichu", "description", "desc"]) || "Thiết kế hoa lụa cao cấp lưu giữ kỷ niệm từ omaichua.";
       const rawDimensions = getField(["kichthuoc", "size", "sizes", "dimensions", "dimension", "kichthuocbo"]);
       const dimensions = formatDimensionsText(rawDimensions);
       const status = getField(["trangthai", "tinhtrang", "status"]) || "Còn hàng";
@@ -3451,6 +3557,19 @@
       link.download = "mau-du-lieu-mai-and-more.csv";
       link.click();
     }
+
+    function openLogoModal() {
+      const m = document.getElementById("logo-modal");
+      m.classList.remove("hidden");
+      m.classList.add("flex");
+      lucide.createIcons();
+    }
+    function closeLogoModal() {
+      const m = document.getElementById("logo-modal");
+      m.classList.add("hidden");
+      m.classList.remove("flex");
+    }
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLogoModal(); });
 
     function toggleCard(el) {
       el.classList.toggle("active");
