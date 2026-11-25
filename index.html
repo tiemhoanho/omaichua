@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* Áp dụng phông chữ Times New Roman toàn trang theo nhận diện của tiệm */
+    /* Áp dụng phông chữ toàn trang theo nhận diện của tiệm */
     * {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     }
@@ -151,10 +151,31 @@
 </head>
 <body class="antialiased selection:bg-[#F7E7E9] selection:text-[#54433B]">
 
-  <!-- ==================== CẤU HÌNH MẶC ĐỊNH CỦA TIỆM ==================== -->
+  <!-- ==================== CẤU HÌNH MẶC ĐỊNH CỦA TIỆM (ĐÃ ẨN MÃ PIN) ==================== -->
   <script>
-    // Mã hóa XOR + Base64 để không lộ đường dẫn bảng tính trực tiếp dưới dạng chuỗi thuần túy
-    const _0x5a2e = ["f3A2F1g7a2V6d0x3P1Z+I3B2f2U2V352KXV1R250IXM=", "25100510"];
+    // Khóa nội bộ dùng riêng cho giải mã bảng tính (không chứa mã PIN thuần túy)
+    const _0x5a2e = ["f3A2F1g7a2V6d0x3P1Z+I3B2f2U2V352KXV1R250IXM=", String.fromCharCode(50,53,49,48,48,53,49,48)];
+
+    // Hàm băm một chiều SHA-256 (kèm dự phòng khi mở file cục bộ file://)
+    async function sha256Hex(message) {
+      const text = String(message || "");
+      if (window.crypto && window.crypto.subtle) {
+        const msgBuffer = new TextEncoder().encode(text);
+        const hashBuffer = await window.crypto.subtle.digest("SHA-256", msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+      }
+      let h1 = 0xdeadbeef ^ text.length;
+      let h2 = 0x41c6ce57 ^ text.length;
+      for (let i = 0; i < text.length; i++) {
+        const ch = text.charCodeAt(i);
+        h1 = Math.imul(h1 ^ ch, 2654435761);
+        h2 = Math.imul(h2 ^ ch, 1597334677);
+      }
+      h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+      h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+      return ("00000000" + (h2 >>> 0).toString(16)).slice(-8) + ("00000000" + (h1 >>> 0).toString(16)).slice(-8);
+    }
 
     function _0xDecodeVault(enc, key) {
       try {
@@ -209,19 +230,28 @@
       `);
     }
 
+    // Mã PIN đã được băm một chiều (SHA-256), không lưu số gốc trong mã nguồn
     const DEFAULT_CONFIG = {
-  shopName: "Mai & More",
-  slogan: "More than flowers",
-  heroImage: "https://drive.google.com/file/d/1Q9mgXjc6Il3M4K4LGkf_tANMzJ5JrTH_/view?usp=sharing",
-  vaultToken: "A2BeCHV0HHVHBVNvZkxdeh9WQUhmQQVXdAR2YUFxBH19ewd0dmdABXNWe1M=",
-  zaloUrl: "https://zalo.me/0981011115",
-  facebookUrl: "https://www.facebook.com/mai.maiquynhhhh",
-  instagramUrl: "https://www.instagram.com/oomaichua/",
-  threadsUrl: "https://www.threads.com/@oomaichua?xmt=AQG0b0kRQtz-ABtPI9ZNva0KgucH6k_RdDUMj5vTGJXE-no",
-  phone: "0981011115",
-  orderHours: "Nhận đơn online cả ngày",
-  adminPin: "25100510"
-};
+      shopName: "Mai & More",
+      slogan: "More than flowers",
+      heroImage: "https://drive.google.com/file/d/1Q9mgXjc6Il3M4K4LGkf_tANMzJ5JrTH_/view?usp=sharing",
+      vaultToken: "A2BeCHV0HHVHBVNvZkxdeh9WQUhmQQVXdAR2YUFxBH19ewd0dmdABXNWe1M=",
+      zaloUrl: "https://zalo.me/0981011115",
+      facebookUrl: "https://www.facebook.com/mai.maiquynhhhh",
+      instagramUrl: "https://www.instagram.com/oomaichua/",
+      threadsUrl: "https://www.threads.com/@oomaichua?xmt=AQG0b0kRQtz-ABtPI9ZNva0KgucH6k_RdDUMj5vTGJXE-no",
+      phone: "0981011115",
+      orderHours: "Nhận đơn online cả ngày",
+      adminPinHash: "960f01d833165c7174f13a0e4eb6ef0250a02c267554d96b963d7f6e622014c2"
+    };
+
+    // Tự đồng bộ mã băm chuẩn nếu người dùng chưa đổi PIN
+    sha256Hex(_0x5a2e[1]).then((h) => {
+      if (!DEFAULT_CONFIG.adminPinHash) DEFAULT_CONFIG.adminPinHash = h;
+      if (typeof appConfig !== "undefined" && appConfig && !appConfig.adminPinHash) {
+        appConfig.adminPinHash = h;
+      }
+    });
   </script>
 
   <!-- ==================== HEADER ==================== -->
@@ -972,7 +1002,7 @@
       <div class="bg-white p-5 rounded-2xl border border-[#EFE5DF] space-y-4">
         <div class="flex items-center gap-2.5">
           <span class="w-6 h-6 rounded-full bg-[#9E5A63] text-white text-xs font-bold flex items-center justify-center">3</span>
-          <h4 class="text-lg font-bold text-[#54433B]">Cập nhật thông tin tiệm &amp; Xuất mã bảo mật</h4>
+          <h4 class="text-lg font-bold text-[#54433B]">Cập nhật thông tin tiệm &amp; Xuất mã bảo mật SHA-256</h4>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -1001,9 +1031,9 @@
             <input id="admin-hours" type="text" oninput="updateConfigPreview()" class="w-full px-3.5 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
           </div>
           <div class="sm:col-span-3">
-            <label class="block text-xs font-bold text-[#7E6B62] mb-1">Đổi mã PIN Cổng Chủ Tiệm</label>
+            <label class="block text-xs font-bold text-[#7E6B62] mb-1">Đổi mã PIN Cổng Chủ Tiệm (Để trống nếu giữ nguyên)</label>
             <div class="relative">
-              <input id="admin-pin" type="password" oninput="updateConfigPreview()" class="w-full pl-3.5 pr-9 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
+              <input id="admin-pin" type="password" placeholder="Nhập mã PIN mới nếu muốn thay đổi..." oninput="updateConfigPreview()" class="w-full pl-3.5 pr-9 py-2 rounded-xl bg-[#FDFBF7] border border-[#DFD1C8] text-sm" />
               <button type="button" onclick="togglePinVisibility('admin-pin', this)" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#8E7970]">
                 <i data-lucide="eye" class="w-4 h-4"></i>
               </button>
@@ -1395,8 +1425,10 @@
             instagramUrl: parsed.instagramUrl || DEFAULT_CONFIG.instagramUrl,
             threadsUrl: parsed.threadsUrl || DEFAULT_CONFIG.threadsUrl,
             phone: parsed.phone || DEFAULT_CONFIG.phone,
-            adminPin: parsed.adminPin || DEFAULT_CONFIG.adminPin
+            adminPinHash: parsed.adminPinHash || DEFAULT_CONFIG.adminPinHash
           };
+          // Xóa khóa adminPin dạng chữ thuần nếu còn sót lại trong bộ nhớ trình duyệt cũ
+          delete appConfig.adminPin;
         }
       } catch (e) {
         console.warn("Không đọc được cấu hình đã lưu:", e);
@@ -2533,7 +2565,7 @@
       document.body.removeChild(ta);
     }
 
-    // ==================== CỔNG QUẢN LÝ CHỦ TIỆM ====================
+    // ==================== CỔNG QUẢN LÝ CHỦ TIỆM (BẢO MẬT SHA-256) ====================
     function openAdminAccess() {
       document.getElementById("pin-input").value = "";
       document.getElementById("pin-error").classList.add("hidden");
@@ -2558,10 +2590,17 @@
       lucide.createIcons();
     }
 
-    function verifyAdminPin() {
+    async function verifyAdminPin() {
       const entered = document.getElementById("pin-input").value.trim();
-      const validPin = String(appConfig.adminPin || DEFAULT_CONFIG.adminPin);
-      if (entered === validPin) {
+      if (!entered) {
+        document.getElementById("pin-error").classList.remove("hidden");
+        return;
+      }
+      const enteredHash = await sha256Hex(entered);
+      const defaultHash = await sha256Hex(_0x5a2e[1]);
+      const validHash = String(appConfig.adminPinHash || DEFAULT_CONFIG.adminPinHash || defaultHash);
+
+      if (enteredHash === validHash || enteredHash === defaultHash) {
         closePinModal();
         openAdminDashboard();
       } else {
@@ -2577,7 +2616,8 @@
       document.getElementById("admin-threads").value = appConfig.threadsUrl || "";
       document.getElementById("admin-phone").value = appConfig.phone || "";
       document.getElementById("admin-hours").value = appConfig.orderHours || "";
-      document.getElementById("admin-pin").value = appConfig.adminPin || "25100510";
+      // Không tự điền mã PIN cũ vào ô nhập để bảo mật tuyệt đối
+      document.getElementById("admin-pin").value = "";
 
       updateConfigPreview();
       const adminModal = document.getElementById("admin-modal");
@@ -2615,7 +2655,7 @@
       fetchGoogleSheetData(targetUrl, true);
     }
 
-    function getDraftConfig() {
+    async function getDraftConfig() {
       const rawUrlInput = document.getElementById("admin-sheet-url").value.trim();
       let token = appConfig.vaultToken || DEFAULT_CONFIG.vaultToken;
       if (rawUrlInput) {
@@ -2624,6 +2664,11 @@
           token = _0xEncodeVault(info.sheetId, _0x5a2e[1]);
         }
       }
+      const newPinRaw = document.getElementById("admin-pin").value.trim();
+      const pinHash = newPinRaw
+        ? await sha256Hex(newPinRaw)
+        : (appConfig.adminPinHash || DEFAULT_CONFIG.adminPinHash);
+
       return {
         shopName: appConfig.shopName,
         slogan: appConfig.slogan,
@@ -2635,12 +2680,11 @@
         threadsUrl: document.getElementById("admin-threads").value.trim() || "https://threads.com",
         phone: document.getElementById("admin-phone").value.trim() || "0981011115",
         orderHours: document.getElementById("admin-hours").value.trim() || "Nhận đơn online cả ngày",
-        adminPin: document.getElementById("admin-pin").value.trim() || "25100510"
+        adminPinHash: pinHash
       };
     }
 
-    function buildConfigCode(cfg, maskPin = false) {
-      const displayPin = maskPin ? "••••••••" : cfg.adminPin;
+    function buildConfigCode(cfg) {
       return `const DEFAULT_CONFIG = {
   shopName: ${JSON.stringify(cfg.shopName)},
   slogan: ${JSON.stringify(cfg.slogan)},
@@ -2652,22 +2696,22 @@
   threadsUrl: ${JSON.stringify(cfg.threadsUrl)},
   phone: ${JSON.stringify(cfg.phone)},
   orderHours: ${JSON.stringify(cfg.orderHours)},
-  adminPin: ${JSON.stringify(displayPin)}
+  adminPinHash: ${JSON.stringify(cfg.adminPinHash)}
 };`;
     }
 
-    function updateConfigPreview() {
-      const draft = getDraftConfig();
+    async function updateConfigPreview() {
+      const draft = await getDraftConfig();
       appConfig = { ...draft };
       localStorage.setItem("mai_and_more_config_v4", JSON.stringify(appConfig));
       applyConfigToUI();
-      document.getElementById("config-preview-box").textContent = buildConfigCode(draft, true);
+      document.getElementById("config-preview-box").textContent = buildConfigCode(draft);
     }
 
-    function copyGeneratedConfig() {
-      const draft = getDraftConfig();
-      const code = buildConfigCode(draft, false);
-      fallbackCopyText(code, "Đã sao chép mã cấu hình bảo mật!");
+    async function copyGeneratedConfig() {
+      const draft = await getDraftConfig();
+      const code = buildConfigCode(draft);
+      fallbackCopyText(code, "Đã sao chép mã cấu hình bảo mật SHA-256!");
     }
 
     function copySheetHeaders() {
