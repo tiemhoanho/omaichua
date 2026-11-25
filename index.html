@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>omaichua — Hoa Lụa Nghệ Thuật Lưu Giữ Kỷ Niệm</title>
+  <title>omaichua</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
@@ -323,7 +323,7 @@
       instagramUrl: "https://www.instagram.com/oomaichua/",
       threadsUrl: "https://www.threads.com/@oomaichua?xmt=AQG0b0kRQtz-ABtPI9ZNva0KgucH6k_RdDUMj5vTGJXE-no",
       phone: "0981011115",
-      orderHours: "Nhận đơn online cả ngày",
+      orderHours: "Nhận đơn cả ngày",
       adminPinHash: "960f01d833165c7174f13a0e4eb6ef0250a02c267554d96b963d7f6e622014c2"
     };
 
@@ -339,59 +339,62 @@
   <!-- Biểu tượng logo dùng chung (header + cửa sổ xem logo đầy đủ) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <defs>
-      <radialGradient id="omc-plum" cx="38%" cy="32%" r="75%">
-        <stop offset="0" stop-color="#FFB3CC"/><stop offset="0.55" stop-color="#F27AA0"/><stop offset="1" stop-color="#D9577F"/>
-      </radialGradient>
+    <linearGradient id="omc-fadeTop" gradientUnits="userSpaceOnUse" x1="0" y1="178" x2="0" y2="238">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="1"/>
+    </linearGradient>
+    <mask id="omc-armFade" maskUnits="userSpaceOnUse" x="0" y="100" width="480" height="300">
+      <rect x="0" y="178" width="480" height="60" fill="url(#omc-fadeTop)"/>
+      <rect x="0" y="238" width="480" height="170" fill="#fff"/>
+    </mask>
     </defs>
-    <symbol id="omc-mark" viewBox="72 57 336 336">
-  <!-- nền tròn kem -->
-  <circle cx="240" cy="225" r="168" fill="#FDF1F3"/>
-  <circle cx="240" cy="225" r="168" fill="none" stroke="#EBCBD2" stroke-width="2" stroke-dasharray="2 9" stroke-linecap="round"/>
-
-  <g transform="translate(0 22)">
-  <!-- cuống + lá (quả ô mai) -->
-  <path d="M240 112 C240 96 246 84 258 74" fill="none" stroke="#54433B" stroke-width="6" stroke-linecap="round"/>
-  <path d="M252 88 C262 62 294 58 308 66 C302 92 274 102 252 88 Z" fill="#7FA877"/>
-  <path d="M256 86 C272 80 286 76 300 68" fill="none" stroke="#DCEBD7" stroke-width="2" stroke-linecap="round"/>
-  <path d="M243 98 C232 80 210 76 196 84 C203 102 226 109 243 98 Z" fill="#94B98A"/>
-  <path d="M240 96 C226 90 212 86 200 84" fill="none" stroke="#DCEBD7" stroke-width="2" stroke-linecap="round"/>
-
-  <!-- bông hồng nhiều lớp cánh -->
-  <g fill="#F9A8C3" stroke="#E0678F" stroke-width="3">
-    <circle cx="240.0" cy="144.0" r="44"/>
-    <circle cx="283.7" cy="175.8" r="44"/>
-    <circle cx="267.0" cy="227.2" r="44"/>
-    <circle cx="213.0" cy="227.2" r="44"/>
-    <circle cx="196.3" cy="175.8" r="44"/>
+    <symbol id="omc-mark" viewBox="90 126 300 300">
+<g transform="translate(0 92)">
+  <!-- lá + cuống -->
+  <g stroke="#3B3B40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M240 186 C238 206 240 224 242 246" fill="none"/>
+    <path d="M239 214 C222 214 205 206 196 190 C214 186 232 196 239 214 Z" fill="#8E9096" fill-opacity="0.55"/>
+    <path d="M241 206 C256 196 270 180 284 168 C288 186 270 204 241 206 Z" fill="#8E9096" fill-opacity="0.55"/>
   </g>
-  <g fill="#F47FA6" stroke="#D9577F" stroke-width="3">
-    <circle cx="254.1" cy="170.6" r="30"/>
-    <circle cx="262.8" cy="197.4" r="30"/>
-    <circle cx="240.0" cy="214.0" r="30"/>
-    <circle cx="217.2" cy="197.4" r="30"/>
-    <circle cx="225.9" cy="170.6" r="30"/>
-  </g>
-  <circle cx="240" cy="190" r="20" fill="#E2628C" stroke="#C24A74" stroke-width="3"/>
-  <path d="M240 190 c-6 0 -7 -8 0 -9 c9 -1 13 8 7 14" fill="none" stroke="#FFD3E1" stroke-width="3" stroke-linecap="round"/>
-
-  <!-- đường muối ô mai -->
-  <g fill="#FFFFFF" opacity="0.9">
-    <circle cx="190" cy="140" r="2.6"/><circle cx="212" cy="118" r="2"/><circle cx="276" cy="124" r="2.6"/>
-    <circle cx="300" cy="158" r="2"/><circle cx="168" cy="196" r="2.2"/><circle cx="312" cy="196" r="2.6"/>
-    <circle cx="226" cy="262" r="2"/><circle cx="262" cy="258" r="2.4"/><circle cx="288" cy="236" r="2"/>
-  </g>
-  <!-- lấp lánh -->
-  <g fill="#F5C26B">
-    <path d="M122 120 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 Z"/>
-    <path d="M360 100 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3 Z"/>
+  <g stroke="#3B3B40" stroke-width="1.4" stroke-linecap="round" fill="none">
+    <path d="M238 213 C226 208 212 200 202 192"/>
+    <path d="M242 205 C254 198 266 188 278 174"/>
   </g>
 
-  <!-- hai cánh tay ôm quanh quả, hai bàn tay đan trước ngực -->
-  <path d="M344 140 C358 252 282 306 202 256" fill="none" stroke="#9E5A63" stroke-width="17" stroke-linecap="round"/>
-  <path d="M136 140 C122 252 198 306 278 256" fill="none" stroke="#B26E78" stroke-width="17" stroke-linecap="round"/>
-  <circle cx="202" cy="256" r="12" fill="#F7D7C8"/>
-  <circle cx="278" cy="256" r="12" fill="#FBE3D6"/>
+  <!-- bông hồng -->
+  <g stroke="#3B3B40" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M190 128 C186 96 212 76 240 78 C270 76 296 98 292 130 C289 162 264 188 240 188 C214 188 193 162 190 128 Z" fill="#F0A9B6" fill-opacity="0.8"/>
+    <path d="M198 108 C214 90 246 88 262 100 C250 110 214 114 198 108 Z" fill="#F6C6A9" fill-opacity="0.85"/>
+    <path d="M200 134 C204 160 224 176 246 176 C262 176 278 164 286 148 C280 168 262 184 240 184 C220 184 202 164 200 134 Z" fill="#E88CA2" fill-opacity="0.55" stroke="none"/>
+  </g>
+  <g stroke="#3B3B40" stroke-width="2" stroke-linecap="round" fill="none">
+    <path d="M241 128 C231 126 229 112 241 110 C256 108 262 124 252 136 C240 150 216 142 214 124 C212 104 236 92 254 100"/>
+    <path d="M214 124 C210 146 224 164 244 166 C262 168 276 156 280 140"/>
+    <path d="M262 100 C282 104 292 118 288 136"/>
+    <path d="M196 120 C198 140 208 156 224 168"/>
+  </g>
+  </g>
 
+  <!-- tay phải (phía sau) -->
+  <g transform="translate(480 10) scale(-1 1)">
+    <g mask="url(#omc-armFade)">
+      <path d="M128 190 C108 296 158 370 244 350" fill="none" stroke="#3B3B40" stroke-width="35" stroke-linecap="round"/>
+      <path d="M128 190 C108 296 158 370 244 350" fill="none" stroke="#F6CDB3" stroke-width="31" stroke-linecap="round"/>
+      <path d="M138 214 C124 292 164 346 236 334" fill="none" stroke="#FBE3D2" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
+    </g>
+    <ellipse cx="258" cy="347" rx="27" ry="18.5" transform="rotate(-8 258 347)" fill="#F6CDB3" stroke="#3B3B40" stroke-width="2.2"/>
+    <path d="M262 331 C272 336 276 346 272 356" fill="none" stroke="#3B3B40" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M249 332 C259 338 263 348 259 359" fill="none" stroke="#3B3B40" stroke-width="1.8" stroke-linecap="round"/>
+  </g>
+  <!-- tay trái (phía trước) -->
+  <g>
+    <g mask="url(#omc-armFade)">
+      <path d="M128 190 C108 296 158 370 244 350" fill="none" stroke="#3B3B40" stroke-width="35" stroke-linecap="round"/>
+      <path d="M128 190 C108 296 158 370 244 350" fill="none" stroke="#F6CDB3" stroke-width="31" stroke-linecap="round"/>
+      <path d="M138 214 C124 292 164 346 236 334" fill="none" stroke="#FBE3D2" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
+    </g>
+    <ellipse cx="258" cy="347" rx="27" ry="18.5" transform="rotate(-8 258 347)" fill="#F6CDB3" stroke="#3B3B40" stroke-width="2.2"/>
+    <path d="M262 331 C272 336 276 346 272 356" fill="none" stroke="#3B3B40" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M249 332 C259 338 263 348 259 359" fill="none" stroke="#3B3B40" stroke-width="1.8" stroke-linecap="round"/>
   </g>
 
     </symbol>
@@ -403,9 +406,10 @@
       <button type="button" onclick="closeLogoModal()" aria-label="Đóng" class="absolute top-3 right-3 p-2 rounded-full bg-[#F5EFEA] hover:bg-[#EFE5DF] text-[#54433B]">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
-      <svg viewBox="0 0 480 450" class="w-full h-auto block" role="img" aria-label="Logo omaichua">
-        <use href="#omc-mark" x="72" y="35" width="336" height="336"/>
-        <text x="240" y="428" text-anchor="middle" font-family="inherit" font-size="58" font-weight="700" fill="#54433B" letter-spacing="2">omaichua</text>
+      <svg viewBox="30 150 420 380" class="w-full h-auto block" role="img" aria-label="Logo Ôm Ai Chưa omaichua">
+        <use href="#omc-mark" x="90" y="126" width="300" height="300"/>
+        <text x="240" y="452" text-anchor="middle" font-family="'Cormorant Garamond','Playfair Display',Georgia,'Times New Roman',serif" font-size="62" font-weight="600" letter-spacing="2"><tspan fill="#F0A58B">ÔM AI</tspan> <tspan fill="#3B3B40">CHƯA</tspan></text>
+        <text x="240" y="504" text-anchor="middle" font-family="'Montserrat','Helvetica Neue',Arial,sans-serif" font-size="26" font-weight="300" letter-spacing="11" fill="#4A4A50">OMAICHUA</text>
       </svg>
     </div>
   </div>
@@ -415,7 +419,7 @@
     <div class="max-w-5xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
       <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
         <button type="button" onclick="openLogoModal()" aria-label="Xem logo omaichua" title="Xem logo đầy đủ" class="w-11 h-11 sm:w-14 sm:h-14 shrink-0 rounded-full overflow-hidden transition-transform duration-300 hover:scale-105 active:scale-95 focus:outline-none">
-          <svg viewBox="0 0 336 336" class="w-full h-full block bg-[#FDF1F3]" aria-hidden="true"><use href="#omc-mark" x="-42" y="-42" width="420" height="420"/></svg>
+          <svg viewBox="0 0 300 300" class="w-full h-full block bg-[#FDF1F3]" aria-hidden="true"><use href="#omc-mark" width="300" height="300"/></svg>
         </button>
         <a href="#" class="block min-w-0">
           <span id="header-shop-name" class="block text-lg sm:text-2xl font-bold tracking-tight text-[#54433B] leading-none truncate">omaichua</span>
@@ -460,11 +464,6 @@
   <section id="hero" class="pastel-gradient border-b border-[#EFE5DF] overflow-hidden">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
       <div class="lg:col-span-6 space-y-6">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#E8D8D2] text-xs font-bold tracking-wider uppercase text-[#8B6B61]">
-          <i data-lucide="heart" class="w-3.5 h-3.5 text-[#C07A84] fill-[#C07A84]"></i>
-          <span>Hoa lụa nghệ thuật lưu giữ kỷ niệm</span>
-        </div>
-
         <h1 class="text-4xl sm:text-5xl font-bold text-[#54433B] leading-[1.18]">
           Gói Trọn Yêu Thương Trong Từng Cánh Hoa Mềm
         </h1>
@@ -807,7 +806,7 @@
             <span id="footer-shop-name" class="text-2xl font-bold text-[#54433B]">omaichua</span>
           </div>
           <p class="text-base text-[#6E5B52] mt-3 leading-relaxed">
-            Chuyên thiết kế hoa lụa nghệ thuật lưu giữ kỷ niệm cho các dịp đặc biệt: tặng người yêu, tri ân thầy cô, sinh nhật và lễ kỷ niệm.
+            Chuyên thiết kế hoa lụa cho các dịp đặc biệt: tặng người yêu, tri ân thầy cô, sinh nhật và lễ kỷ niệm.
           </p>
         </div>
 
@@ -952,7 +951,7 @@
   </div>
 
   <!-- ==================== MODAL CHI TIẾT MẪU HOA ==================== -->
-  <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-[#FDFBF7] md:bg-black/65 md:backdrop-blur-sm p-0 md:px-14 lg:px-16 md:py-4" onclick="closeProductModal(event)">
+  <div id="product-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-[#FDFBF7] md:bg-black/65 md:backdrop-blur-sm p-0 md:px-14 lg:px-16 md:py-4" onclick="closeProductModal(event)">
     <button
       id="modal-prev-product-btn"
       type="button"
@@ -1414,7 +1413,7 @@
       <!-- Chân giỏ hàng: Tổng tiền (đưa lên trên) + Lời nhắn thiệp + Chốt đơn -->
       <div id="cart-footer" class="p-4 sm:p-5 border-t border-[#EFE5DF] bg-white space-y-3 shrink-0">
         <div class="flex items-center justify-between pb-2.5 border-b border-[#F5ECE6]">
-          <span class="text-sm font-bold text-[#6E5B52]">Tạm tính đơn hoa:</span>
+          <span class="text-sm font-bold text-[#6E5B52]">Tạm tính (mẫu đã chọn):</span>
           <span id="cart-total-price" class="text-xl font-bold text-[#9E5A63]">0đ</span>
         </div>
 
@@ -1433,12 +1432,13 @@
 
         <div>
           <button
+            id="cart-copy-btn"
             type="button"
             onclick="copyCartOrderAndNotify()"
             class="w-full py-3 px-4 rounded-full bg-[#54433B] hover:bg-[#3F312B] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-sm transition-colors"
           >
             <i data-lucide="copy" class="w-4 h-4 shrink-0"></i>
-            <span class="truncate">Sao chép đơn hàng để gửi tiệm</span>
+            <span id="cart-copy-label" class="truncate">Sao chép đơn hàng để gửi tiệm</span>
           </button>
         </div>
       </div>
@@ -1557,6 +1557,7 @@
     let selectedCategory = "Tất cả";
     let currentPage = 1;
     let currentModalProduct = null;
+    let modalNavSource = "shop"; // "shop" = danh sách cửa hàng, "cart" = các mẫu trong giỏ
     let currentModalImageIndex = 0;
 
     // Trạng thái Yêu thích & Giỏ hàng (lưu cục bộ trên trình duyệt của khách)
@@ -1686,6 +1687,7 @@
       if (existing) {
         existing.qty += 1;
         existing.price = product.price;
+        existing.selected = true;
       } else {
         cartItems.push({
           key,
@@ -1693,7 +1695,8 @@
           name: product.name,
           price: product.price,
           thumb,
-          qty: 1
+          qty: 1,
+          selected: true
         });
       }
 
@@ -1748,6 +1751,39 @@
       renderCartDrawer();
     }
 
+    function isCartItemSelected(item) {
+      return item.selected !== false;
+    }
+
+    function getSelectedCartItems() {
+      return cartItems.filter(isCartItemSelected);
+    }
+
+    function toggleCartItemSelected(index) {
+      if (index < 0 || index >= cartItems.length) return;
+      cartItems[index].selected = !isCartItemSelected(cartItems[index]);
+      saveCartState();
+      renderCartDrawer();
+    }
+
+    function toggleCartSelectAll() {
+      const allSelected = cartItems.length > 0 && cartItems.every(isCartItemSelected);
+      cartItems.forEach(item => { item.selected = !allSelected; });
+      saveCartState();
+      renderCartDrawer();
+    }
+
+    function openCartProduct(index) {
+      const item = cartItems[index];
+      if (!item) return;
+      const product = allProducts.find(p => p.id === item.id);
+      if (!product) {
+        showToast("Mẫu hoa này hiện không còn trong cửa hàng.");
+        return;
+      }
+      openProductModal(product.id, "cart");
+    }
+
     function removeCartItem(index) {
       if (index < 0 || index >= cartItems.length) return;
       cartItems.splice(index, 1);
@@ -1794,13 +1830,30 @@
       const totalEl = document.getElementById("cart-total-price");
       const footer = document.getElementById("cart-footer");
       const clearBtn = document.getElementById("cart-clear-btn");
+      const copyBtn = document.getElementById("cart-copy-btn");
+      const copyLabel = document.getElementById("cart-copy-label");
       if (!container) return;
 
-      const totalQty = cartItems.reduce((sum, item) => sum + item.qty, 0);
-      const totalPrice = cartItems.reduce((sum, item) => sum + (Number(item.price) || 0) * item.qty, 0);
+      const selectedItems = getSelectedCartItems();
+      const selQty = selectedItems.reduce((sum, item) => sum + item.qty, 0);
+      const totalPrice = selectedItems.reduce((sum, item) => sum + (Number(item.price) || 0) * item.qty, 0);
 
-      if (subtitle) subtitle.textContent = `${totalQty} bó hoa đang được chọn`;
+      if (subtitle) {
+        subtitle.textContent = cartItems.length === 0
+          ? "0 bó hoa đang được chọn"
+          : `${selQty} bó · ${selectedItems.length}/${cartItems.length} loại hoa được chọn`;
+      }
       if (totalEl) totalEl.textContent = formatVND(totalPrice);
+
+      if (copyBtn && copyLabel) {
+        const none = selectedItems.length === 0;
+        copyBtn.disabled = none;
+        copyBtn.classList.toggle("opacity-50", none);
+        copyBtn.classList.toggle("cursor-not-allowed", none);
+        copyLabel.textContent = none
+          ? "Hãy tích chọn mẫu hoa muốn đặt"
+          : `Sao chép đơn hàng (${selQty} bó) để gửi tiệm`;
+      }
 
       if (cartItems.length === 0) {
         if (clearBtn) clearBtn.classList.add("hidden");
@@ -1830,19 +1883,40 @@
       if (clearBtn) clearBtn.classList.remove("hidden");
       if (footer) footer.classList.remove("hidden");
 
-      container.innerHTML = cartItems.map((item, idx) => `
-        <div class="bg-white p-3 rounded-2xl border border-[#EFE5DF] card-shadow flex items-center gap-3">
-          <div class="w-16 h-20 rounded-xl overflow-hidden bg-[#F5EFEA] shrink-0 border border-[#EAE0D9]">
+      const allSelected = cartItems.every(isCartItemSelected);
+      const checkBox = (checked) => `
+        <span class="w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-colors ${checked ? "bg-[#9E5A63] border-[#9E5A63] text-white" : "bg-white border-[#CDBBB1] text-transparent"}">
+          <i data-lucide="check" class="w-3.5 h-3.5"></i>
+        </span>`;
+
+      const selectAllRow = `
+        <button type="button" onclick="toggleCartSelectAll()" class="w-full flex items-center gap-2.5 px-1 py-1 text-left" aria-pressed="${allSelected}">
+          ${checkBox(allSelected)}
+          <span class="text-xs sm:text-sm font-bold text-[#54433B]">Chọn tất cả</span>
+          <span class="text-xs text-[#8E7970]">(${selectedItems.length}/${cartItems.length} loại)</span>
+        </button>`;
+
+      container.innerHTML = selectAllRow + cartItems.map((item, idx) => {
+        const checked = isCartItemSelected(item);
+        return `
+        <div class="bg-white p-3 rounded-2xl border ${checked ? "border-[#E8CFD3]" : "border-[#EFE5DF]"} card-shadow flex items-center gap-2.5 transition-colors">
+          <button type="button" onclick="toggleCartItemSelected(${idx})" class="p-1 -ml-1 shrink-0" aria-label="${checked ? "Bỏ chọn" : "Chọn"} mẫu này" aria-pressed="${checked}">
+            ${checkBox(checked)}
+          </button>
+
+          <button type="button" onclick="openCartProduct(${idx})" class="relative w-16 h-20 rounded-xl overflow-hidden bg-[#F5EFEA] shrink-0 border border-[#EAE0D9] group ${checked ? "" : "opacity-60"}" aria-label="Xem lại mẫu ${item.name}">
             ${
               item.thumb
                 ? `<img src="${item.thumb}" data-orig-src="${item.thumb}" referrerpolicy="no-referrer" onerror="handleImageError(this)" alt="${item.name}" class="w-full h-full object-cover" />`
                 : `<div class="w-full h-full flex items-center justify-center text-[#B4A096]"><i data-lucide="flower-2" class="w-5 h-5"></i></div>`
             }
-          </div>
+          </button>
 
-          <div class="flex-1 min-w-0">
+          <div class="flex-1 min-w-0 ${checked ? "" : "opacity-60"}">
             <div class="flex items-start justify-between gap-1.5">
-              <h4 class="text-sm font-bold text-[#54433B] line-clamp-2 leading-snug">${item.name}</h4>
+              <button type="button" onclick="openCartProduct(${idx})" class="text-left min-w-0">
+                <h4 class="text-sm font-bold text-[#54433B] line-clamp-2 leading-snug hover:text-[#9E5A63] transition-colors">${item.name}</h4>
+              </button>
               <button
                 type="button"
                 onclick="removeCartItem(${idx})"
@@ -1876,21 +1950,22 @@
               <span class="text-xs font-bold text-[#54433B]">${formatVND((Number(item.price) || 0) * item.qty)}</span>
             </div>
           </div>
-        </div>
-      `).join("");
+        </div>`;
+      }).join("");
 
       lucide.createIcons();
     }
 
     function buildCartOrderMessage() {
-      const lines = cartItems.map((item, i) =>
+      const selected = getSelectedCartItems();
+      const lines = selected.map((item, i) =>
         `${i + 1}. ${item.name} — SL: ${item.qty} (${formatVND((Number(item.price) || 0) * item.qty)})`
       );
-      const totalQty = cartItems.reduce((sum, item) => sum + item.qty, 0);
-      const totalPrice = cartItems.reduce((sum, item) => sum + (Number(item.price) || 0) * item.qty, 0);
+      const totalQty = selected.reduce((sum, item) => sum + item.qty, 0);
+      const totalPrice = selected.reduce((sum, item) => sum + (Number(item.price) || 0) * item.qty, 0);
       const note = document.getElementById("cart-note-input")?.value.trim() || cartOrderNote.trim();
 
-      let msg = `Chào ${appConfig.shopName}, mình muốn đặt đơn hoa gồm ${totalQty} bó:\n${lines.join("\n")}\nTổng tạm tính: ${formatVND(totalPrice)}`;
+      let msg = `Chào ${appConfig.shopName}, mình muốn đặt đơn hoa gồm ${totalQty} bó (${selected.length} loại):\n${lines.join("\n")}\nTổng tạm tính: ${formatVND(totalPrice)}`;
       if (note) {
         msg += `\nLời nhắn thiệp / Ghi chú: ${note}`;
       }
@@ -1899,13 +1974,19 @@
     }
 
     function copyCartOrderAndNotify() {
-      if (cartItems.length === 0) return;
+      if (getSelectedCartItems().length === 0) {
+        showToast("Bạn hãy tích chọn ít nhất 1 mẫu hoa để đặt nhé!");
+        return;
+      }
       const msg = buildCartOrderMessage();
       fallbackCopyText(msg, "Đã sao chép toàn bộ đơn hàng! Bạn chỉ cần dán gửi Zalo/FB cho tiệm.");
     }
 
     function copyCartOrderQuietly() {
-      if (cartItems.length === 0) return;
+      if (getSelectedCartItems().length === 0) {
+        showToast("Bạn hãy tích chọn ít nhất 1 mẫu hoa để đặt nhé!");
+        return;
+      }
       const msg = buildCartOrderMessage();
       fallbackCopyText(msg, "Đã tự động sao chép đơn hàng — bạn dán vào khung chat để gửi tiệm nhé!");
     }
@@ -3141,6 +3222,12 @@
     }
 
     function getModalNavigationList() {
+      if (modalNavSource === "cart") {
+        const cartProducts = cartItems
+          .map(ci => allProducts.find(p => p.id === ci.id))
+          .filter(Boolean);
+        if (cartProducts.length > 0) return cartProducts;
+      }
       return filteredProducts && filteredProducts.length > 0 ? filteredProducts : allProducts;
     }
 
@@ -3155,18 +3242,21 @@
       const nextIdx = (idx + step + list.length) % list.length;
       const nextProd = list[nextIdx];
 
-      const targetPage = Math.floor(nextIdx / ITEMS_PER_PAGE) + 1;
-      if (targetPage !== currentPage && filteredProducts.length > 0) {
-        currentPage = targetPage;
-        renderCurrentPage();
+      if (modalNavSource !== "cart") {
+        const targetPage = Math.floor(nextIdx / ITEMS_PER_PAGE) + 1;
+        if (targetPage !== currentPage && filteredProducts.length > 0) {
+          currentPage = targetPage;
+          renderCurrentPage();
+        }
       }
 
-      openProductModal(nextProd.id);
+      openProductModal(nextProd.id, modalNavSource);
     }
 
-    function openProductModal(productId) {
+    function openProductModal(productId, source) {
       const product = allProducts.find(p => p.id === productId);
       if (!product) return;
+      modalNavSource = source === "cart" ? "cart" : "shop";
 
       currentModalProduct = product;
       currentModalImageIndex = 0;
@@ -3374,7 +3464,9 @@
       const modal = document.getElementById("product-modal");
       modal.classList.add("hidden");
       modal.classList.remove("flex");
-      document.body.style.overflow = "";
+      const cartOpen = document.getElementById("cart-drawer");
+      document.body.style.overflow = (cartOpen && !cartOpen.classList.contains("hidden")) ? "hidden" : "";
+      modalNavSource = "shop";
     }
 
     function copyOrderMessage() {
@@ -3629,7 +3721,8 @@
         closeFloatingContactMenu();
       }
       const cartDrawer = document.getElementById("cart-drawer");
-      if (cartDrawer && !cartDrawer.classList.contains("hidden") && e.key === "Escape") {
+      const modalForEsc = document.getElementById("product-modal");
+      if (cartDrawer && !cartDrawer.classList.contains("hidden") && e.key === "Escape" && modalForEsc.classList.contains("hidden")) {
         hideCartDrawer();
       }
       const modal = document.getElementById("product-modal");
