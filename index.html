@@ -275,13 +275,33 @@
         <a href="#lien-he" class="hover:text-[#9E5A63] transition-colors whitespace-nowrap">Liên hệ đặt hoa</a>
       </nav>
 
-      <a href="#bo-suu-tap" class="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-full bg-[#F7E7E9] hover:bg-[#F0D6DA] text-[#54433B] text-xs sm:text-sm font-bold border border-[#E6CDD1] shrink-0 transition-all">
-        <i data-lucide="sparkles" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#9E5A63]"></i>
-        <span>Chọn mẫu hoa</span>
-      </a>
+      <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+        <button
+          type="button"
+          onclick="toggleFavoritesFilter()"
+          id="header-fav-btn"
+          title="Xem các mẫu hoa đã thích"
+          class="relative inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-[#F7E7E9] text-[#54433B] border border-[#E6CDD1] transition-all"
+          aria-label="Mẫu hoa đã thích"
+        >
+          <i data-lucide="heart" class="w-4 h-4 text-[#9E5A63]"></i>
+          <span id="header-fav-badge" class="hidden absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#D92D4B] text-white text-[10px] font-bold items-center justify-center shadow-sm">0</span>
+        </button>
+
+        <button
+          type="button"
+          onclick="openCartDrawer()"
+          class="relative inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#54433B] hover:bg-[#3F312B] text-[#FDFBF7] text-xs sm:text-sm font-bold shadow-sm transition-all"
+          aria-label="Mở giỏ hàng"
+        >
+          <i data-lucide="shopping-bag" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#F7E7E9]"></i>
+          <span class="hidden sm:inline">Giỏ hàng</span>
+          <span id="header-cart-badge" class="min-w-[18px] h-[18px] px-1 rounded-full bg-[#9E5A63] text-white text-[10px] sm:text-xs font-bold inline-flex items-center justify-center">0</span>
+        </button>
+      </div>
     </div>
 
-    <!-- Dải điều hướng nhanh gọn gàng trên điện thoại -->
+    <!-- Thanh điều hướng nhanh trên điện thoại -->
     <nav aria-label="Điều hướng nhanh trên điện thoại" class="md:hidden border-t border-[#F3EAE5] bg-[#FDFBF7]/90">
       <div class="max-w-5xl mx-auto px-3 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar text-xs font-bold text-[#6E5B52]">
         <a href="#tam-huyet" class="px-3 py-1 rounded-full bg-white border border-[#EAE0D9] hover:border-[#DFC6C9] hover:text-[#9E5A63] whitespace-nowrap shrink-0 transition-colors">
@@ -345,7 +365,7 @@
             <span>Instagram</span>
           </a>
           <a id="hero-threads" href="https://www.threads.com/@oomaichua?xmt=AQG0b0kRQtz-ABtPI9ZNva0KgucH6k_RdDUMj5vTGJXE-no" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-white border border-[#E2D3CA] text-xs font-bold text-[#54433B] shadow-sm transition-all">
-            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#101010"/><path d="M15.85 11.45c-.15-.08-.31-.15-.47-.22-.25-2.18-1.46-3.44-3.56-3.46-1.42-.01-2.61.6-3.27 1.68l1.25.86c.48-.72 1.24-1.05 2.01-1.04 1.24.01 1.94.64 2.13 1.78-.65-.12-1.36-.16-2.12-.11-2.14.13-3.51 1.29-3.42 2.91.05.91.52 1.72 1.32 2.24.67.44 1.54.66 2.44.61 1.19-.07 2.13-.52 2.78-1.34.49-.62.8-1.41.94-2.41.56.34.98.78 1.21 1.31.38.89.41 2.34-.78 3.53-1.05 1.05-2.31 1.5-4.21 1.52-2.11-.02-3.71-.69-4.75-2.01-.98-1.24-1.49-3.03-1.51-5.32.02-2.29.53-4.08 1.51-5.32 1.04-1.32 2.64-1.99 4.75-2.01 2.13.02 3.76.7 4.83 2.02.53.65.93 1.46 1.19 2.41l1.46-.39c-.32-1.16-.82-2.16-1.49-2.98C16.71 4.1 14.69 3.22 12.11 3.2h-.02c-2.57.02-4.57.9-5.94 2.63-1.22 1.54-1.85 3.66-1.87 6.3v.02c.02 2.64.65 4.76 1.87 6.3 1.37 1.73 3.37 2.61 5.94 2.63h.02c2.3-.02 3.94-.63 5.28-1.97 1.73-1.73 1.68-3.89 1.11-5.21-.41-.95-1.18-1.73-2.65-2.45zm-3.53 3.75c-.99.06-2.03-.39-2.08-1.29-.04-.67.47-1.41 1.99-1.5.22-.01.43-.02.64-.02.56 0 1.09.05 1.57.16-.18 1.98-1.12 2.59-2.12 2.65z" fill="#FFFFFF"/></svg>
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#101010"/><path d="M15.7 11.4c-.2-.1-.4-.2-.6-.2-.2-2.2-1.4-3.5-3.4-3.5-1.3 0-2.4.6-3 1.6l1.3.8c.4-.6 1-.9 1.7-.9 1.1 0 1.7.6 1.9 1.8-.6-.1-1.2-.1-1.9-.1-1.9 0-3.1 1-3.1 2.5 0 1.5 1.2 2.5 2.9 2.5 1.6 0 2.7-.8 3.1-2.1.6.3 1 .8 1 1.5 0 1.3-1.2 2.2-3.2 2.2-2.5 0-4.2-1.6-4.2-4.4 0-2.8 1.7-4.5 4.3-4.5 2.1 0 3.7 1.1 4.1 2.9l1.5-.4C17.6 8.3 15.4 6.8 12.6 6.8 9 6.8 6.7 9.2 6.7 13.1c0 3.8 2.3 6.1 5.9 6.1 3 0 4.9-1.6 4.9-3.9 0-1.6-.9-2.8-2.3-3.5-.2-.2-.3-.3-.5-.4zm-3.9 3.1c-.9 0-1.5-.4-1.5-1.1 0-.7.6-1.1 1.7-1.1.6 0 1.1 0 1.6.1-.2 1.3-.8 2.1-1.8 2.1z" fill="#FFFFFF"/></svg>
             <span>Threads</span>
           </a>
         </div>
@@ -448,13 +468,13 @@
     </div>
   </section>
 
-  <!-- ==================== BỘ SƯU TẬP MẪU HOA (LƯỚI 6 Ô GỌN ĐẸP + PHÂN TRANG) ==================== -->
+  <!-- ==================== BỘ SƯU TẬP MẪU HOA ==================== -->
   <main id="bo-suu-tap" class="py-12 md:py-16">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-8">
         <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#7C9882]">Danh mục thiết kế</span>
         <h2 class="text-3xl sm:text-4xl font-bold text-[#54433B] mt-1">Bộ Sưu Tập Hoa Lụa Kỷ Niệm</h2>
-        <p class="text-base text-[#7E6B62] mt-2">Chọn mẫu hoa ưng ý và bấm vào từng bó để xem đầy đủ các góc chụp chi tiết</p>
+        <p class="text-base text-[#7E6B62] mt-2">Thả tim mẫu ưng ý, thêm nhiều bó vào giỏ hàng hoặc bấm vào từng bó để xem chi tiết</p>
       </div>
 
       <div class="bg-white p-3.5 sm:p-4 rounded-2xl border border-[#EFE5DF] card-shadow mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
@@ -495,10 +515,8 @@
         </div>
       </div>
 
-      <!-- Khung lưới 6 ô -->
       <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5"></div>
 
-      <!-- Thanh điều hướng sang trang -->
       <div id="pagination-bar" class="mt-7 pt-5 border-t border-[#EFE5DF] flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-2">
           <button
@@ -534,7 +552,7 @@
   <!-- ==================== HÌNH ẢNH & VIDEO KHÁCH ĐÁNH GIÁ ==================== -->
   <section id="danh-gia" class="py-12 md:py-16 border-t border-[#EFE5DF] bg-[#FAF5F1]/70">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-6 sm:mb-7 relative">
+      <div class="text-center max-w-2xl mx-auto mb-7">
         <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#9E5A63]">Phản hồi chân thật</span>
         <h2 class="text-2xl sm:text-4xl font-bold text-[#54433B] mt-1">Đánh Giá Của Khách Hàng</h2>
         <p class="text-sm sm:text-base text-[#7E6B62] mt-1.5">Chạm vào từng ảnh hoặc video để xem rõ phản hồi từ khách thương của tiệm</p>
@@ -542,10 +560,10 @@
 
       <div class="relative">
         <button
-          id="review-prev-mobile-btn"
+          id="review-prev-btn"
           type="button"
           onclick="scrollReviewsTrack(-1)"
-          class="sm:hidden absolute -left-2.5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/95 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] flex items-center justify-center shadow-md active:scale-95 transition-all"
+          class="md:hidden absolute left-1.5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/90 hover:bg-white border border-[#E2D3CA] text-[#54433B] flex items-center justify-center shadow-md active:scale-95 transition-all"
           aria-label="Xem đánh giá trước"
         >
           <i data-lucide="chevron-left" class="w-4 h-4"></i>
@@ -554,10 +572,10 @@
         <div id="reviews-track" class="flex gap-3 sm:gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth cursor-grab select-none"></div>
 
         <button
-          id="review-next-mobile-btn"
+          id="review-next-btn"
           type="button"
           onclick="scrollReviewsTrack(1)"
-          class="sm:hidden absolute -right-2.5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/95 hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] flex items-center justify-center shadow-md active:scale-95 transition-all"
+          class="md:hidden absolute right-1.5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/90 hover:bg-white border border-[#E2D3CA] text-[#54433B] flex items-center justify-center shadow-md active:scale-95 transition-all"
           aria-label="Xem đánh giá tiếp theo"
         >
           <i data-lucide="chevron-right" class="w-4 h-4"></i>
@@ -629,7 +647,7 @@
           class="zoom-target max-w-full max-h-full w-auto h-auto object-contain select-none"
         />
 
-        <div id="review-lightbox-video-wrap" class="hidden w-full h-full items-center justify-center bg-black/95"></div>
+        <div id="review-lightbox-video-wrap" class="hidden w-full h-full items-center justify-center bg-black"></div>
 
         <button
           id="review-lb-prev"
@@ -863,12 +881,34 @@
         </div>
 
         <div class="mt-3.5 sm:mt-6 pt-3 sm:pt-4 border-t border-[#EFE5DF] space-y-2.5">
+          <div class="flex items-center gap-2">
+            <button
+              id="modal-like-btn"
+              type="button"
+              onclick="toggleModalFavorite()"
+              class="shrink-0 py-2.5 sm:py-3.5 px-3.5 sm:px-4 rounded-full bg-white hover:bg-[#F7E7E9] border border-[#E2D3CA] text-[#54433B] font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-colors"
+              aria-label="Thích mẫu hoa này"
+            >
+              <i data-lucide="heart" class="w-4 h-4 text-[#9E5A63]"></i>
+              <span id="modal-like-text">Thích</span>
+            </button>
+
+            <button
+              type="button"
+              onclick="addModalProductToCart()"
+              class="flex-1 py-2.5 sm:py-3.5 px-3 rounded-full bg-[#9E5A63] hover:bg-[#874952] text-white font-bold text-xs sm:text-base flex items-center justify-center gap-1.5 sm:gap-2 transition-colors shadow-sm"
+            >
+              <i data-lucide="shopping-bag" class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0"></i>
+              <span class="truncate">Thêm vào giỏ hàng</span>
+            </button>
+          </div>
+
           <button
             onclick="copyOrderMessage()"
-            class="w-full py-2.5 sm:py-3.5 px-3 rounded-full bg-[#54433B] hover:bg-[#3E302A] text-white font-bold text-xs sm:text-base flex items-center justify-center gap-1.5 sm:gap-2 transition-colors shadow-sm"
+            class="w-full py-2.5 sm:py-3 px-3 rounded-full bg-[#54433B] hover:bg-[#3E302A] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 sm:gap-2 transition-colors shadow-sm"
           >
             <i data-lucide="copy" class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0"></i>
-            <span class="truncate">Đặt mẫu này ngay (Sao chép lời nhắn)</span>
+            <span class="truncate">Đặt nhanh 1 mẫu này (Sao chép lời nhắn)</span>
           </button>
 
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2">
@@ -1058,6 +1098,111 @@
     <span id="toast-message">Đã sao chép thành công!</span>
   </div>
 
+  <!-- ==================== NGĂN KÉO GIỎ HÀNG (CART DRAWER) ==================== -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 hidden justify-end bg-black/55 backdrop-blur-sm" onclick="closeCartDrawer(event)">
+    <div class="bg-[#FDFBF7] w-full max-w-md h-full shadow-2xl border-l border-[#E8DCD4] flex flex-col justify-between overflow-hidden" onclick="event.stopPropagation()">
+      <!-- Đầu giỏ hàng -->
+      <div class="px-4 sm:px-6 py-4 border-b border-[#EFE5DF] bg-white flex items-center justify-between gap-2 shrink-0">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-full bg-[#F7E7E9] text-[#9E5A63] flex items-center justify-center">
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-[#54433B] leading-tight">Giỏ Hoa Của Bạn</h3>
+            <p id="cart-subtitle" class="text-xs text-[#8E7970]">0 bó hoa đang được chọn</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <button
+            id="cart-clear-btn"
+            type="button"
+            onclick="clearCartItems()"
+            class="hidden px-2.5 py-1 rounded-full bg-[#F5EFEA] hover:bg-[#FEE2E2] text-xs font-bold text-[#7E6B62] hover:text-[#991B1B] transition-colors"
+          >
+            Xóa hết
+          </button>
+          <button
+            type="button"
+            onclick="hideCartDrawer()"
+            class="w-8 h-8 rounded-full bg-[#F5EFEA] hover:bg-[#EFE5DF] text-[#54433B] flex items-center justify-center transition-colors"
+            aria-label="Đóng giỏ hàng"
+          >
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Danh sách sản phẩm trong giỏ -->
+      <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3"></div>
+
+      <!-- Chân giỏ hàng: Lời nhắn thiệp + Tổng tiền + Chốt đơn -->
+      <div id="cart-footer" class="p-4 sm:p-5 border-t border-[#EFE5DF] bg-white space-y-3 shrink-0">
+        <div>
+          <label for="cart-note-input" class="block text-xs font-bold text-[#6E5B52] mb-1">
+            Lời chúc viết thiệp / Thời gian nhận hoa (nếu có):
+          </label>
+          <textarea
+            id="cart-note-input"
+            rows="2"
+            oninput="saveCartNote(this.value)"
+            placeholder="Ví dụ: Viết thiệp 'Chúc mừng sinh nhật em!', nhận hoa chiều thứ 6..."
+            class="w-full px-3 py-2 rounded-xl bg-[#FDFBF7] border border-[#E2D3CA] text-xs sm:text-sm text-[#54433B] placeholder-[#A49188] focus:outline-none focus:border-[#9E5A63] resize-none"
+          ></textarea>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <span class="text-sm font-bold text-[#6E5B52]">Tạm tính đơn hoa:</span>
+          <span id="cart-total-price" class="text-xl font-bold text-[#9E5A63]">0đ</span>
+        </div>
+
+        <button
+          type="button"
+          onclick="copyCartOrderAndNotify()"
+          class="w-full py-3 px-4 rounded-full bg-[#54433B] hover:bg-[#3F312B] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-colors"
+        >
+          <i data-lucide="copy" class="w-4 h-4 shrink-0"></i>
+          <span>Sao chép đơn hàng để gửi tiệm</span>
+        </button>
+
+        <div class="grid grid-cols-3 gap-1.5">
+          <a
+            id="cart-zalo-btn"
+            href="https://zalo.me/0981011115"
+            target="_blank"
+            rel="noopener"
+            onclick="copyCartOrderQuietly()"
+            class="py-2 px-2 rounded-xl bg-[#FDFBF7] hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs font-bold text-[#54433B] transition-colors"
+          >
+            <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#0068FF"/><text x="12" y="15.5" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="bold" font-size="8.5">Zalo</text></svg>
+            <span>Gửi Zalo</span>
+          </a>
+          <a
+            id="cart-fb-btn"
+            href="https://www.facebook.com/mai.maiquynhhhh"
+            target="_blank"
+            rel="noopener"
+            onclick="copyCartOrderQuietly()"
+            class="py-2 px-2 rounded-xl bg-[#FDFBF7] hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs font-bold text-[#54433B] transition-colors"
+          >
+            <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            <span>Facebook</span>
+          </a>
+          <a
+            id="cart-ig-btn"
+            href="https://www.instagram.com/oomaichua/"
+            target="_blank"
+            rel="noopener"
+            onclick="copyCartOrderQuietly()"
+            class="py-2 px-2 rounded-xl bg-[#FDFBF7] hover:bg-[#F7E7E9] border border-[#E2D3CA] inline-flex items-center justify-center gap-1.5 text-xs font-bold text-[#54433B] transition-colors"
+          >
+            <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="igGradCart" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FD5949"/><stop offset="50%" stop-color="#D6249F"/><stop offset="100%" stop-color="#285AEB"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGradCart)"/><circle cx="12" cy="12" r="4.5" stroke="#FFFFFF" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="#FFFFFF"/></svg>
+            <span>Instagram</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ==================== JAVASCRIPT LOGIC ==================== -->
   <script>
     const ITEMS_PER_PAGE = 6;
@@ -1163,6 +1308,344 @@
     let currentPage = 1;
     let currentModalProduct = null;
     let currentModalImageIndex = 0;
+
+    // Trạng thái Yêu thích & Giỏ hàng (lưu cục bộ trên trình duyệt của khách)
+    let likedProductKeys = [];
+    let cartItems = [];
+    let cartOrderNote = "";
+
+    function getProductKey(product) {
+      if (!product) return "";
+      return String(product.name || "").trim().toLowerCase() || String(product.id || "");
+    }
+
+    function loadEngagementState() {
+      try {
+        const savedLikes = JSON.parse(localStorage.getItem("mai_more_likes_v1") || "[]");
+        if (Array.isArray(savedLikes)) likedProductKeys = savedLikes;
+      } catch (e) {}
+      try {
+        const savedCart = JSON.parse(localStorage.getItem("mai_more_cart_v1") || "[]");
+        if (Array.isArray(savedCart)) cartItems = savedCart;
+      } catch (e) {}
+      try {
+        cartOrderNote = localStorage.getItem("mai_more_cart_note_v1") || "";
+        const noteEl = document.getElementById("cart-note-input");
+        if (noteEl) noteEl.value = cartOrderNote;
+      } catch (e) {}
+      updateEngagementBadges();
+    }
+
+    function saveLikesState() {
+      try {
+        localStorage.setItem("mai_more_likes_v1", JSON.stringify(likedProductKeys));
+      } catch (e) {}
+      updateEngagementBadges();
+    }
+
+    function saveCartState() {
+      try {
+        localStorage.setItem("mai_more_cart_v1", JSON.stringify(cartItems));
+      } catch (e) {}
+      updateEngagementBadges();
+    }
+
+    function saveCartNote(val) {
+      cartOrderNote = String(val || "");
+      try {
+        localStorage.setItem("mai_more_cart_note_v1", cartOrderNote);
+      } catch (e) {}
+    }
+
+    function isProductLiked(product) {
+      const key = getProductKey(product);
+      return Boolean(key && likedProductKeys.includes(key));
+    }
+
+    function updateEngagementBadges() {
+      const favBadge = document.getElementById("header-fav-badge");
+      if (favBadge) {
+        const count = likedProductKeys.length;
+        favBadge.textContent = count;
+        if (count > 0) {
+          favBadge.classList.remove("hidden");
+          favBadge.classList.add("inline-flex");
+        } else {
+          favBadge.classList.add("hidden");
+          favBadge.classList.remove("inline-flex");
+        }
+      }
+
+      const cartBadge = document.getElementById("header-cart-badge");
+      if (cartBadge) {
+        const totalQty = cartItems.reduce((sum, item) => sum + (Number(item.qty) || 1), 0);
+        cartBadge.textContent = totalQty;
+      }
+    }
+
+    function toggleProductLike(productId, event) {
+      if (event) event.stopPropagation();
+      const product = allProducts.find(p => p.id === productId);
+      if (!product) return;
+
+      const key = getProductKey(product);
+      const idx = likedProductKeys.indexOf(key);
+      if (idx >= 0) {
+        likedProductKeys.splice(idx, 1);
+        showToast(`Đã bỏ thích "${product.name}"`);
+      } else {
+        likedProductKeys.push(key);
+        showToast(`Đã lưu "${product.name}" vào danh sách yêu thích ❤️`);
+      }
+
+      saveLikesState();
+      renderCategoryButtons();
+      if (selectedCategory === "Đã thích ❤️") {
+        onFilterChanged();
+      } else {
+        renderCurrentPage();
+      }
+      updateModalLikeButton();
+    }
+
+    function toggleFavoritesFilter() {
+      selectedCategory = selectedCategory === "Đã thích ❤️" ? "Tất cả" : "Đã thích ❤️";
+      currentPage = 1;
+      renderCategoryButtons();
+      onFilterChanged();
+      const section = document.getElementById("bo-suu-tap");
+      if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function addToCart(productId, event) {
+      if (event) event.stopPropagation();
+      const product = allProducts.find(p => p.id === productId);
+      if (!product) return;
+
+      const key = getProductKey(product);
+      const mediaList = getProductMediaList(product);
+      const firstImg = mediaList.find(m => m.type === "image");
+      const firstVideo = mediaList.find(m => m.type === "video");
+      const thumb = firstImg ? firstImg.url : (firstVideo ? firstVideo.thumb : "");
+
+      const existing = cartItems.find(item => item.key === key);
+      if (existing) {
+        existing.qty += 1;
+        existing.price = product.price;
+      } else {
+        cartItems.push({
+          key,
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          thumb,
+          qty: 1
+        });
+      }
+
+      saveCartState();
+      renderCartDrawer();
+      showToast(`Đã thêm "${product.name}" vào giỏ hoa!`);
+    }
+
+    function addModalProductToCart() {
+      if (!currentModalProduct) return;
+      addToCart(currentModalProduct.id);
+    }
+
+    function toggleModalFavorite() {
+      if (!currentModalProduct) return;
+      toggleProductLike(currentModalProduct.id);
+    }
+
+    function updateModalLikeButton() {
+      const btn = document.getElementById("modal-like-btn");
+      const textEl = document.getElementById("modal-like-text");
+      if (!btn || !textEl || !currentModalProduct) return;
+
+      const liked = isProductLiked(currentModalProduct);
+      if (liked) {
+        btn.classList.remove("bg-white", "text-[#54433B]", "border-[#E2D3CA]");
+        btn.classList.add("bg-[#F7E7E9]", "text-[#9E5A63]", "border-[#E5C1C6]");
+        textEl.textContent = "Đã thích";
+      } else {
+        btn.classList.add("bg-white", "text-[#54433B]", "border-[#E2D3CA]");
+        btn.classList.remove("bg-[#F7E7E9]", "text-[#9E5A63]", "border-[#E5C1C6]");
+        textEl.textContent = "Thích";
+      }
+    }
+
+    function updateCartItemQty(index, delta) {
+      if (index < 0 || index >= cartItems.length) return;
+      cartItems[index].qty += delta;
+      if (cartItems[index].qty <= 0) {
+        cartItems.splice(index, 1);
+      }
+      saveCartState();
+      renderCartDrawer();
+    }
+
+    function removeCartItem(index) {
+      if (index < 0 || index >= cartItems.length) return;
+      cartItems.splice(index, 1);
+      saveCartState();
+      renderCartDrawer();
+    }
+
+    function clearCartItems() {
+      cartItems = [];
+      saveCartState();
+      renderCartDrawer();
+      showToast("Đã làm trống giỏ hoa.");
+    }
+
+    function openCartDrawer() {
+      renderCartDrawer();
+      const drawer = document.getElementById("cart-drawer");
+      if (drawer) {
+        drawer.classList.remove("hidden");
+        drawer.classList.add("flex");
+        document.body.style.overflow = "hidden";
+      }
+      lucide.createIcons();
+    }
+
+    function closeCartDrawer(event) {
+      if (event && event.target && event.target.id === "cart-drawer") {
+        hideCartDrawer();
+      }
+    }
+
+    function hideCartDrawer() {
+      const drawer = document.getElementById("cart-drawer");
+      if (drawer) {
+        drawer.classList.add("hidden");
+        drawer.classList.remove("flex");
+        document.body.style.overflow = "";
+      }
+    }
+
+    function renderCartDrawer() {
+      const container = document.getElementById("cart-items-container");
+      const subtitle = document.getElementById("cart-subtitle");
+      const totalEl = document.getElementById("cart-total-price");
+      const footer = document.getElementById("cart-footer");
+      const clearBtn = document.getElementById("cart-clear-btn");
+      if (!container) return;
+
+      const totalQty = cartItems.reduce((sum, item) => sum + item.qty, 0);
+      const totalPrice = cartItems.reduce((sum, item) => sum + (Number(item.price) || 0) * item.qty, 0);
+
+      if (subtitle) subtitle.textContent = `${totalQty} bó hoa đang được chọn`;
+      if (totalEl) totalEl.textContent = formatVND(totalPrice);
+
+      if (cartItems.length === 0) {
+        if (clearBtn) clearBtn.classList.add("hidden");
+        if (footer) footer.classList.add("hidden");
+        container.innerHTML = `
+          <div class="h-full flex flex-col items-center justify-center text-center py-12 px-4">
+            <div class="w-16 h-16 rounded-full bg-[#F7E7E9] text-[#9E5A63] flex items-center justify-center mb-3">
+              <i data-lucide="shopping-bag" class="w-7 h-7"></i>
+            </div>
+            <p class="text-base font-bold text-[#54433B]">Giỏ hoa của bạn đang trống</p>
+            <p class="text-xs sm:text-sm text-[#8E7970] mt-1 max-w-xs">
+              Hãy chọn những mẫu hoa bạn yêu thích và bấm biểu tượng giỏ hàng để gom đơn nhé!
+            </p>
+            <button
+              type="button"
+              onclick="hideCartDrawer()"
+              class="mt-4 px-5 py-2.5 rounded-full bg-[#54433B] hover:bg-[#3F312B] text-white text-xs sm:text-sm font-bold transition-colors"
+            >
+              Xem bộ sưu tập hoa
+            </button>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      if (clearBtn) clearBtn.classList.remove("hidden");
+      if (footer) footer.classList.remove("hidden");
+
+      container.innerHTML = cartItems.map((item, idx) => `
+        <div class="bg-white p-3 rounded-2xl border border-[#EFE5DF] card-shadow flex items-center gap-3">
+          <div class="w-16 h-20 rounded-xl overflow-hidden bg-[#F5EFEA] shrink-0 border border-[#EAE0D9]">
+            ${
+              item.thumb
+                ? `<img src="${item.thumb}" data-orig-src="${item.thumb}" referrerpolicy="no-referrer" onerror="handleImageError(this)" alt="${item.name}" class="w-full h-full object-cover" />`
+                : `<div class="w-full h-full flex items-center justify-center text-[#B4A096]"><i data-lucide="flower-2" class="w-5 h-5"></i></div>`
+            }
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-1.5">
+              <h4 class="text-sm font-bold text-[#54433B] line-clamp-2 leading-snug">${item.name}</h4>
+              <button
+                type="button"
+                onclick="removeCartItem(${idx})"
+                class="p-1 text-[#A49188] hover:text-[#991B1B] shrink-0"
+                title="Xóa mẫu này"
+                aria-label="Xóa mẫu này"
+              >
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+            <p class="text-xs font-bold text-[#9E5A63] mt-1">${formatVND(item.price)}</p>
+
+            <div class="flex items-center justify-between mt-2">
+              <div class="inline-flex items-center rounded-full bg-[#FDFBF7] border border-[#E2D3CA] p-0.5">
+                <button
+                  type="button"
+                  onclick="updateCartItemQty(${idx}, -1)"
+                  class="w-6 h-6 rounded-full hover:bg-[#F7E7E9] text-[#54433B] font-bold text-xs flex items-center justify-center"
+                  aria-label="Giảm số lượng"
+                >−</button>
+                <span class="px-2.5 text-xs font-bold text-[#54433B]">${item.qty}</span>
+                <button
+                  type="button"
+                  onclick="updateCartItemQty(${idx}, 1)"
+                  class="w-6 h-6 rounded-full hover:bg-[#F7E7E9] text-[#54433B] font-bold text-xs flex items-center justify-center"
+                  aria-label="Tăng số lượng"
+                >+</button>
+              </div>
+
+              <span class="text-xs font-bold text-[#54433B]">${formatVND((Number(item.price) || 0) * item.qty)}</span>
+            </div>
+          </div>
+        </div>
+      `).join("");
+
+      lucide.createIcons();
+    }
+
+    function buildCartOrderMessage() {
+      const lines = cartItems.map((item, i) =>
+        `${i + 1}. ${item.name} — SL: ${item.qty} (${formatVND((Number(item.price) || 0) * item.qty)})`
+      );
+      const totalQty = cartItems.reduce((sum, item) => sum + item.qty, 0);
+      const totalPrice = cartItems.reduce((sum, item) => sum + (Number(item.price) || 0) * item.qty, 0);
+      const note = document.getElementById("cart-note-input")?.value.trim() || cartOrderNote.trim();
+
+      let msg = `Chào ${appConfig.shopName}, mình muốn đặt đơn hoa gồm ${totalQty} bó:\n${lines.join("\n")}\nTổng tạm tính: ${formatVND(totalPrice)}`;
+      if (note) {
+        msg += `\nLời nhắn thiệp / Ghi chú: ${note}`;
+      }
+      msg += `\nTư vấn giúp mình nhé!`;
+      return msg;
+    }
+
+    function copyCartOrderAndNotify() {
+      if (cartItems.length === 0) return;
+      const msg = buildCartOrderMessage();
+      fallbackCopyText(msg, "Đã sao chép toàn bộ đơn hàng! Bạn chỉ cần dán gửi Zalo/FB cho tiệm.");
+    }
+
+    function copyCartOrderQuietly() {
+      if (cartItems.length === 0) return;
+      const msg = buildCartOrderMessage();
+      fallbackCopyText(msg, "Đã tự động sao chép đơn hàng — bạn dán vào khung chat để gửi tiệm nhé!");
+    }
 
     // ==================== HỆ THỐNG PHÓNG TO / THU NHỎ & DI CHUYỂN ẢNH ĐA THIẾT BỊ ====================
     const zoomControllers = {};
@@ -1364,6 +1847,7 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       loadSavedConfig();
+      loadEngagementState();
       applyConfigToUI();
       setupGridSwipe();
       setupReviewsDragScroll();
@@ -1456,6 +1940,9 @@
       document.getElementById("modal-fb").href = appConfig.facebookUrl;
       document.getElementById("modal-ig").href = appConfig.instagramUrl;
       if (document.getElementById("modal-threads")) document.getElementById("modal-threads").href = appConfig.threadsUrl;
+      if (document.getElementById("cart-zalo-btn")) document.getElementById("cart-zalo-btn").href = appConfig.zaloUrl;
+      if (document.getElementById("cart-fb-btn")) document.getElementById("cart-fb-btn").href = appConfig.facebookUrl;
+      if (document.getElementById("cart-ig-btn")) document.getElementById("cart-ig-btn").href = appConfig.instagramUrl;
 
       const heroImg = document.getElementById("hero-img");
       if (heroImg && appConfig.heroImage) {
@@ -2060,6 +2547,10 @@
       const container = document.getElementById("category-filters");
       const categories = ["Tất cả"];
 
+      if (likedProductKeys.length > 0 || selectedCategory === "Đã thích ❤️") {
+        categories.push("Đã thích ❤️");
+      }
+
       if (allProducts.length > 0) {
         const dynamicCats = [...new Set(
           allProducts.flatMap(p => (Array.isArray(p.categories) && p.categories.length > 0 ? p.categories : [p.category])).filter(Boolean)
@@ -2071,6 +2562,7 @@
 
       container.innerHTML = categories.map(cat => {
         const isActive = cat === selectedCategory;
+        const label = cat === "Đã thích ❤️" ? `Đã thích ❤️ (${likedProductKeys.length})` : cat;
         return `
           <button
             onclick="selectCategory('${cat.replace(/'/g, "\\'")}')"
@@ -2080,7 +2572,7 @@
                 : "bg-[#FDFBF7] text-[#6E5B52] hover:bg-[#F7E7E9] border border-[#E8DCD4]"
             }"
           >
-            ${cat}
+            ${label}
           </button>
         `;
       }).join("");
@@ -2104,7 +2596,9 @@
 
       filteredProducts = allProducts.filter(p => {
         const itemCats = Array.isArray(p.categories) && p.categories.length > 0 ? p.categories : [p.category];
-        const matchCat = selectedCategory === "Tất cả" || itemCats.includes(selectedCategory);
+        const matchCat =
+          selectedCategory === "Tất cả" ||
+          (selectedCategory === "Đã thích ❤️" ? isProductLiked(p) : itemCats.includes(selectedCategory));
         const matchKw =
           !keyword ||
           p.name.toLowerCase().includes(keyword) ||
@@ -2168,6 +2662,7 @@
         const firstVideo = mediaList.find(m => m.type === "video");
         const hasVideo = Boolean(firstVideo);
         const coverThumb = firstImg ? firstImg.url : (firstVideo ? firstVideo.thumb : "");
+        const isLiked = isProductLiked(item);
 
         let statusBadgeClass = "bg-[#EEF3EF] text-[#5D7A63]";
         if (item.status.toLowerCase().includes("đặt")) statusBadgeClass = "bg-[#FEF3C7] text-[#92400E]";
@@ -2213,18 +2708,32 @@
               <div class="relative aspect-[3/4] sm:aspect-[4/3] bg-[#F5EFEA] overflow-hidden">
                 ${mediaPreviewHtml}
 
-                <div class="absolute top-1.5 sm:top-2.5 left-1.5 sm:left-2.5 right-1.5 sm:right-2.5 flex items-center justify-between gap-1 pointer-events-none">
-                  <span class="px-2 sm:px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-sm text-[10px] sm:text-[11px] font-bold text-[#54433B] shadow-sm truncate max-w-[65%]">
-                    ${item.category}
-                  </span>
-                  ${
-                    item.featured
-                      ? `<span class="inline-flex items-center gap-1 px-2 sm:px-2.5 py-0.5 rounded-full bg-[#D92D4B] text-white text-[10px] sm:text-[11px] font-bold shadow-sm shrink-0">
-                          <svg class="w-3 h-3 fill-[#FDE047] shrink-0" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
-                          <span>HOT</span>
-                        </span>`
-                      : ""
-                  }
+                <div class="absolute top-1.5 sm:top-2.5 left-1.5 sm:left-2.5 right-1.5 sm:right-2.5 flex items-center justify-between gap-1">
+                  <div class="flex items-center gap-1 min-w-0 pointer-events-none">
+                    <span class="px-2 sm:px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-sm text-[10px] sm:text-[11px] font-bold text-[#54433B] shadow-sm truncate">
+                      ${item.category}
+                    </span>
+                    ${
+                      item.featured
+                        ? `<span class="inline-flex items-center gap-1 px-2 sm:px-2.5 py-0.5 rounded-full bg-[#D92D4B] text-white text-[10px] sm:text-[11px] font-bold shadow-sm shrink-0">
+                            <svg class="w-3 h-3 fill-[#FDE047] shrink-0" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
+                            <span>HOT</span>
+                          </span>`
+                        : ""
+                    }
+                  </div>
+
+                  <button
+                    type="button"
+                    onclick="toggleProductLike(${item.id}, event)"
+                    title="${isLiked ? "Bỏ thích mẫu này" : "Thả tim mẫu này"}"
+                    aria-label="${isLiked ? "Bỏ thích mẫu này" : "Thả tim mẫu này"}"
+                    class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/95 hover:bg-white backdrop-blur-sm shadow-sm border border-[#EFE5DF] flex items-center justify-center shrink-0 transition-transform active:scale-90"
+                  >
+                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 ${isLiked ? "text-[#D92D4B] fill-[#D92D4B]" : "text-[#8E7970] fill-none"}" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                  </button>
                 </div>
 
                 <div class="absolute bottom-1.5 sm:bottom-2.5 left-1.5 sm:left-2.5 right-1.5 sm:right-2.5 flex items-center justify-between gap-1 pointer-events-none">
@@ -2245,21 +2754,21 @@
               <div class="p-2 sm:p-3.5 pb-1 sm:pb-1.5">
                 <h3 class="text-xs sm:text-base font-bold text-[#54433B] line-clamp-2 sm:line-clamp-1 leading-snug group-hover:text-[#9E5A63] transition-colors">
                   ${item.name}
-                </h3>
-                <p class="hidden sm:block text-sm text-[#7E6B62] line-clamp-2 mt-1 leading-snug">
-                  ${item.description}
-                </p>
-              </div>
-            </div>
-
-            <div class="px-2 sm:px-3.5 pb-2 sm:pb-3.5 pt-1 sm:pt-2 mt-0.5 sm:mt-1 sm:border-t sm:border-[#F6EFEA] flex items-end justify-between gap-1">
+            <div class="px-2 sm:px-3.5 pb-2 sm:pb-3.5 pt-1 sm:pt-2 mt-0.5 sm:mt-1 sm:border-t sm:border-[#F6EFEA] flex items-center justify-between gap-1.5">
               <div class="min-w-0">
                 <span class="hidden sm:block text-[10px] text-[#9A867D] leading-none">Giá mẫu hoa</span>
                 <span class="text-xs sm:text-base font-bold text-[#9E5A63] leading-tight block sm:mt-0.5 truncate">${formatVND(item.price)}</span>
               </div>
-              <span class="hidden sm:inline text-xs font-bold text-[#54433B] underline underline-offset-4 group-hover:text-[#9E5A63] shrink-0">
-                Xem chi tiết
-              </span>
+              <button
+                type="button"
+                onclick="addToCart(${item.id}, event)"
+                title="Thêm vào giỏ hoa"
+                aria-label="Thêm vào giỏ hoa"
+                class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-[#F7E7E9] hover:bg-[#9E5A63] text-[#54433B] hover:text-white border border-[#E6CDD1] text-[11px] sm:text-xs font-bold shrink-0 transition-colors"
+              >
+                <i data-lucide="shopping-bag" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i>
+                <span class="hidden sm:inline">Thêm giỏ</span>
+              </button>
             </div>
           </article>
         `;
@@ -2393,6 +2902,7 @@
       document.getElementById("modal-title").textContent = product.name;
       document.getElementById("modal-price").textContent = formatVND(product.price);
       document.getElementById("modal-desc").textContent = product.description;
+      updateModalLikeButton();
 
       const prevProdBtn = document.getElementById("modal-prev-product-btn");
       const nextProdBtn = document.getElementById("modal-next-product-btn");
@@ -2750,6 +3260,10 @@
     }
 
     document.addEventListener("keydown", (e) => {
+      const cartDrawer = document.getElementById("cart-drawer");
+      if (cartDrawer && !cartDrawer.classList.contains("hidden") && e.key === "Escape") {
+        hideCartDrawer();
+      }
       const modal = document.getElementById("product-modal");
       if (!modal.classList.contains("hidden")) {
         if (e.key === "Escape") hideProductModal();
